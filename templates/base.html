@@ -1,0 +1,88 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ASVS</title>
+</head>
+
+<body>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" />
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Home</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <div class="container">
+          <a href="../" class="navbar-brand">ASVS</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="levels">Levels
+                  <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="levels">
+                  <a class="dropdown-item" href="{% url 'level' level=1 %}">Level 1</a>
+                  <a class="dropdown-item " href="{% url 'level' level=2 %}">Level 2</a>
+                  <a class="dropdown-item " href="{% url 'level' level=3 %}">Level 3</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="help">Help
+                  <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="help">
+                  <a class="dropdown-item" href="{% url 'help' category=1 %}">Architecture, design and threat modelling</a>
+                  <a class="dropdown-item" href="{% url 'help' category=2 %}">Authentication</a>
+                  <a class="dropdown-item" href="{% url 'help' category=3 %}">Session management</a>
+                  <a class="dropdown-item" href="{% url 'help' category=4 %}">Access control</a>
+                  <a class="dropdown-item" href="{% url 'help' category=5 %}">Malicious input handling</a>
+                  <a class="dropdown-item" href="{% url 'help' category=7 %}">Cryptography at rest</a>
+                  <a class="dropdown-item" href="{% url 'help' category=8 %}">Error handling and logging</a>
+                  <a class="dropdown-item" href="{% url 'help' category=9 %}">Data protection</a>
+                  <a class="dropdown-item" href="{% url 'help' category=10 %}">Communications</a>
+                  <a class="dropdown-item" href="{% url 'help' category=11 %}">HTTP security configuration</a>
+                  <a class="dropdown-item" href="{% url 'help' category=13 %}">Malicious controls</a>
+                  <a class="dropdown-item" href="{% url 'help' category=15 %}">Business logic</a>
+                  <a class="dropdown-item" href="{% url 'help' category=16 %}">File and resources</a>
+                  <a class="dropdown-item" href="{% url 'help' category=17 %}">Mobile</a>
+                  <a class="dropdown-item" href="{% url 'help' category=18 %}">Web services</a>
+                  <a class="dropdown-item" href="{% url 'help' category=19 %}">Configuration</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+  {% block content %} {% endblock content %}
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+    crossorigin="anonymous "></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js " integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm "
+    crossorigin="anonymous "></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js " integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ "
+    crossorigin="anonymous "></script>
+  </div>
+  </div>
+</body>
+
+</html>

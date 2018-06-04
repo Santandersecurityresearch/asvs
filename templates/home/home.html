@@ -1,0 +1,131 @@
+{% extends "base.html" %} {% load staticfiles %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h2 id="navbars">
+                    <br>What is the ASVS Standard?</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-7 col-sm-6">
+            <p>The Application Security Verification Standard is a list of application security requirements or tests that can
+                be used by architects, developers, testers, security professionals, and even consumers to define what a secure
+                application is.
+                <br>
+                <br> The Application Security Verification Standard defines three security verification levels, with each level
+                increasing in depth. </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="bs-component">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">ASVS Level 1</div>
+                    <div class="card-body">
+                        <p class="card-text">ASVS Level 1 is meant for all software.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">ASVS Level 2</div>
+                <div class="card-body">
+                    <p class="card-text">ASVS Level 2 is for applications that contain sensitive data, which requires protection.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">ASVS Level 3</div>
+                <div class="card-body">
+                    <p class="card-text">ASVS Level 3 is for the most critical applications - applications that perform high value transactions,
+                        contain sensitive medical data, or any application that requires the highest level of trust.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-7 col-sm-6">
+            <p>One of the best ways to use the Application Security Verification Standard is to use it as blueprint create a
+                Secure Coding Checklist specific to your application, platform or organisation. Tailoring the ASVS to your
+                use cases will increase the focus on the security requirements that are most important to your projects and
+                environments. </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="bs-component">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Level 1: Opportunistic</div>
+                    <div class="card-body">
+                        <p class="card-text">An application achieves ASVS Level 1 (or Opportunistic) if it adequately defends against application
+                            security vulnerabilities that are easy to discover, and included in the OWASP Top 10 and other
+                            similar checklists.
+                            <br>
+                            <br>Level 1 is typically appropriate for applications where low confidence in the correct use of
+                            security controls is required, or to provide a quick analysis of a fleet of enterprise applications,
+                            or assisting in developing a prioritised list of security requirements as part of a multi-phase
+                            effort. Level 1 controls can be ensured either automatically by tools or simply manually without
+                            access to source code. We consider Level 1 the minimum required for all applications.
+                            <br>
+                            <br>Threats to the application will most likely be from attackers who are using simple and low effort
+                            techniques to identify easy-to-find and easy-to-exploit vulnerabilities. This is in contrast
+                            to a determined attacker who will spend focused energy to specifically target the application.
+                            If data processed by your application has high value, you would rarely want to stop at a Level
+                            1 review. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Level 2: Standard</div>
+                <div class="card-body">
+                    <p class="card-text">An application achieves ASVS Level 2 (or Standard) if it adequately defends against most of the risks
+                        associated with software today.
+                        <br>
+                        <br> Level 2 ensures that security controls are in place, effective, and used within the application.
+                        Level 2 is typically appropriate for applications that handle significant business-to-business transactions,
+                        including those that process healthcare information, implement businesscritical or sensitive functions,
+                        or process other sensitive assets.
+                        <br>
+                        <br> Threats to Level 2 applications will typically be skilled and motivated attackers focusing on specific
+                        targets using tools and techniques that are highly practiced and effective at discovering and exploiting
+                        weaknesses within applications.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Level 3: Advanced</div>
+                <div class="card-body">
+                    <p class="card-text">ASVS Level 3 is the highest level of verification within the ASVS. This level is typically reserved for
+                        applications that require significant levels of security verification, such as those that may be
+                        found within areas of military, health and safety, critical infrastructure, etc. Organisations may
+                        require ASVS Level 3 for applications that perform critical functions, 10 OWASP Application Security
+                        Verification Standard 3.0 where failure could significantly impact the organisation's operations,
+                        and even its survivability. Example guidance on the application of ASVS Level 3 is provided below.
+                        An application achieves ASVS Level 3 (or Advanced) if it adequately defends against advanced application
+                        security vulnerabilities and also demonstrates principles of good security design.
+                        <br>
+                        <br> An application at ASVS Level 3 requires more in depth analysis, architecture, coding, and testing
+                        than all the other levels. A secure application is modularized in a meaningful way (to facilitate
+                        e.g. resiliency, scalability, and most of all, layers of security), and each module (separated by
+                        network connection and/or physical instance) takes care of its own security responsibilities (defence
+                        in depth), that need to be properly documented. Responsibilities include controls for ensuring confidentiality
+                        (e.g. encryption), integrity (e.g. transactions, input validation), availability (e.g. handling load
+                        gracefully), authentication (including between systems), non-repudiation, authorization, and auditing
+                        (logging).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,19 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "title": "Architecture, design and threat modelling",
+            "urls": [
+                {
+                    "title": "Threat Modeling Cheat Sheet ",
+                    "url": "https://www.owasp.org/index.php/Application_Security_Architecture_Cheat_Sheet"
+                },
+                {
+                    "title": "Attack Surface Analysis Cheat Sheet",
+                    "url": "https://www.owasp.org/index.php/Attack_Surface_Analysis_Cheat_Sheet"
+                }
+            ],
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><br>At level 1, components of the application are identified and have a reason for being in the app.<br><br>At level 2, the architecture has been defined and the code adheres to the architecture.<br><br>At level 3, the architecture and design is in place, in use, and effective"
+        }
+    ]
+}
