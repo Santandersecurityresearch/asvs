@@ -4,25 +4,29 @@
         <div class="col-lg-12">
             <div class="page-header">
                 <h2 id="navbars">
-                    <br>ASVS Categories: {{ category }} </h2>
+                    <br>Get help understanding the ASVS standard...</h2>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="jumbotron">
-            <h1 class="display-3">ASVS Categories: {{ category }} </h1>
-            <p class="lead">{{ data.text|safe }}</p>
-            <hr class="my-4">
-            <p class="lead">Learn more</p>
-            <br> {% for u in data.urls %}
-            <h3>{{ u.title }}</h3>
-            {{ u.url }}
-            <br>
-            <br> {% endfor %}
-
+        <div class="card" style="width: 60rem;">
+            <div class="card-header">
+                V{{ number }}: {{ category }}
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <strong>Control Objective:</strong>
+                    <br>
+                    <br> {{ data.text|safe }}</p>
+                <p>
+                    <strong>Useful Links: </strong>
+                </p>
+                {% for u in data.urls %}
+                <a href="{{ u.url }}" class="card-link">{{ u.title }}</a>
+                <br> {% endfor %}
+            </div>
         </div>
     </div>
 </div>
-
 
 {% endblock content %}

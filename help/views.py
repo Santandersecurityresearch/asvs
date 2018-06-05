@@ -12,4 +12,4 @@ def load_json_file(category):
 
 def helping(request, category):
     data = load_json_file(category)
-    return render(request, "help/help.html", {"data": data, 'category': data['title']})
+    return render(request, "help/help.html", {"data": data, 'category': data['title'], "number": data['id']})

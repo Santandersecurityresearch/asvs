@@ -3,12 +3,12 @@
 <html lang="en">
 
 <head>
-  <title>ASVS</title>
+  <title>OWASP ASVS</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" />
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
 </head>
 
 <body>
-  <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" />
-  <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,7 +26,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div class="container">
-          <a href="../" class="navbar-brand">ASVS</a>
+          <a href="../" class="navbar-brand">OWASP ASVS v3.0.1</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,23 +48,26 @@
                   <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="help">
-                  <a class="dropdown-item" href="{% url 'help' category=1 %}">Architecture, design and threat modelling</a>
-                  <a class="dropdown-item" href="{% url 'help' category=2 %}">Authentication</a>
-                  <a class="dropdown-item" href="{% url 'help' category=3 %}">Session management</a>
-                  <a class="dropdown-item" href="{% url 'help' category=4 %}">Access control</a>
-                  <a class="dropdown-item" href="{% url 'help' category=5 %}">Malicious input handling</a>
-                  <a class="dropdown-item" href="{% url 'help' category=7 %}">Cryptography at rest</a>
-                  <a class="dropdown-item" href="{% url 'help' category=8 %}">Error handling and logging</a>
-                  <a class="dropdown-item" href="{% url 'help' category=9 %}">Data protection</a>
-                  <a class="dropdown-item" href="{% url 'help' category=10 %}">Communications</a>
-                  <a class="dropdown-item" href="{% url 'help' category=11 %}">HTTP security configuration</a>
-                  <a class="dropdown-item" href="{% url 'help' category=13 %}">Malicious controls</a>
-                  <a class="dropdown-item" href="{% url 'help' category=15 %}">Business logic</a>
-                  <a class="dropdown-item" href="{% url 'help' category=16 %}">File and resources</a>
-                  <a class="dropdown-item" href="{% url 'help' category=17 %}">Mobile</a>
-                  <a class="dropdown-item" href="{% url 'help' category=18 %}">Web services</a>
-                  <a class="dropdown-item" href="{% url 'help' category=19 %}">Configuration</a>
+                  <a class="dropdown-item" href="{% url 'help' category=1 %}">V1: Architecture, design and threat modelling</a>
+                  <a class="dropdown-item" href="{% url 'help' category=2 %}">V2: Authentication</a>
+                  <a class="dropdown-item" href="{% url 'help' category=3 %}">V3: Session management</a>
+                  <a class="dropdown-item" href="{% url 'help' category=4 %}">V4: Access control</a>
+                  <a class="dropdown-item" href="{% url 'help' category=5 %}">V5: Malicious input handling</a>
+                  <a class="dropdown-item" href="{% url 'help' category=7 %}">V7: Cryptography at rest</a>
+                  <a class="dropdown-item" href="{% url 'help' category=8 %}">V8: Error handling and logging</a>
+                  <a class="dropdown-item" href="{% url 'help' category=9 %}">V9: Data protection</a>
+                  <a class="dropdown-item" href="{% url 'help' category=10 %}">V10: Communications</a>
+                  <a class="dropdown-item" href="{% url 'help' category=11 %}">V11: HTTP security configuration</a>
+                  <a class="dropdown-item" href="{% url 'help' category=13 %}">V13: Malicious controls</a>
+                  <a class="dropdown-item" href="{% url 'help' category=15 %}">V15: Business logic</a>
+                  <a class="dropdown-item" href="{% url 'help' category=16 %}">V16: File and resources</a>
+                  <a class="dropdown-item" href="{% url 'help' category=17 %}">V17: Mobile</a>
+                  <a class="dropdown-item" href="{% url 'help' category=18 %}">V18: Web services</a>
+                  <a class="dropdown-item" href="{% url 'help' category=19 %}">V19: Configuration</a>
                 </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Projects</a>
               </li>
             </ul>
           </div>

@@ -13,7 +13,272 @@
                     "url": "https://www.owasp.org/index.php/Attack_Surface_Analysis_Cheat_Sheet"
                 }
             ],
-            "text": "Ensure that a verified application satisfies the following high level requirements:<br><br>At level 1, components of the application are identified and have a reason for being in the app.<br><br>At level 2, the architecture has been defined and the code adheres to the architecture.<br><br>At level 3, the architecture and design is in place, in use, and effective"
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>At level 1, components of the application are identified and have a reason for being in the app.</li><br><li class='circle'>At level 2, the architecture has been defined and the code adheres to the architecture.</li><br><li class='circle'>At level 3, the architecture and design is in place, in use, and effective</li>"
+        },
+        {
+            "id": 2,
+            "title": "Authentication",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Testing for Authentication",
+                    "url": "https://www.owasp.org/index.php/Testing_for_authentication"
+                },
+                {
+                    "title": "Password storage cheat sheet",
+                    "url": "https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet"
+                },
+                {
+                    "title": "Forgot password cheat sheet",
+                    "url": "https://www.owasp.org/index.php/Forgot_Password_Cheat_Sheet"
+                },
+                {
+                    "title": "Choosing and Using Security Questions",
+                    "url": "https://www.owasp.org/index.php/Choosing_and_Using_Security_Questions_Cheat_Sheet"
+                }
+            ],
+            "text": "Authentication is the act of establishing, or confirming, something (or someone) as authentic, that is, that claims made by or about the thing are true.<br><br>Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Verifies the digital identity of the sender of a communication.</li><br><li class='circle'>Ensures that only those authorised are able to authenticate and credentials are transported in a secure manner.</li>"
+        },
+        {
+            "id": 3,
+            "title": "Session management",
+            "text": "One of the core components of any web-based application is the mechanism by which it controls and maintains the state for a user interacting with it. This is referred to this as Session Management and is defined as the set of all controls governing state-full interaction between a user and the web-based application.<br><br>Ensure that a verified application satisfies the following high level session management requirements:<br><li class='circle'>Sessions are unique to each individual and cannot be guessed or shared</li><br><li class='circle'>Sessions are invalidated when no longer required and timed out during periods of inactivity.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Session Management Testing ",
+                    "url": "https://www.owasp.org/index.php/Testing_for_Session_Management"
+                },
+                {
+                    "title": "OWASP Session Management Cheat Sheet",
+                    "url": "https://www.owasp.org/index.php/Session_Management_Cheat_Sheet"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Access control",
+            "text": "Authorisation is the concept of allowing access to resources only to those permitted to use them.<br><br>Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Persons accessing resources holds valid credentials to do so.</li><br><li class='circle'>Users are associated with a well-defined set of roles and privileges.</li><br><li class='circle'>Role and permission metadata is protected from replay or tampering.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Authorization ",
+                    "url": "https://www.owasp.org/index.php/Testing_for_Authorization"
+                },
+                {
+                    "title": "OWASP Cheat Sheet: Access Control ",
+                    "url": "https://www.owasp.org/index.php/Access_Control_Cheat_Sheet"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "title": "Malicious input handling",
+            "text": "The most common web application security weakness is the failure to properly validate input coming from the client or from the environment before using it. This weakness leads to almost all of the major vulnerabilities in web applications, such as cross site scripting, SQL injection, interpreter injection, locale/Unicode attacks, file system attacks, and buffer overflows.<br><br>Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>All input is validated to be correct and fit for the intended purpose.</li><br><li class='circle'>Data from an external entity or client should never be trusted and should be handled accordingly.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Input Validation Testing",
+                    "url": "https://www.owasp.org/index.php/Testing_for_Input_Validation"
+                },
+                {
+                    "title": "OWASP Cheat Sheet: Input Validation",
+                    "url": "https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet"
+                },
+                {
+                    "title": "OWASP Testing Guide 4.0: Testing for HTTP Parameter Pollution",
+                    "url": "https://www.owasp.org/index.php/Testing_for_HTTP_Parameter_pollution_%28OTG-INPVAL-004%29"
+                },
+                {
+                    "title": "OWASP LDAP Injection Cheat Sheet ",
+                    "url": "https://www.owasp.org/index.php/LDAP_Injection_Prevention_Cheat_Sheet"
+                },
+                {
+                    "title": "OWASP Testing Guide 4.0: Client Side Testing",
+                    "url": "https://www.owasp.org/index.php/Client_Side_Testing"
+                },
+                {
+                    "title": "OWASP Cross Site Scripting Prevention Cheat Sheet",
+                    "url": "https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet"
+                },
+                {
+                    "title": "OWASP Java Encoding Project",
+                    "url": "https://www.owasp.org/index.php/OWASP_Java_Encoder_Project"
+                },
+                {
+                    "title": "Reducing XSS by way of Automatic Context-Aware Escaping in Template Systems",
+                    "url": "http://googleonlinesecurity.blogspot.com/2009/03/reducing-xss-by-way-of-automatic.html"
+                },
+                {
+                    "title": "AngularJS Strict Contextual Escaping",
+                    "url": "https://docs.angularjs.org/api/ng/service/$sce"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Cryptography at rest",
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>That all cryptographic modules fail in a secure manner and that errors are handled correctly.</li><br><li class='circle'>That a suitable random number generator is used when randomness is required.</li><br><li class='circle'>That access to keys is managed in a secure way.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Testing for weak Cryptography",
+                    "url": "https://www.owasp.org/index.php/Testing_for_weak_Cryptography"
+                },
+                {
+                    "title": "OWASP Cheat Sheet: Cryptographic Storage",
+                    "url": "https://www.owasp.org/index.php/Cryptographic_Storage_Cheat_Sheet"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "title": "Error handling and logging",
+            "text": "The primary objective of error handling and logging is to provide a useful reaction by the user, administrators, and incident response teams. The objective is not to create massive amounts of logs, but high quality logs, with more signal than discarded noise.<br><br>If logs contain private or sensitive data, the definition of which varies from country to country, the logs become some of the most sensitive information held by the application and thus very attractive to attackers in their own right.<br><br>High quality logs will often contain sensitive data, and must be protected as per local data privacy laws or directives. This should include:<br><li class='circle'>Not collecting or logging sensitive information if not specifically required.</li><br><li class='circle'>Ensuring all logged information is handled securely and protected as per its data classification.</li><br><li class='circle'>Ensuring that logs are not forever, but have an absolute lifetime that is as short as possible.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0 content: Testing for Error Handling",
+                    "url": "https://www.owasp.org/index.php/Testing_for_Error_Handling"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "title": "Data protection",
+            "text": "There are three key elements to sound data protection: Confidentiality, Integrity and Availability (CIA). This standard assumes that data protection is enforced on a trusted system, such as a server, which has been hardened and has sufficient protections.<br><br>Applications have to assume that all user devices are compromised in some way. Where an application transmits or stores sensitive information on insecure devices, such as shared computers, phones and tablets, the application is responsible for ensuring data stored on these devices is encrypted and cannot be easily illicitly obtained, altered or disclosed.<br><br>Ensure that a verified application satisfies the following high level data protection requirements:<br><li class='circle'><strong>Confidentiality: </strong>Data should be protected from unauthorised observation or disclosure both in transit and when stored.</li><br><li class='circle'><strong>Integrity: </strong>Data should be protected being maliciously created, altered or deleted by unauthorised attackers.</li><br><li class='circle'><strong>Availability: </strong>Data should be available to authorised users as required</li>",
+            "urls": [
+                {
+                    "title": "User Privacy Protection Cheat Sheet",
+                    "url": "https://www.owasp.org/index.php/User_Privacy_Protection_Cheat_Sheet"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "title": "Communications",
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>That TLS is used where sensitive data is transmitted</li><br><li class='circle'>That strong algorithms and ciphers are used at all times.</li>",
+            "urls": [
+                {
+                    "title": "OWASP – TLS Cheat Sheet",
+                    "url": "https://www.owasp.org/index.php/Transport_Layer_Protection_Cheat_Sheet"
+                },
+                {
+                    "title": "Certificate pinning",
+                    "url": "https://noncombatant.org/2015/05/01/about-http-public-key-pinning/"
+                },
+                {
+                    "title": "OWASP Certificate Pinning Cheat Sheet",
+                    "url": "https://www.owasp.org/index.php/Pinning_Cheat_Sheet"
+                },
+                {
+                    "title": "OWASP Certificate and Public Key Pinning",
+                    "url": "https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning"
+                },
+                {
+                    "title": "Time of first use (TOFU) Pinning ",
+                    "url": "https://developer.mozilla.org/en/docs/Web/Security/Public_Key_Pinning"
+                },
+                {
+                    "title": "Pre-loading HTTP Strict Transport Security",
+                    "url": "https://www.chromium.org/hsts"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "title": "HTTP security configuration",
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>The application server is suitably hardened from a default configuration</li><br><li class='circle'>HTTP responses contain a safe character set in the content type header.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Testing for HTTP Verb Tampering",
+                    "url": "https://www.owasp.org/index.php/Testing_for_HTTP_Verb_Tampering_%28OTG-INPVAL-003%29"
+                },
+                {
+                    "title": "Adding Content-Disposition to API responses helps prevent many attacks based on misunderstanding on the MIME type between client and server, and the 'filename' option specifically helps prevent Reflected File Download attacks",
+                    "url": "https://www.blackhat.com/docs/eu-14/materials/eu-14-Hafif-Reflected-File-Download-A-New-Web-Attack-Vector.pdf"
+                },
+                {
+                    "title": "OWASP Cheat Sheet: Content Security Policy",
+                    "url": "https://www.owasp.org/index.php?title=Content_Security_Policy_Cheat_Sheet&setlang=en"
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "title": "Malicious controls",
+            "text": "Malicious code is extremely rare, and is difficult to detect. Manual line by line code review can assist looking for logic bombs, but even the most experienced code reviewer will struggle to find malicious code even if they know it exists. This section is not possible to complete without access to source code, including as many third party libraries as possible.<br><br>Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Malicious activity is handled securely and properly as to not affect the rest of the application.</li><br><li class='circle'>Do not have time bombs or other time based attacks built into them</li><br><li class='circle'>do not “phone home” to malicious or unauthorised destinations</li><br><li class='circle'>Applications do not have back doors, Easter eggs, salami attacks, or logic flaws that can be controlled by an attacker</li>",
+            "urls": [
+                {
+                    "title": "The Apple goto fail vulnerability",
+                    "url": "https://www.dwheeler.com/essays/apple-goto-fail.html"
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "title": "Business logic",
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>The business logic flow is sequential and in order</li><br><li class='circle'>Business logic includes limits to detect and prevent automated attacks, such as continuous small funds transfers, or adding a million friends one at a time, and so on.</li><br><li class='circle'>High value business logic flows have considered abuse cases and malicious actors, and have protections against spoofing, tampering, repudiation, information disclosure, and elevation of privilege attacks.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Business Logic Testing",
+                    "url": "https://www.owasp.org/index.php/Testing_for_business_logic"
+                },
+                {
+                    "title": "OWASP Cheat Sheet: Business Logic",
+                    "url": "https://www.owasp.org/index.php/Business_Logic_Security_Cheat_Sheet"
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "title": "File and resources",
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Untrusted file data should be handled accordingly and in a secure manner</li><br><li class='circle'>Obtained from untrusted sources are stored outside the webroot and limited permissions.</li>",
+            "urls": [
+                {
+                    "title": "File Extension Handling for Sensitive Information",
+                    "url": "https://www.owasp.org/index.php/Unrestricted_File_Upload"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "title": "Mobile",
+            "text": "This section contains controls that are mobile application specific. These controls have been de-duplicated from 2.0, so must be taken in conjunction with all other sections of the relevant ASVS Verification Level.<br><br>Mobile applications should:<br><li class='circle'>Should have the same level of security controls within the mobile client as found in the server, by enforcing security controls in a trusted environment</li><br><li class='circle'>Sensitive information assets stored on the device should be done so in a secure manner</li><br><li class='circle'>All sensitive data transmitted from the device should be done so with transport layer security in mind.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Mobile Security Project",
+                    "url": "https://www.owasp.org/index.php/OWASP_Mobile_Security_Project"
+                },
+                {
+                    "title": "iOS Developer Cheat Sheet",
+                    "url": "https://www.owasp.org/index.php/IOS_Developer_Cheat_Sheet"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "title": "Web services",
+            "text": "Ensure that a verified application that uses RESTful or SOAP based web services has:<br><li class='circle'>Adequate authentication, session management and authorisation of all web services</li><br><li class='circle'>Input validation of all parameters that transit from a lower to higher trust level</li><br><li class='circle'>Basic interoperability of SOAP web services layer to promote API use</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Configuration and Deployment Management Testing",
+                    "url": "https://www.owasp.org/index.php/Testing_for_configuration_management"
+                },
+                {
+                    "title": "OWASP Cheat Sheet: Cross-Site Request Forgery",
+                    "url": "https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet"
+                },
+                {
+                    "title": "JSON Web Tokens (and Signing)",
+                    "url": "https://jwt.io/"
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "title": "Configuration",
+            "text": "Ensure that a verified application has:<br><li class='circle'>Up to date libraries and platform(s).</li><br><li class='circle'>A secure by default configuration.</li><br><li class='circle'>Sufficient hardening that user initiated changes to default configuration do not unnecessarily expose or create security weaknesses or flaws to underlying systems.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Testing Guide 4.0: Configuration and Deployment Management Testing",
+                    "url": "https://www.owasp.org/index.php/Testing_for_configuration_management"
+                }
+            ]
         }
     ]
 }
