@@ -47,6 +47,7 @@
                                     <th>Created</th>
                                     <th>Name</th>
                                     <th>Description</th>
+                                    <th>Level</th>
                                     <th>% Completed</th>
                                 </tr>
                             </thead>
@@ -54,10 +55,9 @@
                                 {% for p in projects %}
                                 <tr>
                                     <td>{{ p.project_created }}</td>
-                                    <td>
-                                        {{ p.project_name }}
-                                    </td>
+                                    <td>{{ p.project_name }}</td>
                                     <td>{{ p.project_description }}</td>
+                                    <td>{{ p.project_level }} </td>
                                     <td></td>
                                 </tr>
                                 {% endfor %}
