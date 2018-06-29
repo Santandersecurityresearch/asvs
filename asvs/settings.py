@@ -27,9 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    # 'help',
+    'help',
     'levels',
-    'accountauth'
+    'accountauth',
+    'crispy_forms',
+    'projects'
 ]
 
 MIDDLEWARE = [
@@ -114,4 +116,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+LOGIN_URL = "login"
+CRISPY_TEMPLATE_PACK = "bootstrap3"
 # USE_THOUSAND_SEPARATOR = True

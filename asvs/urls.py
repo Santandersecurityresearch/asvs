@@ -9,5 +9,6 @@ urlpatterns = [
     path('home/', include('home.urls')),
     path('levels/', include('levels.urls')),
     path('help/', include('help.urls')),
-    path('auth/', include('accountauth.urls'))
+    path('auth/', include('accountauth.urls')),
+    path('projects/', include('projects.urls'))
 ]

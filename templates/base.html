@@ -26,7 +26,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div class="container">
-          <a href="../" class="navbar-brand">OWASP Application Security Verification Standard (ASVS) 3.0.1</a>
+          <a href="{% url 'home' %}" class="navbar-brand">OWASP Application Security Verification Standard (ASVS) 3.0.1</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="{% url 'projectsall' %}">Projects</a>
               </li>
             </ul>
           </div>
