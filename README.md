@@ -1,17 +1,20 @@
-# Welcome to blah
+# Welcome To The OWASP Application Security Verification Standard (ASVS) Web App - Release Name: Marbles
 
 The OWASP Application Security Verification Standard (ASVS) is a community-effort to
 establish a framework of security requirements and controls that focus on normalising the functional and non-functional security controls required when designing, developing and testing modern web applications.
 
 The ASVS is free to download as a PDF, but this is 2018 so we have taken the PDF and converted it into a web application (based on django). The key aim of the web application is to allow individuals or companies a quick and easy way to understand the ASVS controls, and where to find information on meeting those controls.
 
-When we built [name], we wanted to try and do the following:
+When we built Marbles, our aim was the following:
 
- - [x] Easy to update - the app is powered by two json files (asvs.json & category.json)
+ - [x] Easy to update - the app is powered by two JSON files (asvs.json & category.json)
  - [X] Lightweight -  The included Dockerfile builds a 89MB Docker image (size isn't everything)
  - [X] No frills - You don't want a web app that takes ages to load and has "extra" stuff in it
+ - [X] Community-focused - The ASVS is built by you for you, and so should this application. We welcome requests and ideas from you, the community.
 
 ## Installing
+
+We decided to use Docker for virtualisation so that it's easier to run in the cloud and keep update. This assumes you have Docker installed and running on your host (be it on-prem or cloud)
 
 ### Docker
 Once you have cloned the repo, you can build and run the docker image with the following commands:
@@ -31,19 +34,18 @@ If you want to run the web app on a "production" grade web server (such as Apach
 
 This is the first release and we already have some new "features" in the planning stages. These are currently (and subject to change).
 
-1. Projects - As a developer, create a project and chose the "level" for that project. You will then be given a checklist of all the controls you should implement, with the ability to "tick" which ones have been implemented. You can then give this to your security team so validate it, and your risk team so they can accept/challenge any outstanding controls.
-2. User registration and authentication (only for the project area)
-3. Sharing projects between individuals
-4. Teams (maybe)
+1. Sharing projects between individuals
+2. Teams (maybe)
+3. Integration into JIRA (via an API)
 
 ## Disclaimer
 
 This is the **first** release, as such we offer no warranties on the software and at present the following are known issues.
 
-1. Debugging is on within the django app.
+1. We made the decision to turn off debugging, trying to abide by the 'ship secure defaults principle'. If you need debugging, you need to turn it back on.  
 2. There is no nice error handling for missing routes.
 3. The secret key is static (you many want to change that if you release to production).
-4. I've only been using django for a couple of months, so yes there are probably better ways of doing things.
+4. We've only been using django for a couple of months, so yes there are probably better ways of doing things.
 
 ## Screenshots
 
@@ -57,4 +59,7 @@ This is the **first** release, as such we offer no warranties on the software an
 
 ![help](screenshots/help.png)
 
+## Who Are We?
+
+Adam Maxwell & Daniel Cuthbert are part of the Santander Group Cyber Security Research Team. Daniel is one of the co-authors of the ASVS, and we use it within the group and felt this app would be better suited as a community release, rather than just another internal tool. 
 
