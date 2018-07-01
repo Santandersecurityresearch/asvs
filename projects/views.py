@@ -21,7 +21,8 @@ def projects_add(request):
         project_name = request.POST.get('project_name')
         project_owner = request.user.username
         project_description = request.POST.get('project_description')
+        project_level = request.POST.get('project_level')
         p = Projects(project_name=project_name, project_owner=project_owner,
-                     project_description=project_description)
+                     project_description=project_description, project_level=project_level)
         p.save()
         return redirect('projectsall')
