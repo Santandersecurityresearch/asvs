@@ -12,9 +12,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '+*p)c@s0qatu6z6g()z)^cpj$m4@13m-ce$w^@xayj=6(_-ram'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# If you want to run with debug (for debugging) set an OS environement variable called DEV (with any value)
+if os.environ.get('DEV'):
+    DEBUG = True
+    ALLOWED_HOSTS = []
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
