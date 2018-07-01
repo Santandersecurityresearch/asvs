@@ -1,0 +1,1 @@
+The OWASP Application Security Verification Standard (ASVS) is driven by the community, and as such, so should this. We welcome anyone contributing, from code to ideas to advice. This release is for all to use and enjoy and help shape. 
