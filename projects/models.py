@@ -16,7 +16,7 @@ class Projects(models.Model):
     project_owner = models.CharField(default=User, max_length=60)
     project_created = models.DateTimeField(auto_now_add=True)
     project_description = models.CharField(max_length=255)
-    project_level = models.IntegerField(default=1)
+    project_level = models.IntegerField(default=0)
 
     objects = ProjectQuerySet.as_manager()
 

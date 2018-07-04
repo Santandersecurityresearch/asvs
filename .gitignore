@@ -106,3 +106,4 @@ venv.bak/
 .vscode
 .pyc
 .DS_Store
+storage/*.json
