@@ -4,22 +4,24 @@ import json
 
 
 def load_json_file(level):
-    results = {}
+    results = []
     with open('common/asvs.json') as f:
         data = json.load(f)
-    if level == 0:
-        for r in data['requirements']:
-            if results.get(r['sectionTitle']):
-                results[r['sectionTitle']].append(r['title'])
-            else:
-                results[r['sectionTitle']] = [r['title']]
-    else:
-        for r in data['requirements']:
-            if int(level) in r['levels']:
-                if results.get(r['sectionTitle']):
-                    results[r['sectionTitle']].append(r['title'])
-                else:
-                    results[r['sectionTitle']] = [r['title']]
+    # if level == 0:
+    #     for r in data['requirements']:
+    #         if results.get(r['sectionTitle']):
+    #             results[r['sectionTitle']].append(r['title'])
+    #         else:
+    #             results[r['sectionTitle']] = [r['title']]
+    # else:
+    for r in data['requirements']:
+        bob = 'L{0}'.format(level)
+        if r.get(bob):
+            results.append(r)
+            # if results.get(r['sectionTitle']):
+            #     results[r['sectionTitle']].append(r['title'])
+            # else:
+            #     results[r['sectionTitle']] = [r['title']]
     return results
 
 

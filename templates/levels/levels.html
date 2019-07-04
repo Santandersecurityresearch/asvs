@@ -12,68 +12,87 @@
     <div class="row">
         <div class="col-lg-12 col-md-7 col-sm-6">
             {% if level == 1 %}
-            <p>An application achieves ASVS Level 1 (or Opportunistic) if it adequately defends against application security
-                vulnerabilities that are easy to discover, and included in the OWASP Top 10 and other similar checklists.
+            <p>An application achieves ASVS Level 1 (or Opportunistic) if it adequately defends against application
+                security
+                vulnerabilities that are easy to discover, and included in the OWASP Top 10 and other similar
+                checklists.
                 <br>
-                <br>Level 1 is typically appropriate for applications where low confidence in the correct use of security controls
-                is required, or to provide a quick analysis of a fleet of enterprise applications, or assisting in developing
-                a prioritised list of security requirements as part of a multi-phase effort. Level 1 controls can be ensured
-                either automatically by tools or simply manually without access to source code. We consider Level 1 the minimum
+                <br>Level 1 is the bare minimum that all applications should strive for. It is also useful as a first
+                step in a multi-phase effort or when applications do not store or handle sensitive data and therefore do
+                not need the more rigorous controls of Level 2 or 3. Level 1 controls can be checked either
+                automatically by tools or simply manually without access to source code. We consider Level 1 the minimum
                 required for all applications.
                 <br>
-                <br>Threats to the application will most likely be from attackers who are using simple and low effort techniques
-                to identify easy-to-find and easy-to-exploit vulnerabilities. This is in contrast to a determined attacker
-                who will spend focused energy to specifically target the application. If data processed by your application
-                has high value, you would rarely want to stop at a Level 1 review. </p>
-            {% elif level == 2 %}
-            <p>An application achieves ASVS Level 2 (or Standard) if it adequately defends against most of the risks associated
-                with software today.
-                <br>
-                <br> Level 2 ensures that security controls are in place, effective, and used within the application. Level 2
-                is typically appropriate for applications that handle significant business-to-business transactions, including
-                those that process healthcare information, implement businesscritical or sensitive functions, or process
-                other sensitive assets.
-                <br>
-                <br> Threats to Level 2 applications will typically be skilled and motivated attackers focusing on specific targets
-                using tools and techniques that are highly practiced and effective at discovering and exploiting weaknesses
-                within applications.</p>
-            {% else %}
-            <p>ASVS Level 3 is the highest level of verification within the ASVS. This level is typically reserved for applications
-                that require significant levels of security verification, such as those that may be found within areas of
-                military, health and safety, critical infrastructure, etc. Organisations may require ASVS Level 3 for applications
-                that perform critical functions, 10 OWASP Application Security Verification Standard 3.0 where failure could
-                significantly impact the organisation's operations, and even its survivability. Example guidance on the application
-                of ASVS Level 3 is provided below. An application achieves ASVS Level 3 (or Advanced) if it adequately defends
-                against advanced application security vulnerabilities and also demonstrates principles of good security design.
-                <br>
-                <br> An application at ASVS Level 3 requires more in depth analysis, architecture, coding, and testing than all
-                the other levels. A secure application is modularized in a meaningful way (to facilitate e.g. resiliency,
-                scalability, and most of all, layers of security), and each module (separated by network connection and/or
-                physical instance) takes care of its own security responsibilities (defence in depth), that need to be properly
-                documented. Responsibilities include controls for ensuring confidentiality (e.g. encryption), integrity (e.g.
-                transactions, input validation), availability (e.g. handling load gracefully), authentication (including
-                between systems), non-repudiation, authorization, and auditing (logging).
-            </p>
-            {% endif %}
+                <br>Threats to the application will most likely be from attackers who are using simple and low effort
+                techniques to identify easy-to-find and easy-to-exploit vulnerabilities. This is in contrast to a
+                determined attacker who will spend focused energy to specifically target the application. If data
+                processed by your application has high value, you would rarely want to stop at a Level 1 review.
+                {% elif level == 2 %}
+                <p>An application achieves ASVS Level 2 (or Standard) if it adequately defends against most of the risks
+                    associated
+                    with software today.
+                    <br>
+                    <br> Level 2 ensures that security controls are in place, effective, and used within the
+                    application. Level 2 is typically appropriate for applications that handle significant
+                    business-to-business transactions, including those that process healthcare information, implement
+                    business-critical or sensitive functions, or process other sensitive assets, or industries where
+                    integrity is a critical facet to protect their business, such as the game industry to thwart
+                    cheaters and game hacks.
+                    <br>
+                    <br> Threats to Level 2 applications will typically be skilled and motivated attackers focusing on
+                    specific targets
+                    using tools and techniques that are highly practiced and effective at discovering and exploiting
+                    weaknesses
+                    within applications.</p>
+                {% else %}
+                <p>ASVS Level 3 is the highest level of verification within the ASVS. This level is typically reserved
+                    for applications that require significant levels of security verification, such as those that may be
+                    found within areas of military, health and safety, critical infrastructure, etc.
+
+                    Organizations may require ASVS Level 3 for applications that perform critical functions, where
+                    failure could significantly impact the organization's operations, and even its survivability.
+                    Example guidance on the application of ASVS Level 3 is provided below. An application achieves ASVS
+                    Level 3 (or Advanced) if it adequately defends against advanced application security vulnerabilities
+                    and also demonstrates principles of good security design.
+                    <br>
+                    <br> An application at ASVS Level 3 requires more in depth analysis, architecture, coding, and
+                    testing than all
+                    the other levels. A secure application is modularized in a meaningful way (to facilitate e.g.
+                    resiliency,
+                    scalability, and most of all, layers of security), and each module (separated by network connection
+                    and/or
+                    physical instance) takes care of its own security responsibilities (defence in depth), that need to
+                    be properly
+                    documented. Responsibilities include controls for ensuring confidentiality (e.g. encryption),
+                    integrity (e.g.
+                    transactions, input validation), availability (e.g. handling load gracefully), authentication
+                    (including
+                    between systems), non-repudiation, authorization, and auditing (logging).
+                </p>
+                {% endif %}
         </div>
     </div>
     <div class="row">
         <div id="accordion">
-            {% for k, v in data.items %}
+            {% for d in data %}
             <div class="card">
                 <div class="card-header" id="heading{{ forloop.counter }}">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
-                            {{ k }}
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
+                            aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                            {{ d.Description }}
                         </button>
                     </h5>
                 </div>
 
-                <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}" data-parent="#accordion">
+                <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}"
+                    data-parent="#accordion">
                     <div class="card-body">
-                        {% for i in v %}
-                        <li class="circle">{{ i }}</li>
-                        <br> {% endfor %}
+                        <li class="circle">{{ d.Section }}</li>
+                        <li class="circle">{{ d.Name }}</li>
+                        <li class="circle">{{ d.Item }}</li>
+                        <li class="circle">{{ d.CWE }}</li>
+                        <li class="circle">{{ d.NIST }}</li>
                     </div>
                 </div>
             </div>

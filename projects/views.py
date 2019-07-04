@@ -14,16 +14,17 @@ def load_json_file(level):
     with open('common/asvs.json') as f:
         data = json.load(f)
         for r in data['requirements']:
-            if int(level) in r['levels']:
+            bob = 'L{0}'.format(level)
+            if r.get(bob):
                 results.append(r)
     return results
 
 
 def create_template(requirements, project):
     # delete all the levels out of the requirements as not needed in the template
-    for r in requirements:
-        del r['levels']
-        r['enabled'] = 0
+    # for r in requirements:
+    #     del r['levels']
+    #     r['enabled'] = 0
     # build the template with project information and requirements
     data = {}
     data['project_owner'] = project['project_owner']
@@ -60,8 +61,10 @@ def calculate_completion(requirements):
     total = len(requirements)
     enabled = 0
     for r in requirements:
-        if r['enabled'] == 1:
+        if r.get('enabled') and r['enabled'] > 0:
             enabled += 1
+        else:
+            pass
     percentage = enabled / total * 100
     return {'total': total, 'enabled': enabled, 'percentage': '{0:.1f}'.format(percentage)}
 
@@ -123,7 +126,7 @@ def project_update(request):
                 pass
             else:
                 for r in project['requirements']:
-                    if r['requirementId'] == int(k):
+                    if r['Item'] in k:
                         if int(v) == 0:
                             r['enabled'] = 0
                         else:

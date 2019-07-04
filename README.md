@@ -32,36 +32,23 @@ If you want to run the web app on a "production" grade web server (such as Apach
 
 ## Roadmap
 
-This is the first release and we already have some new "features" in the planning stages. These are currently (and subject to change).
+This is the second release and we already have some new "features" in the planning stages. These are currently (and subject to change).
 
 1. Sharing projects between individuals
 2. Teams (maybe)
 3. Integration into JIRA (via an API)
 
-## Disclaimer
 
-This is the **first** release, as such we offer no warranties on the software and at present the following are known issues.
-
-1. We made the decision to turn off debugging, trying to abide by the 'ship secure defaults principle'. If you need debugging, you need to turn it back on.  
-2. There is no nice error handling for missing routes.
-3. The secret key is static (you many want to change that if you release to production).
-4. We've only been using django for a couple of months, so yes there are probably better ways of doing things.
 
 ## Screenshots
 
 ![homepage](screenshots/homepage.png)
-
-![menus1](screenshots/menus1.png)
-
-![menus2](screenshots/menus2.png)
 
 ![levels](screenshots/levels.png)
 
 ![help](screenshots/help.png)
 
 ![projectmanagement](screenshots/projectmanagement.png)
-
-![emptyproject](screenshots/emptyproject.png)
 
 ![projectunderway](screenshots/projectunderway.png)
 
