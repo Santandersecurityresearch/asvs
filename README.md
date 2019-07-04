@@ -3,7 +3,7 @@
 The OWASP Application Security Verification Standard (ASVS) is a community-effort to
 establish a framework of security requirements and controls that focus on normalising the functional and non-functional security controls required when designing, developing and testing modern web applications.
 
-The ASVS is free to download as a PDF, but this is 2018 so we have taken the PDF and converted it into a web application (based on django). The key aim of the web application is to allow individuals or companies a quick and easy way to understand the ASVS controls, and where to find information on meeting those controls.
+You can access the ASVS via Github, but we wanted to make this more accessible to all as a web application (based on django). The key aim of the web application is to allow individuals or companies a quick and easy way to understand the ASVS controls, and where to find information on meeting those controls.
 
 When we built Marbles, our aim was the following:
 
