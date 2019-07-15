@@ -9,7 +9,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -20,7 +21,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1053,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -31,7 +33,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1110,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -42,7 +45,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1059,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -53,7 +57,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1059,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -64,7 +69,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 637,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -75,7 +81,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 637,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -86,7 +93,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 284,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -97,7 +105,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1059,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -108,7 +117,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 362,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -119,7 +129,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 367,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -130,7 +141,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 552,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V1",
@@ -141,7 +153,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 646,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V1",
@@ -152,7 +165,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 923,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -174,7 +188,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1104,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -185,7 +200,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -196,7 +212,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 265,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -207,7 +224,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 477,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -218,7 +236,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 250,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -229,7 +248,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 306,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -240,7 +260,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 306,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "authentication"
   },
   {
     "Section": "V1",
@@ -251,7 +272,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 306,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "authentication"
   },
   {
     "Section": "V1",
@@ -262,7 +284,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 602,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -273,7 +296,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 284,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V1",
@@ -284,7 +308,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 272,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V1",
@@ -295,7 +320,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 284,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V1",
@@ -306,7 +332,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 275,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V1",
@@ -317,7 +344,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1029,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V1",
@@ -328,7 +356,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 502,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, encryption, sensitive data"
   },
   {
     "Section": "V1",
@@ -339,7 +368,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 602,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, input data"
   },
   {
     "Section": "V1",
@@ -350,7 +380,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 116,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "output data"
   },
   {
     "Section": "V1",
@@ -361,7 +392,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 320,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V1",
@@ -372,7 +404,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 320,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption, authentication"
   },
   {
     "Section": "V1",
@@ -383,7 +416,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 320,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption, data handlilng, sensitive data"
   },
   {
     "Section": "V1",
@@ -394,7 +428,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 320,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V1",
@@ -405,7 +440,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1009,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging"
   },
   {
     "Section": "V1",
@@ -416,7 +452,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging"
   },
   {
     "Section": "V1",
@@ -427,7 +464,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "sensitive data"
   },
   {
     "Section": "V1",
@@ -438,7 +476,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V1",
@@ -449,7 +488,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 319,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V1",
@@ -460,7 +500,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 295,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V2",
@@ -471,7 +512,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -482,7 +524,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 263,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -493,7 +536,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -504,7 +548,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -515,7 +560,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -526,7 +572,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -537,7 +584,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -548,7 +596,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 620,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -559,7 +608,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 620,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -570,7 +620,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -581,7 +632,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -592,7 +644,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 521,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -603,7 +656,8 @@
     "L2": "OS assisted",
     "L3": "HSM",
     "CWE": 287,
-    "NIST": "5.1.1.1"
+    "NIST": "5.1.1.1",
+    "Keyword": "authentication, secrets"
   },
   {
     "Section": "V2",
@@ -614,7 +668,8 @@
     "L2": "OS assisted",
     "L3": "HSM",
     "CWE": 255,
-    "NIST": "5.1.1.1"
+    "NIST": "5.1.1.1",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -625,7 +680,8 @@
     "L2": "OS assisted",
     "L3": "HSM",
     "CWE": 522,
-    "NIST": "5.1.1.1"
+    "NIST": "5.1.1.1",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -636,7 +692,8 @@
     "L2": "OS assisted",
     "L3": "HSM",
     "CWE": 798,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "authentication, secrets"
   },
   {
     "Section": "V2",
@@ -647,7 +704,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 307,
-    "NIST": "5.2.2 / 5.1.1.2 / 5.1.4.2 / 5.1.5.2"
+    "NIST": "5.2.2 / 5.1.1.2 / 5.1.4.2 / 5.1.5.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -658,7 +716,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 304,
-    "NIST": "5.2.10"
+    "NIST": "5.2.10",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -669,7 +728,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 620,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -680,7 +740,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 308,
-    "NIST": "5.2.5"
+    "NIST": "5.2.5",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -691,7 +752,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 319,
-    "NIST": "5.2.6"
+    "NIST": "5.2.6",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -702,7 +764,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 308,
-    "NIST": "5.2.8"
+    "NIST": "5.2.8",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -713,7 +776,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 308,
-    "NIST": "5.2.9"
+    "NIST": "5.2.9",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -724,7 +788,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 330,
-    "NIST": "5.1.1.2 / A.3"
+    "NIST": "5.1.1.2 / A.3",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -735,7 +800,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 308,
-    "NIST": "6.1.3"
+    "NIST": "6.1.3",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -746,7 +812,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 287,
-    "NIST": "6.1.4"
+    "NIST": "6.1.4",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -757,7 +824,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 916,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication, encryption"
   },
   {
     "Section": "V2",
@@ -768,7 +836,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 916,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication, encryption"
   },
   {
     "Section": "V2",
@@ -779,7 +848,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 916,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication, encryption"
   },
   {
     "Section": "V2",
@@ -790,7 +860,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 916,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication, encryption"
   },
   {
     "Section": "V2",
@@ -801,7 +872,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 916,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication, encryption"
   },
   {
     "Section": "V2",
@@ -812,7 +884,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 640,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication, encryption"
   },
   {
     "Section": "V2",
@@ -823,7 +896,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 640,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -834,7 +908,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 640,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -845,7 +920,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 16,
-    "NIST": "5.1.1.2 / A.3"
+    "NIST": "5.1.1.2 / A.3",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -856,7 +932,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 304,
-    "NIST": "6.1.2.3"
+    "NIST": "6.1.2.3",
+    "Keyword": "authentication, 2FA"
   },
   {
     "Section": "V2",
@@ -867,7 +944,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 640,
-    "NIST": "5.1.1.2"
+    "NIST": "5.1.1.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -878,7 +956,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 308,
-    "NIST": "6.1.2.3"
+    "NIST": "6.1.2.3",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -889,7 +968,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 308,
-    "NIST": "5.1.2.2"
+    "NIST": "5.1.2.2",
+    "Keyword": "2FA, secrets"
   },
   {
     "Section": "V2",
@@ -900,7 +980,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 330,
-    "NIST": "5.1.2.2"
+    "NIST": "5.1.2.2",
+    "Keyword": "2FA, secrets"
   },
   {
     "Section": "V2",
@@ -911,7 +992,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 310,
-    "NIST": "5.1.2.2"
+    "NIST": "5.1.2.2",
+    "Keyword": "2FA, secrets,  encryption"
   },
   {
     "Section": "V2",
@@ -922,7 +1004,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 287,
-    "NIST": "5.1.3.2"
+    "NIST": "5.1.3.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -933,7 +1016,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 287,
-    "NIST": "5.1.3.2"
+    "NIST": "5.1.3.2",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -944,7 +1028,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 287,
-    "NIST": "5.1.3.2"
+    "NIST": "5.1.3.2",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -955,7 +1040,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 523,
-    "NIST": "5.1.3.2"
+    "NIST": "5.1.3.2",
+    "Keyword": "authentication, 2FA"
   },
   {
     "Section": "V2",
@@ -966,7 +1052,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 256,
-    "NIST": "5.1.3.2"
+    "NIST": "5.1.3.2",
+    "Keyword": "2FA"
   },
   {
     "Section": "V2",
@@ -977,7 +1064,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 310,
-    "NIST": "5.1.3.2"
+    "NIST": "5.1.3.2",
+    "Keyword": "authentication"
   },
   {
     "Section": "V2",
@@ -988,7 +1076,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 613,
-    "NIST": "5.1.4.2 / 5.1.5.2"
+    "NIST": "5.1.4.2 / 5.1.5.2",
+    "Keyword": "authentication, 2FA"
   },
   {
     "Section": "V2",
@@ -999,7 +1088,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 320,
-    "NIST": "5.1.4.2 / 5.1.5.2"
+    "NIST": "5.1.4.2 / 5.1.5.2",
+    "Keyword": "authentication, 2FA, encryption"
   },
   {
     "Section": "V2",
@@ -1010,7 +1100,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 326,
-    "NIST": "5.1.4.2 / 5.1.5.2"
+    "NIST": "5.1.4.2 / 5.1.5.2",
+    "Keyword": "authentication, encryption"
   },
   {
     "Section": "V2",
@@ -1021,7 +1112,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 287,
-    "NIST": "5.1.4.2 / 5.1.5.2"
+    "NIST": "5.1.4.2 / 5.1.5.2",
+    "Keyword": "authentication, 2FA"
   },
   {
     "Section": "V2",
@@ -1032,7 +1124,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 287,
-    "NIST": "5.1.5.2"
+    "NIST": "5.1.5.2",
+    "Keyword": "authentication, 2FA"
   },
   {
     "Section": "V2",
@@ -1043,7 +1136,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 613,
-    "NIST": "5.2.1"
+    "NIST": "5.2.1",
+    "Keyword": "authentication, 2FA"
   },
   {
     "Section": "V2",
@@ -1054,7 +1148,8 @@
     "L2": "o",
     "L3": "X",
     "CWE": 308,
-    "NIST": "5.2.3"
+    "NIST": "5.2.3",
+    "Keyword": "authentication, 2FA"
   },
   {
     "Section": "V2",
@@ -1065,7 +1160,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 320,
-    "NIST": "5.1.7.2"
+    "NIST": "5.1.7.2",
+    "Keyword": "authentication, 2FA, encryption, secrets"
   },
   {
     "Section": "V2",
@@ -1076,7 +1172,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 330,
-    "NIST": "5.1.7.2"
+    "NIST": "5.1.7.2",
+    "Keyword": "authentication, 2FA, encryption"
   },
   {
     "Section": "V2",
@@ -1087,7 +1184,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 327,
-    "NIST": "5.1.7.2"
+    "NIST": "5.1.7.2",
+    "Keyword": "authentication, encryption"
   },
   {
     "Section": "V3",
@@ -1098,7 +1196,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 598,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "session management, logging"
   },
   {
     "Section": "V3",
@@ -1109,7 +1208,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 384,
-    "NIST": 7.1
+    "NIST": 7.1,
+    "Keyword": "session management, authentication"
   },
   {
     "Section": "V3",
@@ -1120,7 +1220,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 331,
-    "NIST": 7.1
+    "NIST": 7.1,
+    "Keyword": "session management, encryption"
   },
   {
     "Section": "V3",
@@ -1131,7 +1232,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 539,
-    "NIST": 7.1
+    "NIST": 7.1,
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1142,7 +1244,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 331,
-    "NIST": 7.1
+    "NIST": 7.1,
+    "Keyword": "session management, encryption"
   },
   {
     "Section": "V3",
@@ -1153,7 +1256,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 613,
-    "NIST": 7.1
+    "NIST": 7.1,
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1164,7 +1268,8 @@
     "L2": "12 hours or 30 minutes of inactivity, 2FA optional",
     "L3": "12 hours or 15 minutes of inactivity, with 2FA",
     "CWE": 613,
-    "NIST": 7.2
+    "NIST": 7.2,
+    "Keyword": "session management, authentication"
   },
   {
     "Section": "V3",
@@ -1175,7 +1280,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 613,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1186,7 +1292,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 613,
-    "NIST": 7.1
+    "NIST": 7.1,
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1197,7 +1304,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 614,
-    "NIST": "7.1.1"
+    "NIST": "7.1.1",
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1208,7 +1316,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1004,
-    "NIST": "7.1.1"
+    "NIST": "7.1.1",
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1219,7 +1328,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 16,
-    "NIST": "7.1.1"
+    "NIST": "7.1.1",
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1230,7 +1340,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 16,
-    "NIST": "7.1.1"
+    "NIST": "7.1.1",
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1241,7 +1352,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 16,
-    "NIST": "7.1.1"
+    "NIST": "7.1.1",
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1252,7 +1364,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 290,
-    "NIST": "7.1.2"
+    "NIST": "7.1.2",
+    "Keyword": "session management"
   },
   {
     "Section": "V3",
@@ -1263,7 +1376,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 798,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "session management, encryption, secrets"
   },
   {
     "Section": "V3",
@@ -1274,7 +1388,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 345,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "session management, encryption"
   },
   {
     "Section": "V3",
@@ -1285,7 +1400,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 613,
-    "NIST": "7.2.1"
+    "NIST": "7.2.1",
+    "Keyword": "session management, authentication"
   },
   {
     "Section": "V3",
@@ -1296,7 +1412,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 613,
-    "NIST": "7.2.1"
+    "NIST": "7.2.1",
+    "Keyword": "session management, authentication"
   },
   {
     "Section": "V3",
@@ -1307,7 +1424,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 778,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "session management, authentication, 2FA, risk transactions"
   },
   {
     "Section": "V4",
@@ -1318,7 +1436,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 602,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V4",
@@ -1329,7 +1448,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 639,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V4",
@@ -1340,7 +1460,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 285,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control, administrative controls"
   },
   {
     "Section": "V4",
@@ -1351,7 +1472,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 276,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control, administrative controls"
   },
   {
     "Section": "V4",
@@ -1362,7 +1484,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 285,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V4",
@@ -1373,7 +1496,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 639,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control, sensitive data"
   },
   {
     "Section": "V4",
@@ -1384,7 +1508,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 352,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control, authentication, session management"
   },
   {
     "Section": "V4",
@@ -1395,7 +1520,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 419,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control, 2FA"
   },
   {
     "Section": "V4",
@@ -1406,7 +1532,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 548,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V4",
@@ -1417,7 +1544,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 732,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control, administrative controls"
   },
   {
     "Section": "V5",
@@ -1428,7 +1556,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 235,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1439,7 +1568,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 915,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1450,7 +1580,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 20,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "input data"
   },
   {
     "Section": "V5",
@@ -1461,7 +1592,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 20,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1472,7 +1604,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 601,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1483,7 +1616,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 116,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "input data"
   },
   {
     "Section": "V5",
@@ -1494,7 +1628,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 138,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1505,7 +1640,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 147,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "input data"
   },
   {
     "Section": "V5",
@@ -1516,7 +1652,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 95,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1527,7 +1664,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 94,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "input data"
   },
   {
     "Section": "V5",
@@ -1538,7 +1676,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 918,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1549,7 +1688,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 159,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1560,7 +1700,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 94,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1571,7 +1712,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 116,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "output data"
   },
   {
     "Section": "V5",
@@ -1582,7 +1724,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 643,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1593,7 +1736,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 176,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "output data"
   },
   {
     "Section": "V5",
@@ -1604,7 +1748,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 79,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "output data"
   },
   {
     "Section": "V5",
@@ -1615,7 +1760,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 89,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, databases"
   },
   {
     "Section": "V5",
@@ -1626,7 +1772,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 89,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, databases"
   },
   {
     "Section": "V5",
@@ -1637,7 +1784,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 830,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1648,7 +1796,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 943,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "LDAP"
   },
   {
     "Section": "V5",
@@ -1659,7 +1808,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 78,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1670,7 +1820,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 829,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1681,7 +1832,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 120,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1692,7 +1844,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 134,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "input data"
   },
   {
     "Section": "V5",
@@ -1703,7 +1856,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 190,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "input data"
   },
   {
     "Section": "V5",
@@ -1714,7 +1868,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 502,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1725,7 +1880,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 611,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1736,7 +1892,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 502,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V5",
@@ -1747,7 +1904,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 95,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V6",
@@ -1758,7 +1916,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 311,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption, sensitive data"
   },
   {
     "Section": "V6",
@@ -1769,7 +1928,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 311,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption, sensitive data"
   },
   {
     "Section": "V6",
@@ -1780,7 +1940,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 311,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption, sensitive data"
   },
   {
     "Section": "V6",
@@ -1791,7 +1952,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 310,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1802,7 +1964,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 327,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1813,7 +1976,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 326,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1824,7 +1988,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 326,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1835,7 +2000,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 326,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1846,7 +2012,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 326,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1857,7 +2024,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 326,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1868,7 +2036,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 385,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1879,7 +2048,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 338,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1890,7 +2060,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 338,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1901,7 +2072,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 338,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption"
   },
   {
     "Section": "V6",
@@ -1912,7 +2084,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 798,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption, secrets"
   },
   {
     "Section": "V6",
@@ -1923,7 +2096,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 320,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "encryption, secrets"
   },
   {
     "Section": "V7",
@@ -1934,7 +2108,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 532,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging, sensitive data, session management, authentication"
   },
   {
     "Section": "V7",
@@ -1945,7 +2120,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 532,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging, sensitive data"
   },
   {
     "Section": "V7",
@@ -1956,7 +2132,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 778,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging"
   },
   {
     "Section": "V7",
@@ -1967,7 +2144,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 778,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging"
   },
   {
     "Section": "V7",
@@ -1978,7 +2156,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 778,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging, authentication, session management"
   },
   {
     "Section": "V7",
@@ -1989,7 +2168,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 285,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging, access control"
   },
   {
     "Section": "V7",
@@ -2000,7 +2180,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 117,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging, input data"
   },
   {
     "Section": "V7",
@@ -2011,7 +2192,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 117,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging, data handling"
   },
   {
     "Section": "V7",
@@ -2022,7 +2204,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 200,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "logging, administrative controls"
   },
   {
     "Section": "V7",
@@ -2033,7 +2216,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V7",
@@ -2044,7 +2228,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 210,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V7",
@@ -2055,7 +2240,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 544,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V7",
@@ -2066,7 +2252,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 460,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V8",
@@ -2077,7 +2264,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 524,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data"
   },
   {
     "Section": "V8",
@@ -2088,7 +2276,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 524,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data, administrative controls"
   },
   {
     "Section": "V8",
@@ -2099,7 +2288,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 233,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V8",
@@ -2110,7 +2300,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 770,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V8",
@@ -2121,7 +2312,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 19,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V8",
@@ -2132,7 +2324,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 19,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V8",
@@ -2143,7 +2336,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 525,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "sensitive data"
   },
   {
     "Section": "V8",
@@ -2154,7 +2348,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 922,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data"
   },
   {
     "Section": "V8",
@@ -2165,7 +2360,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 922,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, session management"
   },
   {
     "Section": "V8",
@@ -2176,7 +2372,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 319,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data"
   },
   {
     "Section": "V8",
@@ -2187,7 +2384,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 212,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V8",
@@ -2198,7 +2396,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 285,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V8",
@@ -2209,7 +2408,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 200,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data"
   },
   {
     "Section": "V8",
@@ -2220,7 +2420,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 532,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data, logging, administrative controls"
   },
   {
     "Section": "V8",
@@ -2231,7 +2432,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 226,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data"
   },
   {
     "Section": "V8",
@@ -2242,7 +2444,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 327,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data, encryption"
   },
   {
     "Section": "V8",
@@ -2253,7 +2456,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 285,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, sensitive data"
   },
   {
     "Section": "V9",
@@ -2264,7 +2468,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 319,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V9",
@@ -2275,7 +2480,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 326,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V9",
@@ -2286,7 +2492,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 326,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V9",
@@ -2297,7 +2504,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 295,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V9",
@@ -2308,7 +2516,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 319,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V9",
@@ -2319,7 +2528,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 287,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "sensitive data, data handling, encryption"
   },
   {
     "Section": "V9",
@@ -2330,7 +2540,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 299,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V9",
@@ -2341,7 +2552,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 544,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2352,7 +2564,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 749,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2363,7 +2576,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 359,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2374,7 +2588,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 272,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2385,7 +2600,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 507,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2396,7 +2612,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 511,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2407,7 +2624,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 511,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2418,7 +2636,8 @@
     "L2": "",
     "L3": "X",
     "CWE": 507,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2429,7 +2648,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 16,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V10",
@@ -2451,7 +2671,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 350,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V11",
@@ -2462,7 +2683,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 841,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "business logic"
   },
   {
     "Section": "V11",
@@ -2473,7 +2695,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 779,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "business logic"
   },
   {
     "Section": "V11",
@@ -2484,7 +2707,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 770,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "business logic"
   },
   {
     "Section": "V11",
@@ -2495,7 +2719,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 770,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "business logic"
   },
   {
     "Section": "V11",
@@ -2506,7 +2731,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 841,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "business logic"
   },
   {
     "Section": "V11",
@@ -2517,7 +2743,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 367,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "business logic"
   },
   {
     "Section": "V11",
@@ -2528,7 +2755,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 754,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "business logic, logging"
   },
   {
     "Section": "V11",
@@ -2539,7 +2767,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 390,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "business logic, logging"
   },
   {
     "Section": "V12",
@@ -2550,7 +2779,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 400,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2561,7 +2791,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 409,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2572,7 +2803,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 770,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2583,7 +2815,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 434,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2594,7 +2827,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 22,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2605,7 +2839,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 73,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2616,7 +2851,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 98,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2627,7 +2863,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 641,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2638,7 +2875,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 78,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2649,7 +2887,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 829,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2660,7 +2899,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 922,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2671,7 +2911,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 509,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file upload"
   },
   {
     "Section": "V12",
@@ -2682,7 +2923,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 552,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file management"
   },
   {
     "Section": "V12",
@@ -2693,7 +2935,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 434,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file management"
   },
   {
     "Section": "V12",
@@ -2704,7 +2947,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 918,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "file management"
   },
   {
     "Section": "V13",
@@ -2715,7 +2959,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 116,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2726,7 +2971,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 419,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, administrative controls"
   },
   {
     "Section": "V13",
@@ -2737,7 +2983,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 598,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, session management, sensitive data"
   },
   {
     "Section": "V13",
@@ -2748,7 +2995,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 285,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "access control"
   },
   {
     "Section": "V13",
@@ -2759,7 +3007,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 434,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2770,7 +3019,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 650,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2781,7 +3031,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 20,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2792,7 +3043,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 352,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling, session management"
   },
   {
     "Section": "V13",
@@ -2803,7 +3055,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 779,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2814,7 +3067,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 436,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2825,7 +3079,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 345,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2836,7 +3091,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 20,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2847,7 +3103,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 345,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2858,7 +3115,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 770,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V13",
@@ -2869,7 +3127,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 285,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "data handling"
   },
   {
     "Section": "V14",
@@ -2880,7 +3139,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2891,7 +3151,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 120,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2902,7 +3163,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 16,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2913,7 +3175,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2924,7 +3187,8 @@
     "L2": "",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2935,7 +3199,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1026,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2946,7 +3211,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1002,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2957,7 +3223,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 714,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2968,7 +3235,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 829,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2979,7 +3247,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": "",
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -2990,7 +3259,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 265,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3001,7 +3271,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 209,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3012,7 +3283,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 497,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3023,7 +3295,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 200,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3034,7 +3307,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 173,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3045,7 +3319,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 116,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3056,7 +3331,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 1021,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3067,7 +3343,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 116,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3078,7 +3355,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 523,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3089,7 +3367,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 116,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3100,7 +3379,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 346,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3111,7 +3391,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 749,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3122,7 +3403,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 346,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3133,7 +3415,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 346,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   },
   {
     "Section": "V14",
@@ -3144,7 +3427,8 @@
     "L2": "X",
     "L3": "X",
     "CWE": 306,
-    "NIST": ""
+    "NIST": "",
+    "Keyword": "all"
   }
 ]
 }
