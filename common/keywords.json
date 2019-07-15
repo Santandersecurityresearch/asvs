@@ -1,0 +1,80 @@
+{
+  "Keywords": [
+    {
+      "Keyword": "all",
+      "Description": "General rule that applies to all the applications"
+    },
+    {
+      "Keyword": "2FA",
+      "Description": "A multi-factor authentication as push notifications or google authenticator is in use. It might also be used for authorisation purposes"
+    },
+    {
+      "Keyword": "access control",
+      "Description": "There are controls in place to validate which data can be accessed by a customer. For example, account ownership when performing a payment"
+    },
+    {
+      "Keyword": "administrative controls",
+      "Description": "Those controls apply when different roles can access to the same data, but with different privileges. As an example, an administrator can reset passwords, but a regular user can't"
+    },
+    {
+      "Keyword": "authentication",
+      "Description": "Your application contains any authentication mechanism to validate customer identity. It can be both user/password or any other authentication system as a token"
+    },
+    {
+      "Keyword": "business logic",
+      "Description": "Use this keyword if you have any business logic in your application"
+    },
+    {
+      "Keyword": "data handling",
+      "Description": "If your application handles any data, no matter if it is sensitive or not, this option applies to your application. Note that even if you don't manage input/output data, this option is still applicable if you do any validation in the business logic layer "
+    },
+    {
+      "Keyword": "databases",
+      "Description": "Tick this option if you use databases"
+    },
+    {
+      "Keyword": "encryption",
+      "Description": "If your application uses any type of encryption, both to secure data in transit or to store it securely, those controls apply to you"
+    },
+    {
+      "Keyword": "file management",
+      "Description": "File management, it is, your application serves a file to the customer, or reads a file in the server and returns the data to the customer"
+    },
+    {
+      "Keyword": "file upload",
+      "Description": "Your application contains an upload file functionality. It can be both documents, images, etc... "
+    },
+    {
+      "Keyword": "input data",
+      "Description": "Your application receives untrusted data from the customer"
+    },
+    {
+      "Keyword": "LDAP",
+      "Description": "Tick this option if your application connects to an LDAP"
+    },
+    {
+      "Keyword": "logging",
+      "Description": "If your application has logging capacities, which is very likely, those controls apply to you"
+    },
+    {
+      "Keyword": "output data",
+      "Description": "Your application displays any data in the front end to the customer. It can be both trusted data retrieved from an internal component, or displaying in the screen untrusted data that has been previously entered by the customer"
+    },
+    {
+      "Keyword": "risk transaction",
+      "Description": "Some applications perform risk transactions, as transfer money, display PIN number from a credit card, etc..."
+    },
+    {
+      "Keyword": "secrets",
+      "Description": "Some applications use secrets, as keys to authenticate a transaction or to perform encryption"
+    },
+    {
+      "Keyword": "sensitive data",
+      "Description": "If your application uses sensitive data as card numbers, passwords, or any Personally Identifiable Information, those controls apply to you"
+    },
+    {
+      "Keyword": "session management",
+      "Description": "Select this component if you use session management mechanisms in your application"
+    }
+  ]
+}
