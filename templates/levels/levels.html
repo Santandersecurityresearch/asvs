@@ -74,26 +74,23 @@
     </div>
     <div class="row">
         <div id="accordion">
-            {% for d in data %}
+            {% for result, data in results.items %}
             <div class="card">
-                <div class="card-header" id="heading{{ forloop.counter }}">
+                <div class="card-header">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
+                        <button class="btn btn-link btn-custom" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
                             aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
-                            {{ d.Description }}
+                            {{ result }}
                         </button>
                     </h5>
                 </div>
-
                 <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}"
                     data-parent="#accordion">
+                    {% for d in data %}
                     <div class="card-body">
-                        <li class="circle">{{ d.Section }}</li>
-                        <li class="circle">{{ d.Name }}</li>
-                        <li class="circle">{{ d.Item }}</li>
-                        <li class="circle">{{ d.CWE }}</li>
-                        <li class="circle">{{ d.NIST }}</li>
+                        <li>{{d.Description}}</li>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
             {% endfor %}

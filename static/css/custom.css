@@ -74,3 +74,7 @@
 .side-nav>li>ul>li>a:hover {
     color: #fff;
 }
+
+.btn-custom {
+    padding: 10px 1000px 10px 20px;
+}
