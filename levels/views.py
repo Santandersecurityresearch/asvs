@@ -4,7 +4,8 @@ import json
 
 
 def load_json_file(level):
-    results = []
+    results = {}
+
     with open('common/asvs.json') as f:
         data = json.load(f)
     # if level == 0:
@@ -17,7 +18,7 @@ def load_json_file(level):
     for r in data['requirements']:
         bob = 'L{0}'.format(level)
         if r.get(bob):
-            results.append(r)
+            results.setdefault(r['Name'], []).append(r)
             # if results.get(r['sectionTitle']):
             #     results[r['sectionTitle']].append(r['title'])
             # else:
@@ -26,5 +27,5 @@ def load_json_file(level):
 
 
 def levels(request, level):
-    data = load_json_file(level)
-    return render(request, 'levels/levels.html', {'data': data, 'level': int(level)})
+    results = load_json_file(level)
+    return render(request, 'levels/levels.html', {'results': results, 'level': int(level)})
