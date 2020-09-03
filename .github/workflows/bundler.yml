@@ -1,0 +1,25 @@
+name: Hello. We like security stuff
+# This yml is the start of us doing stuff manually as part of the triggered workflow
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Word @danielcuthbert'
+        # Default value if no value is explicitly provided
+        default:
+        # Input has to be provided for the workflow to run
+        required: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Bundler Audit'
+        uses: andrewmcodes/bundler-audit-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+          
