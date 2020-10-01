@@ -1,0 +1,11 @@
+
+  
+steps:
+- uses: actions/checkout@v1
+- name: Kiuwan Baseline Analysis
+uses: lsacera/KiuwanBaselineAction@v0.4
+  with:
+    project: ASVS
+    label: '4.0'
+    userid: ${{ secrets.KIUWAN_SSO_USER }}
+    password: ${{ secrets.KIUWAN_SSO_PASSWORD }}
