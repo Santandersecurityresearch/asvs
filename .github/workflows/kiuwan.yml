@@ -1,11 +1,25 @@
+name: Testing Kiuwan
 
-  
-steps:
-- uses: actions/checkout@v1
-- name: Kiuwan Baseline Analysis
-uses: lsacera/KiuwanBaselineAction@v0.4
-  with:
-    project: ASVS
-    label: '4.0'
-    userid: ${{ secrets.KIUWAN_SSO_USER }}
-    password: ${{ secrets.KIUWAN_SSO_PASSWORD }}
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Kiuwan Delivery Action
+      uses: lsacera/KiuwanActions@v0.4
+      id: kstep
+      with:
+        project: ASVS
+        label: ${{ github.run_number }}
+        userid: ${{ secrets.KIUWAN_USER }}
+        password: ${{ secrets.KIUWAN_PASS }}
+      
+    - name: show results step
+      run: echo 'Ooh baby, guess the results were ${{ steps.kstep.outputs.result }} and the message was ${{ steps.kstep.outputs.message }} and the vulns are ${{ steps.kstep.outputs.auditresult }} and if you wanted to see them, head to ${{ steps.kstep.outputs.analysisurl }}.'
+      
+
+      
