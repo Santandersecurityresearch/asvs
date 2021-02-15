@@ -220,7 +220,6 @@
 
         meter.append("path")
             .attr("class", "background")
-            .attr("style","background-color:red")
             .attr("d", arc.endAngle(360));
 
         var foreground = meter.append("path")
@@ -239,11 +238,11 @@
             .attr("class", "description")
             .attr("dy", "2.3em")
             .text(c);
-
-        var i = d3.interpolate(progress, allocated / total);
+      
 
         
     }
+    
 
 </script>
 

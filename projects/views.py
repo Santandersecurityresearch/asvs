@@ -155,7 +155,7 @@ def generate_pdf(request, projectid):
     phash = (hashlib.md5('{0}{1}'.format(request.user.username, projectid).encode('utf-8')).hexdigest())
     project = load_template(phash)
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="DomainReport.pdf"'
+    response['Content-Disposition'] = 'attachment; filename="ProjectReport.pdf"'
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
     data=[['PROJECT REPORT']]
@@ -164,8 +164,10 @@ def generate_pdf(request, projectid):
 
     data.append(["Project Owner:"])
     data.append([str(project['project_owner'])])
-    data.append(["Project Name:","Project ID:"])
-    data.append([str(project['project_name']), str(project['project_id'])])
+    data.append(["Project Name:"])
+    data.append([str(project['project_name'])])
+    data.append(["Project ID:"])
+    data.append([str(project['project_id'])])
     data.append(["Project Description:"])
     data.append([str(project['project_description'])])
     data.append(["Project Created:"])
