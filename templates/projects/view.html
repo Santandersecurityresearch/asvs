@@ -37,6 +37,16 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-7 col-sm-6">
+            <div class="card border-primary mb-4">
+                <div class="card-body">
+                    <div class="radial-progress" id="docsChart" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <form action="{% url 'projectsupdate' %}" method="POST" role="form" class="form-horizontal">
@@ -63,7 +73,61 @@
                                 <tbody>
                                     {% for d in data %}
                                     <tr>
-                                        <td>{{ d.Name }}</td>
+                                        {% if d.Name == "Architecture" %}
+                                        <td style="background-color:#F6C2AE">{{ d.Name }}</td>
+                                        {% else %}
+                                                {% if d.Name == "Authentication" %}
+                                                <td style="background-color:#AEF6EE">{{ d.Name }}</td>
+                                                {% else %}
+                                                    {% if d.Name == "Session" %}
+                                                            <td style="background-color:#AECEF6">{{ d.Name }}</td>
+                                                    {% else %}
+                                                        {% if d.Name == "Access" %}
+                                                            <td style="background-color:#F5F6AE">{{ d.Name }}</td>
+                                                        {% else %}  
+                                                            {% if d.Name == "Validation" %}
+                                                                <td style="background-color:#97E995">{{ d.Name }}</td>
+                                                            {% else %}  
+                                                                {% if d.Name == "Cryptography" %}
+                                                                    <td style="background-color:#7CC4A5">{{ d.Name }}</td>
+                                                                {% else %}  
+                                                                    {% if d.Name == "Error" %}
+                                                                        <td style="background-color:#FF8282">{{ d.Name }}</td>
+                                                                    {% else %}  
+                                                                        {% if d.Name == "Data" %}
+                                                                            <td style="background-color:#C290BA">{{ d.Name }}</td>
+                                                                        {% else %}  
+                                                                            {% if d.Name == "Communications" %}
+                                                                                <td style="background-color:#6986A0">{{ d.Name }}</td>
+                                                                            {% else %}  
+                                                                                {% if d.Name == "Malicious" %}
+                                                                                    <td style="background-color:#AFBA7F">{{ d.Name }}</td>
+                                                                                {% else %}  
+                                                                                    {% if d.Name == "BusLogic" %}
+                                                                                        <td style="background-color:#FFB962">{{ d.Name }}</td>
+                                                                                    {% else %}  
+                                                                                        {% if d.Name == "Files" %}
+                                                                                            <td style="background-color:#73E2D7">{{ d.Name }}</td>
+                                                                                        {% else %}  
+                                                                                            {% if d.Name == "API" %}
+                                                                                                <td style="background-color:#80DAAD">{{ d.Name }}</td>
+                                                                                            {% else %}  
+                                                                                                <td style="background-color:#C7ABDD">{{ d.Name }}</td>
+                                                                                            {% endif %} 
+                                                                                        {% endif %} 
+                                                                                    {% endif %} 
+                                                                                {% endif %} 
+                                                                            {% endif %} 
+                                                                        {% endif %} 
+                                                                    {% endif %} 
+                                                                {% endif %} 
+                                                            {% endif %}    
+                                                        {% endif %}    
+                                                    {% endif %}        
+                                                {% endif %}
+                                            
+
+                                        {% endif %}
                                         <td>{{ d.Description }}</td>
                                         <td>
                                             {% if d.enabled > 0 %}
@@ -87,9 +151,99 @@
                     </div>
                 </div>
             </form>
+            <a href="{% url 'generate_pdf' projectid=project.project_id %}" style="margin-bottom: 30px; text-align: center;"><button style="margin-bottom: 30px;" class="btn" id="pdfreport" style="background-color:#dd4b39; color:white">PDF Report</button></a>
+            <br>
         </div>
     </div>
 </div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    //Get data
+    var table = document.getElementById("project-results");
+    var rows = table.getElementsByTagName("tr");
+    var completion={}
+    for(var i=0;i<rows.length;i++){
+        if (rows[i].getElementsByTagName("td")){
+            if (rows[i].getElementsByTagName("td")[0]){
+                if (rows[i].getElementsByTagName("td")[0].innerText){
+                    var cat=rows[i].getElementsByTagName("td")[0].innerText
+                    if  (completion[cat]){
+                        completion[cat]['total']=completion[cat]['total']+1
+                        if (rows[i].getElementsByTagName("td")[2].getElementsByTagName('input').length>1){
+                            completion[cat]['checked']=completion[cat]['checked']+1
+                        }                       
+                    }
+                    else{
+                        completion[cat]={}
+                        completion[cat]['total']=1
+                        completion[cat]['colour']=rows[i].getElementsByTagName("td")[0].style.backgroundColor
+                        if (rows[i].getElementsByTagName("td")[2].getElementsByTagName('input').length>1){
+                            completion[cat]['checked']=1
+                        }
+                        else{
+                            completion[cat]['checked']=0
+                        }
+                    }
+                }
+            }    
+        }
+    }
 
+    //Draw Circles
+    for (c in completion){
+
+        var width = 135,
+        height = 135,
+        twoPi = 2 * Math.PI,
+        
+        allocated = completion[c]['checked'],
+        total = completion[c]['total'],
+        progress = allocated/total
+        formatPercent = d3.format(".0%");
+
+        var arc = d3.arc()
+            .startAngle(0)
+            .innerRadius(52)
+            .outerRadius(66);
+
+        var svg = d3.select("#docsChart").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("x", 0)
+            .attr("y", 0)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var meter = svg.append("g")
+            .attr("class", "funds-allocated-meter");
+
+        meter.append("path")
+            .attr("class", "background")
+            .attr("d", arc.endAngle(360));
+
+        var foreground = meter.append("path")
+            .attr("class", "foreground")
+            .attr("style","fill:"+completion[c]['colour'])
+            .attr("d", arc.endAngle(twoPi * progress));
+            
+        var percentComplete = meter.append("text")
+            .attr("text-anchor", "middle")
+            .attr("class", "percent-complete")
+            .attr("dy", "0em")
+            .text(formatPercent(progress));
+
+        var description = meter.append("text")
+            .attr("text-anchor", "middle")
+            .attr("class", "description")
+            .attr("dy", "2.3em")
+            .text(c);
+      
+
+        
+    }
+    
+
+</script>
 
 {% endblock content %}

@@ -78,3 +78,19 @@
 .btn-custom {
     padding: 10px 1000px 10px 20px;
 }
+
+.funds-allocated-meter .background  {
+    fill: #E6E7E8;
+}
+
+.description {
+    font-family: 'Roboto Condensed',      sans-serif;
+    font-size: 14px;
+    fill: #008cba !important;
+}
+  
+.percent-complete {
+    font-family: 'Roboto Condensed',      sans-serif;
+    font-size: 20px;
+    fill: #008cba !important;
+}

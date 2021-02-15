@@ -7,6 +7,9 @@ import hashlib
 from django.conf import settings
 from django.core.files import File
 import os
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
 
 
 def load_json_file(level):
@@ -146,3 +149,84 @@ def project_download(request, projectid):
         response['Content-Disposition'] = 'inline; filename=' + \
             os.path.basename(filename)
         return response
+
+@login_required
+def generate_pdf(request, projectid):
+    phash = (hashlib.md5('{0}{1}'.format(request.user.username, projectid).encode('utf-8')).hexdigest())
+    project = load_template(phash)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="ProjectReport.pdf"'
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer)
+    data=[['PROJECT REPORT']]
+    # Create the PDF object, using the BytesIO object as its "file."
+    
+
+    data.append(["Project Owner:"])
+    data.append([str(project['project_owner'])])
+    data.append(["Project Name:"])
+    data.append([str(project['project_name'])])
+    data.append(["Project ID:"])
+    data.append([str(project['project_id'])])
+    data.append(["Project Description:"])
+    data.append([str(project['project_description'])])
+    data.append(["Project Created:"])
+    data.append([str(project['project_created'])])
+    data.append(["Project Level:"])
+    data.append([str(project['project_level'])])
+    data.append([" "])
+    data.append(["Requirements"])
+    data.append([" "])
+    for r in project['requirements']:
+        data.append([r['Name']+":"])
+        data.append([" "])
+        split_description = chunkstring(r['Description'], 123)
+        for sd in split_description:
+            data.append([sd])
+        if r.get('enabled') and r['enabled'] > 0:
+            data.append(["Complete ✓"])
+            data.append([" "])
+        else:
+            data.append(["Incomplete ✕"])  
+            data.append([" "])
+    
+  
+    maxlength=0
+    if len(data)>=40:
+        for x in range(len(data)+1):
+            if (((x % 40==0) and (x>0)) or x==len(data)):   
+                smalldata=data[x-40:x]
+                width = 800 
+                height = 200
+                x = 20
+                y = 80
+                f = Table(smalldata)
+                f.wrapOn(p, width, height)
+                f.drawOn(p, x, y)
+                p.showPage()
+        
+    else:
+        width = 800
+        height = 200
+        x = 20
+        y = 767-17*len(data)
+        f = Table(data)
+        f.wrapOn(p, width, height)
+        f.drawOn(p, x, y)
+        p.showPage()
+
+    
+    p.save()
+
+    # Get the value of the BytesIO buffer and write it to the response.
+    pdf = buffer.getvalue()
+    buffer.close()
+    response.write(pdf)
+    return response
+
+def chunkstring(text, length):
+
+    list_of_strings = []
+    for i in range(0, len(text), length):
+        list_of_strings.append(text[i:length+i])
+    return(list_of_strings)
