@@ -68,13 +68,29 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'projectsmanage' %}">Projects</a>
-              </li>
+              </li>            
             </ul>
           </div>
-        </div>
+      <div class="navbar-custom-menu" style="float:right">
+        <ul class="nav navbar-nav">
+            <!-- User Account Menu -->
+        {% if user.is_authenticated %}
+            <li class="dropdown user user-menu">
+              <!-- Menu Toggle Button -->
+              <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+            </li>
+          
+        {% else %}
+                <li class="navbar-nav">
+                  <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+        {% endif %}
+        </ul>
+      </div>  
+      </div>
       </div>
       <!-- /.navbar-collapse -->
-    </div>
+    </div>  
     <!-- /.container-fluid -->
   </nav>
   {% block content %} {% endblock content %}
