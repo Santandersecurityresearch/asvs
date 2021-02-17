@@ -68,6 +68,8 @@
                                         <th>Category</th>
                                         <th>Requirement</th>
                                         <th>Complete</th>
+                                        <th>Incomplete</th>
+                                        <th>N/A</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,13 +133,30 @@
                                         <td>{{ d.Description }}</td>
                                         <td>
                                             {% if d.enabled > 0 %}
-                                            <input type='hidden' value='0' name="{{ d.Item }}">
-                                            <input type="checkbox" name="{{ d.Item }}" value="1" checked="checked"
-                                                data-id="0">
+                                                <input type="checkbox" id="{{ d.Item }}enabled"  name="{{ d.Item }}enabled" onclick="uncheckOthers('{{ d.Item }}enabled')" value="1" checked="true">
                                             {% else %}
-                                            <input type="checkbox" name="{{ d.Item }}" value="1" data-id="0">
+                                                <input type="checkbox" id="{{ d.Item }}enabled" name="{{ d.Item }}enabled" onclick="uncheckOthers('{{ d.Item }}enabled')" value="0">
                                             {% endif %}
                                         </td>
+                                        <td>
+                                            {% if d.disabled > 0 %}
+                                                <input type="checkbox" id="{{ d.Item }}disabled" name="{{ d.Item }}disabled" onclick="uncheckOthers('{{ d.Item }}disabled')"value="1" checked="true">
+                                            {% else %}
+                                                <input type="checkbox" id="{{ d.Item }}disabled" name="{{ d.Item }}disabled" onclick="uncheckOthers('{{ d.Item }}disabled')" value="0"   >
+                                            {% endif %}
+                                        </td>
+                                         
+                                        <td>
+                                            {% if d.enabled == 0 and  d.disabled == 0 %}
+                                                <input type="checkbox"  id="{{ d.Item }}na" name="{{ d.Item }}na" onclick="uncheckOthers('{{ d.Item }}na')" value="1" checked="true">
+                                            {% elif not d.enabled and not d.disabled%}
+                                                <input type="checkbox"  id="{{ d.Item }}na" name="{{ d.Item }}na" onclick="uncheckOthers('{{ d.Item }}na')" value="1" checked="true">
+                                            {% else %}
+                                                <input type="checkbox" id="{{ d.Item }}na" name="{{ d.Item }}na" onclick="uncheckOthers('{{ d.Item }}na')" value="0"  >
+                                            {% endif %}
+                                        </td>
+                                         
+                                       
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -168,17 +187,17 @@
             if (rows[i].getElementsByTagName("td")[0]){
                 if (rows[i].getElementsByTagName("td")[0].innerText){
                     var cat=rows[i].getElementsByTagName("td")[0].innerText
-                    if  (completion[cat]){
+                    if  (completion[cat]){ //If already exists on dict
                         completion[cat]['total']=completion[cat]['total']+1
-                        if (rows[i].getElementsByTagName("td")[2].getElementsByTagName('input').length>1){
-                            completion[cat]['checked']=completion[cat]['checked']+1
+                        if (rows[i].getElementsByTagName("td")[2].getElementsByTagName('input')[0].value=="1"){
+                            completion[cat]['checked']=completion[cat]['checked']+1 
                         }                       
                     }
-                    else{
+                    else{ //If this category still doesnt exist on ourdict
                         completion[cat]={}
                         completion[cat]['total']=1
                         completion[cat]['colour']=rows[i].getElementsByTagName("td")[0].style.backgroundColor
-                        if (rows[i].getElementsByTagName("td")[2].getElementsByTagName('input').length>1){
+                        if (rows[i].getElementsByTagName("td")[2].getElementsByTagName('input')[0].value=="1"){
                             completion[cat]['checked']=1
                         }
                         else{
@@ -242,8 +261,35 @@
 
         
     }
-    
+    function uncheckOthers(itemcheckbox){
+        var item = itemcheckbox.replace("enabled","").replace("disabled","").replace("na","")
+        var enablecheckbox= document.getElementById(item+"enabled")
+        var disablecheckbox= document.getElementById(item+"disabled")
+        var nacheckbox= document.getElementById(item+"na")
 
+       
+        document.getElementById(itemcheckbox).setAttribute("checked","true")
+        document.getElementById(itemcheckbox).checked=true
+        document.getElementById(itemcheckbox).value=1
+
+        if (item+"disabled" != itemcheckbox){
+            disablecheckbox.setAttribute("checked","false")
+            disablecheckbox.checked=false
+            disablecheckbox.value=0
+        }
+        if (item+"enabled" != itemcheckbox){
+            enablecheckbox.setAttribute("checked","false")
+            enablecheckbox.checked=false
+            enablecheckbox.value=0
+        }
+        if (item+"na" != itemcheckbox){
+            nacheckbox.setAttribute("checked","false")
+            nacheckbox.checked=false
+            nacheckbox.value=0
+        }
+
+    }
+    
 </script>
 
 {% endblock content %}
