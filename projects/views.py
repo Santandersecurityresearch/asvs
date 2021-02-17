@@ -10,6 +10,8 @@ import os
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
+
+
 def load_json_file(level):
     results = []
     with open('common/asvs.json') as f:
