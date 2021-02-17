@@ -115,6 +115,7 @@ def project_view(request, projectid):
     project = load_template(phash)
     if project['project_owner'] == request.user.username:
         percentage = calculate_completion(project['requirements'])
+    
         return render(request, "projects/view.html", {'data': project['requirements'], 'project': project, 'percentage': percentage})
 
 
@@ -129,11 +130,20 @@ def project_update(request):
                 pass
             else:
                 for r in project['requirements']:
-                    if r['Item'] in k:
-                        if int(v) == 0:
-                            r['enabled'] = 0
-                        else:
-                            r['enabled'] = 1
+                    if request.POST.get(r['Item']+'enabled')=="1":
+                        r['enabled'] = 1  
+                    else:
+                        r['enabled'] = 0  
+                    if request.POST.get(r['Item']+'disabled')=="1":
+                        r['disabled'] = 1  
+                    else:
+                        r['disabled'] = 0  
+                    if request.POST.get(r['Item']+'na')=="1":
+                        r['enabled'] = 0  
+                        r['disabled'] = 0  
+                       
+                    
+
         update_template(phash, project)
         return redirect('projectsview', projectid=request.POST.get('projectid'))
 
@@ -187,14 +197,19 @@ def generate_pdf(request, projectid):
         if r.get('enabled') and r['enabled'] > 0:
             data.append(["Complete ✓"])
             data.append([" "])
-        else:
+
+        elif r.get('disabled') and r['disabled'] > 0:
             data.append(["Incomplete ✕"])
             data.append([" "])
-
+        else:  
+            data.append(["N/A "])
+            data.append([" "])  
+    
+  
     maxlength = 0
     if len(data) >= 40:
         for x in range(len(data)+1):
-            if (((x % 40 == 0) and (x > 0)) or x == len(data)):
+            if (((x % 40 == 0) and (x > 0)) or x == len(data)):   
                 smalldata = data[x-40:x]
                 width = 800
                 height = 200
