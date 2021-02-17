@@ -197,17 +197,17 @@ def generate_pdf(request, projectid):
             data.append(["Complete ✓"])
             data.append([" "])
         elif r.get('disabled') and r['disabled'] > 0:
-            data.append(["Incomplete ✕"])  
+            data.append(["Incomplete ✕"])
             data.append([" "])
         else:  
-            data.append(["N/A "])  
+            data.append(["N/A "])
             data.append([" "])  
     
   
-    maxlength=0
-    if len(data)>=40:
+    maxlength = 0
+    if len(data) >= 40:
         for x in range(len(data)+1):
-            if (((x % 40==0) and (x>0)) or x==len(data)):   
+            if (((x % 40 == 0) and (x > 0)) or x == len(data)):   
                 smalldata=data[x-40:x]
                 width = 800 
                 height = 200
