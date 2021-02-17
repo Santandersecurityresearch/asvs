@@ -208,8 +208,8 @@ def generate_pdf(request, projectid):
     if len(data) >= 40:
         for x in range(len(data)+1):
             if (((x % 40 == 0) and (x > 0)) or x == len(data)):   
-                smalldata=data[x-40:x]
-                width = 800 
+                smalldata = data[x-40:x]
+                width = 800
                 height = 200
                 x = 20
                 y = 80
