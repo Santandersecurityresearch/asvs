@@ -37,7 +37,7 @@ def create_template(requirements, project):
     data['project_created'] = project['project_created'].isoformat()
     data['project_level'] = project['project_level']
     data['requirements'] = requirements
-    phash = (hashlib.md5('{0}{1}'.format(
+    phash = (hashlib.sha3_256('{0}{1}'.format(
         project['project_owner'], project['id']).encode('utf-8')).hexdigest())
     with open('storage/{0}.json'.format(phash), 'w') as output:
         project_file = File(output)
@@ -102,7 +102,7 @@ def project_add(request):
 def project_delete(request, projectid):
     Projects.objects.filter(
         project_owner=request.user.username, pk=projectid).delete()
-    phash = (hashlib.md5('{0}{1}'.format(
+    phash = (hashlib.sha3_256('{0}{1}'.format(
         request.user.username, projectid).encode('utf-8')).hexdigest())
     os.remove('storage/{0}.json'.format(phash))
     return redirect('projectsmanage')
@@ -110,7 +110,7 @@ def project_delete(request, projectid):
 
 @login_required
 def project_view(request, projectid):
-    phash = (hashlib.md5('{0}{1}'.format(
+    phash = (hashlib.sha3_256('{0}{1}'.format(
         request.user.username, projectid).encode('utf-8')).hexdigest())
     project = load_template(phash)
     if project['project_owner'] == request.user.username:
@@ -121,7 +121,7 @@ def project_view(request, projectid):
 @login_required
 def project_update(request):
     if request.method == 'POST':
-        phash = (hashlib.md5('{0}{1}'.format(request.user.username, request.POST.get(
+        phash = (hashlib.sha3_256('{0}{1}'.format(request.user.username, request.POST.get(
             'projectid')).encode('utf-8')).hexdigest())
         project = load_template(phash)
         for k, v in request.POST.items():
@@ -140,7 +140,7 @@ def project_update(request):
 
 @login_required
 def project_download(request, projectid):
-    phash = (hashlib.md5('{0}{1}'.format(
+    phash = (hashlib.sha3_256('{0}{1}'.format(
         request.user.username, projectid).encode('utf-8')).hexdigest())
     filename = 'storage/{0}.json'.format(phash)
     with open(filename, 'rb') as fh:
@@ -150,17 +150,18 @@ def project_download(request, projectid):
             os.path.basename(filename)
         return response
 
+
 @login_required
 def generate_pdf(request, projectid):
-    phash = (hashlib.md5('{0}{1}'.format(request.user.username, projectid).encode('utf-8')).hexdigest())
+    phash = (hashlib.sha3_256('{0}{1}'.format(
+        request.user.username, projectid).encode('utf-8')).hexdigest())
     project = load_template(phash)
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="ProjectReport.pdf"'
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
-    data=[['PROJECT REPORT']]
+    data = [['PROJECT REPORT']]
     # Create the PDF object, using the BytesIO object as its "file."
-    
 
     data.append(["Project Owner:"])
     data.append([str(project['project_owner'])])
@@ -187,16 +188,15 @@ def generate_pdf(request, projectid):
             data.append(["Complete ✓"])
             data.append([" "])
         else:
-            data.append(["Incomplete ✕"])  
+            data.append(["Incomplete ✕"])
             data.append([" "])
-    
-  
-    maxlength=0
-    if len(data)>=40:
+
+    maxlength = 0
+    if len(data) >= 40:
         for x in range(len(data)+1):
-            if (((x % 40==0) and (x>0)) or x==len(data)):   
-                smalldata=data[x-40:x]
-                width = 800 
+            if (((x % 40 == 0) and (x > 0)) or x == len(data)):
+                smalldata = data[x-40:x]
+                width = 800
                 height = 200
                 x = 20
                 y = 80
@@ -204,7 +204,7 @@ def generate_pdf(request, projectid):
                 f.wrapOn(p, width, height)
                 f.drawOn(p, x, y)
                 p.showPage()
-        
+
     else:
         width = 800
         height = 200
@@ -215,7 +215,6 @@ def generate_pdf(request, projectid):
         f.drawOn(p, x, y)
         p.showPage()
 
-    
     p.save()
 
     # Get the value of the BytesIO buffer and write it to the response.
@@ -223,6 +222,7 @@ def generate_pdf(request, projectid):
     buffer.close()
     response.write(pdf)
     return response
+
 
 def chunkstring(text, length):
 
