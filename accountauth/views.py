@@ -13,8 +13,7 @@ from django_otp.plugins.otp_totp.models import TOTPDevice
 from django import forms
 from django.contrib.auth import get_user_model
 from accountauth.models import CustomUser
-from django.http import HttpResponse
-
+from django.http import Http404, HttpResponse, HttpResponseForbidden
 
 class UserCreateForm(UserCreationForm):
    
@@ -94,3 +93,10 @@ class TOTPVerifyView(views.APIView):
                 
             return render(request, 'verified.html',{'user':user})
         return render(request, '2fa.html', {'secret':device.config_url})
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        return render(request, 'auth/profile.html')
+    else:
+        return HttpResponseForbidden('You need to be authenticated to see this page.')

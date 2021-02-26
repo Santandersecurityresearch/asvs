@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h3>Hello {{ user.username }}</h3>
+    <p> This will eventually be your profile page where you will be able to:
+    <ul>
+        <li>QR Code scanning for 2FA/TOTP</li>
+        <li>Ability to change your password</li>
+        <li>Ability to update your email address</li>
+        <li>Ability to add/remove yourself from a project</li>
+    </ul>
+
+    </p>
+
+    <pre>{{ userdata }}</pre>
+</div>
+{% endblock %}

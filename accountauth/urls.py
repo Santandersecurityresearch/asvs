@@ -6,6 +6,7 @@ from .views import signup, TOTPVerifyView, authenticate_2fa
 from django.urls import re_path
 from .import views
 
+
 urlpatterns = [
     re_path(r'^totp/create/$', views.TOTPCreateView.as_view(), name='totp-create'),
     re_path(r'^totp/login/$', views.TOTPVerifyView.as_view() , name='totp-login'),
@@ -14,4 +15,5 @@ urlpatterns = [
     url(r'login$', LoginView.as_view(
         template_name="auth/login.html"), name="login"),
     url(r'logout$', LogoutView.as_view(), name="logout"),
+    url(r'profile', profile, name="profile"),
 ]
