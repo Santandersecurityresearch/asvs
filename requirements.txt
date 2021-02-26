@@ -1,3 +1,5 @@
 django
 django-crispy-forms
 reportlab
+django_otp
+djangorestframework-jsonapi

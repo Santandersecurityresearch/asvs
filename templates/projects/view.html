@@ -75,43 +75,43 @@
                                 <tbody>
                                     {% for d in data %}
                                     <tr>
-                                        {% if d.Name == "Architecture" %}
+                                        {% if "Architecture" in d.Name %}
                                         <td style="background-color:#F6C2AE">{{ d.Name }}</td>
                                         {% else %}
-                                                {% if d.Name == "Authentication" %}
+                                                {% if "Authentication" in d.Name %}
                                                 <td style="background-color:#AEF6EE">{{ d.Name }}</td>
                                                 {% else %}
-                                                    {% if d.Name == "Session" %}
+                                                    {% if "Session" in d.Name %}
                                                             <td style="background-color:#AECEF6">{{ d.Name }}</td>
                                                     {% else %}
-                                                        {% if d.Name == "Access" %}
+                                                        {% if "Access" in d.Name %}
                                                             <td style="background-color:#F5F6AE">{{ d.Name }}</td>
                                                         {% else %}  
-                                                            {% if d.Name == "Validation" %}
+                                                            {% if "Validation" in d.Name %}
                                                                 <td style="background-color:#97E995">{{ d.Name }}</td>
                                                             {% else %}  
-                                                                {% if d.Name == "Cryptography" %}
+                                                                {% if "Cryptography" in d.Name %}
                                                                     <td style="background-color:#7CC4A5">{{ d.Name }}</td>
                                                                 {% else %}  
-                                                                    {% if d.Name == "Error" %}
+                                                                    {% if "Error" in d.Name %}
                                                                         <td style="background-color:#FF8282">{{ d.Name }}</td>
                                                                     {% else %}  
-                                                                        {% if d.Name == "Data" %}
+                                                                        {% if "Data" in d.Name %}
                                                                             <td style="background-color:#C290BA">{{ d.Name }}</td>
                                                                         {% else %}  
-                                                                            {% if d.Name == "Communications" %}
+                                                                            {% if "Communications" in d.Name %}
                                                                                 <td style="background-color:#6986A0">{{ d.Name }}</td>
                                                                             {% else %}  
-                                                                                {% if d.Name == "Malicious" %}
+                                                                                {% if "Malicious" in d.Name %}
                                                                                     <td style="background-color:#AFBA7F">{{ d.Name }}</td>
                                                                                 {% else %}  
-                                                                                    {% if d.Name == "BusLogic" %}
+                                                                                    {% if "BusLogic" in d.Name %}
                                                                                         <td style="background-color:#FFB962">{{ d.Name }}</td>
                                                                                     {% else %}  
-                                                                                        {% if d.Name == "Files" %}
+                                                                                        {% if "Files" in d.Name %}
                                                                                             <td style="background-color:#73E2D7">{{ d.Name }}</td>
                                                                                         {% else %}  
-                                                                                            {% if d.Name == "API" %}
+                                                                                            {% if "API" in d.Name %}
                                                                                                 <td style="background-color:#80DAAD">{{ d.Name }}</td>
                                                                                             {% else %}  
                                                                                                 <td style="background-color:#C7ABDD">{{ d.Name }}</td>
@@ -256,7 +256,7 @@
             .attr("text-anchor", "middle")
             .attr("class", "description")
             .attr("dy", "2.3em")
-            .text(c);
+            .text(c.replace(" Verification Requirements","").replace(", Sanitization and Encoding","").replace(" and Logging Verification Requirements","").replace(" and Logging",""));
       
 
         

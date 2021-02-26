@@ -32,7 +32,11 @@ INSTALLED_APPS = [
     'levels',
     'accountauth',
     'crispy_forms',
-    'projects'
+    'projects',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_static',
+    
 ]
 
 MIDDLEWARE = [
@@ -43,6 +47,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
 ]
 
 ROOT_URLCONF = 'asvs.urls'
@@ -117,8 +123,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "authenticate_2fa"
 LOGOUT_REDIRECT_URL = "home"
 LOGIN_URL = "login"
 CRISPY_TEMPLATE_PACK = "bootstrap3"
 # USE_THOUSAND_SEPARATOR = True
+AUTH_USER_MODEL = "accountauth.CustomUser" 
