@@ -12,6 +12,7 @@
 
 <body>
   <nav class="navbar navbar-default">
+    {% if not user.is_authenticated or user.is_two_factor_enabled %}
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -69,9 +70,17 @@
                   <a class="dropdown-item" href="{% url 'help' category=16 %}">V14: Configuration</a>
                 </div>
               </li>
-              <li class="nav-item">
+              {% if user.is_authenticated and user.is_two_factor_enabled %}
+              <li class="nav-item"> 
                 <a class="nav-link" href="{% url 'projectsmanage' %}">Projects</a>
-              </li>
+              </li>   
+              {% endif %}     
+              {% if user.is_authenticated and not user.is_two_factor_enabled %}  
+              <li class="nav-item"> 
+                <a class="nav-link" href="{% url 'login' %}">2FA Autenticate</a>
+              </li>   
+              {% endif %}     
+
             </ul>
           </div>
           <div class="navbar-custom-menu" style="float:right">
@@ -95,7 +104,34 @@
         </div>
       </div>
       <!-- /.navbar-collapse -->
-    </div>
+
+    </div> 
+    {% else %} 
+    <div class="container-fluid">
+      <div class="navbar-header">
+      </div>
+      <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <div class="container">
+          <div class="navbar-brand">OWASP Application Security Verification Standard (ASVS) 4.0.1</div>
+          <div class="collapse navbar-collapse" id="navbarResponsive"></div>
+          <div class="navbar-custom-menu" style="float:right">
+          <ul class="nav navbar-nav">
+              <!-- User Account Menu -->
+          {% if user.is_authenticated %}
+              <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+              </li>
+
+          {% endif %}
+          </ul>
+          </div>  
+        </div>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div> 
+    {% endif %}
+
     <!-- /.container-fluid -->
   </nav>
   {% block content %} {% endblock content %}

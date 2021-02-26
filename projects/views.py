@@ -9,6 +9,13 @@ import os
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
+from django.contrib.auth.decorators import user_passes_test
+
+def is_2fa_authenticated(user):
+    try:
+        return user.is_authenticated and user.is_two_factor_enabled is True
+    except Seller.DoesNotExist:
+        return False
 
 
 def load_json_file(level):
@@ -71,14 +78,14 @@ def calculate_completion(requirements):
     return {'total': total, 'enabled': enabled, 'percentage': '{0:.1f}'.format(percentage)}
 
 
-@login_required
+@user_passes_test(is_2fa_authenticated, login_url='/home')
 def project_all(request):
-    projects = Projects.objects.filter(
-        project_owner=request.user.username).values()
-    return render(request, 'projects/manage.html', {'projects': projects})
+    if is_2fa_authenticated(request.user):
+        projects = Projects.objects.filter(
+            project_owner=request.user.username).values()
+        return render(request, 'projects/manage.html', {'projects': projects, 'user':request.user})
 
-
-@login_required
+@user_passes_test(is_2fa_authenticated)
 def project_add(request):
     if request.method == 'POST':
         # Create the database record
@@ -96,8 +103,7 @@ def project_add(request):
         create_template(controls, project)
         return redirect('projectsmanage')
 
-
-@login_required
+@user_passes_test(is_2fa_authenticated)
 def project_delete(request, projectid):
     Projects.objects.filter(
         project_owner=request.user.username, pk=projectid).delete()
@@ -106,8 +112,7 @@ def project_delete(request, projectid):
     os.remove('storage/{0}.json'.format(phash))
     return redirect('projectsmanage')
 
-
-@login_required
+@user_passes_test(is_2fa_authenticated)
 def project_view(request, projectid):
     phash = (hashlib.sha3_256('{0}{1}'.format(
         request.user.username, projectid).encode('utf-8')).hexdigest())
@@ -117,8 +122,7 @@ def project_view(request, projectid):
 
         return render(request, "projects/view.html", {'data': project['requirements'], 'project': project, 'percentage': percentage})
 
-
-@login_required
+@user_passes_test(is_2fa_authenticated)
 def project_update(request):
     if request.method == 'POST':
         phash = (hashlib.sha3_256('{0}{1}'.format(request.user.username, request.POST.get(
@@ -145,7 +149,7 @@ def project_update(request):
         return redirect('projectsview', projectid=request.POST.get('projectid'))
 
 
-@login_required
+@user_passes_test(is_2fa_authenticated)
 def project_download(request, projectid):
     phash = (hashlib.sha3_256('{0}{1}'.format(
         request.user.username, projectid).encode('utf-8')).hexdigest())
@@ -158,7 +162,7 @@ def project_download(request, projectid):
         return response
 
 
-@login_required
+@user_passes_test(is_2fa_authenticated)
 def generate_pdf(request, projectid):
     phash = (hashlib.sha3_256('{0}{1}'.format(
         request.user.username, projectid).encode('utf-8')).hexdigest())

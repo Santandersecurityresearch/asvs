@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h2 id="navbars">              
+                    <br>Two Factor Authentication</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card" style="width: 60rem;">
+            <div class="card-header">
+              
+            </div>
+            <div class="card-body" style="margin:auto">
+                <p class="card-text">
+                    <strong>Scan this QR Code with your Authenticator App (Google Authenticator, Duo, Authy...) to register your device:</strong>
+                    <br>
+                </p>
+                <input type="hidden" id="qr-data" value="{{secret}}">
+                <div id="qrcode" style="display: flex; justify-content: center; text-align: center;" ></div>     
+            </div>
+            <div class="card-body" style="justify-content: center; text-align: center;">
+                <form method="POST" action="{% url 'totp-login' %}">   
+                    {% csrf_token %}
+                    <strong>Verification Code:</strong>
+                    <input type="text" style="text-align:center;" class="form-control" name="verification_code" id="verification_code" placeholder="XXX XXX">
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Submit Verification Code</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script type="text/javascript">
+  var text= document.getElementById("qr-data").value
+  new QRCode(document.getElementById("qrcode"), text);
+</script>
+<script type="text/javascript">
+    var qrcode = new QRCode(document.getElementById("qr_code"), {
+    text: document.getElementById("qr-data").value,
+    width: 260,
+    height: 260,
+    display: "block",
+    margin: "auto",
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+    });
+ 
+</script>
+{% endblock content %}
