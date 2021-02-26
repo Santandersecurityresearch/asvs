@@ -5,6 +5,7 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.http import Http404, HttpResponse, HttpResponseForbidden
 
 
 def signup(request):
@@ -20,3 +21,12 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'auth/signup.html', {'form': form})
+
+# Loads the profile page for the user
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        return render(request, 'auth/profile.html')
+    else:
+        return HttpResponseForbidden('You need to be authenticated to see this page.')

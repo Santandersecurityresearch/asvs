@@ -6,8 +6,8 @@
   <title>OWASP Application Security Verification Standard (ASVS) 4.0.1</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" />
   <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 
 <body>
@@ -15,7 +15,8 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -28,9 +29,10 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div class="container">
-          <a href="{% url 'home' %}" class="navbar-brand">OWASP Application Security Verification Standard (ASVS) 4.0.1</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-            aria-expanded="false" aria-label="Toggle navigation">
+          <a href="{% url 'home' %}" class="navbar-brand">OWASP Application Security Verification Standard (ASVS)
+            4.0.1</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -54,7 +56,8 @@
                   <a class="dropdown-item" href="{% url 'help' category=2 %}">V2: Authentication</a>
                   <a class="dropdown-item" href="{% url 'help' category=3 %}">V3: Session management</a>
                   <a class="dropdown-item" href="{% url 'help' category=4 %}">V4: Access control</a>
-                  <a class="dropdown-item" href="{% url 'help' category=5 %}">V5: Validation, Sanitization and Encoding</a>
+                  <a class="dropdown-item" href="{% url 'help' category=5 %}">V5: Validation, Sanitization and
+                    Encoding</a>
                   <a class="dropdown-item" href="{% url 'help' category=6 %}">V6: Cryptography</a>
                   <a class="dropdown-item" href="{% url 'help' category=7 %}">V7: Error Logging</a>
                   <a class="dropdown-item" href="{% url 'help' category=8 %}">V8: Data protection</a>
@@ -68,38 +71,43 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'projectsmanage' %}">Projects</a>
-              </li>            
+              </li>
             </ul>
           </div>
-      <div class="navbar-custom-menu" style="float:right">
-        <ul class="nav navbar-nav">
-            <!-- User Account Menu -->
-        {% if user.is_authenticated %}
-            <li class="dropdown user user-menu">
-              <!-- Menu Toggle Button -->
-              <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-            </li>
-          
-        {% else %}
-                <li class="navbar-nav">
-                  <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-        {% endif %}
-        </ul>
-      </div>  
-      </div>
+          <div class="navbar-custom-menu" style="float:right">
+            <ul class="nav navbar-nav">
+              <!-- User Account Menu -->
+              {% if user.is_authenticated %}
+              <li class="dropdown user user-menu">
+                <!-- Show profile page -->
+                <a class="nav-link" href="/auth/profile">Profile</a>
+                <!-- Menu Toggle Button -->
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+              </li>
+
+              {% else %}
+              <li class="navbar-nav">
+                <a class="nav-link" href="{% url 'login' %}">Log In</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
       </div>
       <!-- /.navbar-collapse -->
-    </div>  
+    </div>
     <!-- /.container-fluid -->
   </nav>
   {% block content %} {% endblock content %}
   {% block script %}
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
     crossorigin="anonymous "></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js " integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm "
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js "
+    integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm "
     crossorigin="anonymous "></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js " integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ "
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js "
+    integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ "
     crossorigin="anonymous "></script>
   {% endblock script %}
   </div>
