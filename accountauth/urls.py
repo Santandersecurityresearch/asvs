@@ -2,7 +2,7 @@
 
 from django.conf.urls import url
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import signup, TOTPVerifyView, authenticate_2fa
+from .views import signup, TOTPVerifyView, authenticate_2fa, profile
 from django.urls import re_path
 from .import views
 
