@@ -1,4 +1,4 @@
-# Basic setup for allowing users to sign up using a username and a password
+# Basic setup for allowing users to sign up using a username and a password. 
 
 from django.conf.urls import url
 from django.contrib.auth.views import LoginView, LogoutView
