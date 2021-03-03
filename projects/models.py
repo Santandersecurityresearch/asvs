@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 
 
 class ProjectQuerySet(models.QuerySet):
@@ -16,7 +17,7 @@ class Projects(models.Model):
     project_created = models.DateTimeField(auto_now_add=True)
     project_description = models.CharField(max_length=255)
     project_level = models.IntegerField(default=0)
-
+    project_allowed_viewers = models.CharField(max_length=6000)
     objects = ProjectQuerySet.as_manager()
 
     def __str__(self):

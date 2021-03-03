@@ -1,0 +1,23 @@
+<div class="modal fade" id="modalallowedusers"  role="dialog" aria-labelledby="modalallowedusers" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">      
+                <h4 class="modal-title" id="modaliphostslabel">Allowed users {{ project.project_allowed_viewers }} {{project.project_name}} {{project.project_id}}</h4>
+            </div>
+            <form method="POST" action="{% url 'modify_allowed_users' projectid=project.project_id %}" id="modal-modify_alowed_viewers">
+            <div class="modal-body">
+                
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Allowed Users (separated by commas): </label>
+                    <textarea class="form-control" rows="3" name="viewers" id="viewers">{{ project.project_allowed_viewers }}</textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-submit" >Update</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

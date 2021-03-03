@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% load static %} {% block content %}
+{% include "modals/modal_allowed_viewers.html" %}
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -171,13 +172,35 @@
                 </div>
             </form>
             <a href="{% url 'generate_pdf' projectid=project.project_id %}" style="margin-bottom: 30px; text-align: center;"><button style="margin-bottom: 30px;" class="btn" id="pdfreport" style="background-color:#dd4b39; color:white">PDF Report</button></a>
+            {% if user.is_authenticated and user.is_two_factor_enabled and user.is_superuser %}
+            <button style="margin-bottom: 30px; text-align: center;" class="btn js-allowed-users" id="allowedusers" title="Change allowed users" >Modify Allowed Users</button>
+            {% endif %}
             <br>
         </div>
     </div>
 </div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+    $(document).ready(function () {
+        $(".js-allowed-users").click(function () {
+            var btn = $(this);
+            $.ajax({
+                url: btn.attr("data-url"),
+                type: 'get',
+                dataType: 'json',
+                beforeSend: function () {
+                $("#modalallowedusers").modal("show");
+                },
+                success: function (data) {
+                $("#modalallowedusers .modal-content").html(data.html_form);
+                }
+            });
+        });
+    });
+
+
     //Get data
     var table = document.getElementById("project-results");
     var rows = table.getElementsByTagName("tr");
@@ -289,7 +312,7 @@
         }
 
     }
-    
+      
 </script>
 
 {% endblock content %}
