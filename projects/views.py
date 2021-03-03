@@ -10,6 +10,7 @@ from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
 from django.contrib.auth.decorators import user_passes_test
+from django.db.models import Q
 
 def is_2fa_authenticated(user):
     try:
@@ -43,6 +44,7 @@ def create_template(requirements, project):
     data['project_created'] = project['project_created'].isoformat()
     data['project_level'] = project['project_level']
     data['requirements'] = requirements
+    data['project_allowed_viewers'] = project['project_owner']
     phash = (hashlib.sha3_256('{0}{1}'.format(
         project['project_owner'], project['id']).encode('utf-8')).hexdigest())
     with open('storage/{0}.json'.format(phash), 'w') as output:
@@ -81,8 +83,10 @@ def calculate_completion(requirements):
 @user_passes_test(is_2fa_authenticated, login_url='/home')
 def project_all(request):
     if is_2fa_authenticated(request.user):
-        projects = Projects.objects.filter(
-            project_owner=request.user.username).values()
+        if request.user.is_superuser:
+            projects = Projects.objects.all().values()
+        else:    
+            projects = Projects.objects.filter(Q(project_owner=request.user.username) | Q(project_allowed_viewers__icontains=request.user.username)).values()
         return render(request, 'projects/manage.html', {'projects': projects, 'user':request.user})
 
 @user_passes_test(is_2fa_authenticated)
@@ -94,7 +98,7 @@ def project_add(request):
         project_description = request.POST.get('project_description')
         project_level = request.POST.get('project_level')
         p = Projects(project_name=project_name, project_owner=project_owner,
-                     project_description=project_description, project_level=project_level)
+                     project_description=project_description, project_level=project_level, project_allowed_viewers=project_owner)
         p.save()
         # Build the template
         controls = load_json_file(project_level)
@@ -117,7 +121,8 @@ def project_view(request, projectid):
     phash = (hashlib.sha3_256('{0}{1}'.format(
         request.user.username, projectid).encode('utf-8')).hexdigest())
     project = load_template(phash)
-    if project['project_owner'] == request.user.username:
+    allowed_users= project['project_allowed_viewers'].split(",")
+    if project['project_owner'] == request.user.username or request.user.username in allowed_users:
         percentage = calculate_completion(project['requirements'])
 
         return render(request, "projects/view.html", {'data': project['requirements'], 'project': project, 'percentage': percentage})
@@ -244,3 +249,15 @@ def chunkstring(text, length):
     for i in range(0, len(text), length):
         list_of_strings.append(text[i:length+i])
     return(list_of_strings)
+
+def modify_allowed_users(request, projectid):
+    if request.method == 'POST':
+        phash = (hashlib.sha3_256('{0}{1}'.format(
+        request.user.username, projectid).encode('utf-8')).hexdigest())
+       
+        change= Projects.objects.get(id=projectid)
+        change.project_allowed_viewers= request.POST.get('viewers')
+        change.save()
+        return redirect('projectsmanage')
+        
+        
