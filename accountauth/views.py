@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model
 from accountauth.models import CustomUser
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.contrib.auth.forms import PasswordChangeForm
-
+from django.contrib.auth import logout
 class UserCreateForm(UserCreationForm):
    
     
@@ -117,3 +117,19 @@ def modify_password(request):
     else:
         form = PasswordChangeForm(user=request.user)
     return redirect('profile')     
+
+def custom_logout(request):
+    print('Loggin out {}'.format(request.user))
+    my_device= None
+    devices = devices_for_user(request.user, confirmed=None)
+    for device in devices:
+        if isinstance(device, TOTPDevice):
+            my_device= device
+    my_device.confirmed = False
+    my_device.save()
+    request.user.is_two_factor_enabled=False
+    request.user.save()
+    logout(request)
+
+    print(request.user)
+    return redirect('home')
