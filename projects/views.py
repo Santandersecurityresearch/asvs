@@ -12,10 +12,11 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 
+
 def is_2fa_authenticated(user):
     try:
         return user.is_authenticated and user.is_two_factor_enabled is True
-    except Seller.DoesNotExist:
+    except user.DoesNotExist:
         return False
 
 
@@ -85,9 +86,11 @@ def project_all(request):
     if is_2fa_authenticated(request.user):
         if request.user.is_superuser:
             projects = Projects.objects.all().values()
-        else:    
-            projects = Projects.objects.filter(Q(project_owner=request.user.username) | Q(project_allowed_viewers__icontains=request.user.username)).values()
-        return render(request, 'projects/manage.html', {'projects': projects, 'user':request.user})
+        else:
+            projects = Projects.objects.filter(Q(project_owner=request.user.username) | Q(
+                project_allowed_viewers__icontains=request.user.username)).values()
+        return render(request, 'projects/manage.html', {'projects': projects, 'user': request.user})
+
 
 @user_passes_test(is_2fa_authenticated)
 def project_add(request):
@@ -107,6 +110,7 @@ def project_add(request):
         create_template(controls, project)
         return redirect('projectsmanage')
 
+
 @user_passes_test(is_2fa_authenticated)
 def project_delete(request, projectid):
     Projects.objects.filter(
@@ -116,16 +120,18 @@ def project_delete(request, projectid):
     os.remove('storage/{0}.json'.format(phash))
     return redirect('projectsmanage')
 
+
 @user_passes_test(is_2fa_authenticated)
 def project_view(request, projectid):
     phash = (hashlib.sha3_256('{0}{1}'.format(
         request.user.username, projectid).encode('utf-8')).hexdigest())
     project = load_template(phash)
-    allowed_users= project['project_allowed_viewers'].split(",")
+    allowed_users = project['project_allowed_viewers'].split(",")
     if project['project_owner'] == request.user.username or request.user.username in allowed_users:
         percentage = calculate_completion(project['requirements'])
 
         return render(request, "projects/view.html", {'data': project['requirements'], 'project': project, 'percentage': percentage})
+
 
 @user_passes_test(is_2fa_authenticated)
 def project_update(request):
@@ -250,14 +256,13 @@ def chunkstring(text, length):
         list_of_strings.append(text[i:length+i])
     return(list_of_strings)
 
+
 def modify_allowed_users(request, projectid):
     if request.method == 'POST':
         phash = (hashlib.sha3_256('{0}{1}'.format(
-        request.user.username, projectid).encode('utf-8')).hexdigest())
-       
-        change= Projects.objects.get(id=projectid)
-        change.project_allowed_viewers= request.POST.get('viewers')
+            request.user.username, projectid).encode('utf-8')).hexdigest())
+
+        change = Projects.objects.get(id=projectid)
+        change.project_allowed_viewers = request.POST.get('viewers')
         change.save()
         return redirect('projectsmanage')
-        
-        
