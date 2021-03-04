@@ -2,7 +2,7 @@
 
 from django.conf.urls import url
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import signup, TOTPVerifyView, authenticate_2fa, profile
+from .views import signup, TOTPVerifyView, authenticate_2fa, profile, modify_password
 from django.urls import re_path
 from .import views
 
@@ -16,4 +16,5 @@ urlpatterns = [
         template_name="auth/login.html"), name="login"),
     url(r'logout$', LogoutView.as_view(), name="logout"),
     url(r'profile', profile, name="profile"),
+    url(r'modify_password$', modify_password, name="modify_password"),  
 ]

@@ -2,6 +2,7 @@
 
 {% block content %}
 <div>
+    {% include "modals/modal_change_password.html" %}
     <h3>Hello {{ user.username }}</h3>
     <p> This will eventually be your profile page where you will be able to:
     <ul>
@@ -14,5 +15,28 @@
     </p>
 
     <pre>{{ userdata }}</pre>
+
+    <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-password" id="changepassword" title="Change Password" >Change Password</button>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $(".js-change-password").click(function () {
+            var btn = $(this);
+            $.ajax({
+                url: btn.attr("data-url"),
+                type: 'get',
+                dataType: 'json',
+                beforeSend: function () {
+                $("#modalchangepassword").modal("show");
+                },
+                success: function (data) {
+                $("#modalchangepassword .modal-content").html(data.html_form);
+                
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -15,14 +15,160 @@
                     <div class="card border-primary mb-3" style="max-width: 40rem;">
                         <div class="card-header">Create a new user account</div>
                         <div class="card-body">
-                            <form class="form" method="post">
-                                {% csrf_token %} {{ form | crispy }}
-                                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign up</button>
-                            </form>
+                            <form role="form" method="post" action="{% url 'signup' %}" class="js-register-account-form">
+                                {% csrf_token %}
+                              
+                                
+                                <div class="modal-body">
+                                    <div id="div_id_first_name" class="form-group">
+                                        <label for="username" class="control-label  requiredField">Username<span class="asteriskField">*</span></label>
+                                        <div class="form-group has-feedback">
+                                            <input type="text" name="username" maxlength="30" class="textinput textInput form-control" required="" id="id_first_name" value="{{form.username.value|default_if_none:""}}">
+                                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                            <p id="hint_id_first_name" class="help-block">Enter Username</p>
+                                        </div>
+                                    </div>
+                              
+                              
+                                    <div id="div_id_password1" class="form-group {% if form.password1.errors %} has-error{% endif %}">
+                                        <label for="id_password1" class="control-label requiredField">Password<span class="asteriskField">*</span> </label>
+                                        <div class="form-group has-feedback">
+                                            <input type="password" name="password1" class="textinput textInput form-control" required="" id="id_password1" minlength="12" maxlength="128">
+                                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                            <progress max="100" value="0" id="meter"></progress><div id="security_level"></div>
+                                            <div class="wrapper">
+                                                <button class="btn btn-default" id="check_password">Check password existency</button>
+                                                <div id="pass_msg"><p id="check_password_message" ></p></div>
+                                                <div>Is it an non-existing password?:<input type="checkbox" id="passwordcheck" value="false" required="required" onclick="return false;"/>(Click on Check Password Existency)</div>
+                                              </div>     
+                                            <p id="hint_id_password1" class="help-block"></p><ul><li>Your password can't be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can't be a commonly used password.</li><li>Your password can't be entirely numeric.</li></ul><p></p>
+                                        </div>
+                                    </div>
+                              
+                                    <div id="div_id_password2" class="form-group {% if form.password2.errors %} has-error{% endif %}">
+                                        <label for="id_password2" class="control-label  requiredField">Password confirmation<span class="asteriskField">*</span> </label>
+                                        <div class="form-group has-feedback">
+                                            <input type="password" name="password2" class="textinput textInput form-control" required="" id="id_password2" minlength="12" maxlength="128">
+                                            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                                            {% if form.password2.errors %}
+                                              {% for error in form.password2.errors %}
+                                                <p class="help-block text-danger">{{ error }}</p>
+                                              {% endfor %}
+                                            {% else %}
+                                              <p id="hint_id_password2" class="help-block">Enter the same password as before, for verification.</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                              
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary js-register-account-button">Register</button>
+                                </div>
+                              </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var code = document.getElementById("id_password1");
+        
+        var strengthbar = document.getElementById("meter");
+        var security_level = document.getElementById("security_level");
+        
+        code.addEventListener("keyup", function() {
+          checkpassword(code.value);
+        });
+        
+        
+        function checkpassword(password) {
+          var strength = 0;
+          if (password.match(/[a-z]+/)) {
+            strength += 1;
+          }
+          if (password.match(/[A-Z]+/)) {
+            strength += 1;
+          }
+          if (password.match(/[0-9]+/)) {
+            strength += 1;
+          }
+          if (password.match(/[$@#&!]+/)) {
+            strength += 1;
+        
+          }
+        
+          if (password.length < 12) {
+            security_level.innerHTML = "Minimum number of characters is 12";
+            strengthbar.value = 0;
+          }
+          else {
+          switch (strength) {
+            case 0:
+              strengthbar.value = 0;
+              security_level.innerHTML= "Security Level: None"
+              break;
+        
+            case 1:
+              strengthbar.value = 25;
+              security_level.innerHTML= "Security Level: Very Low"
+              break;
+        
+            case 2:
+              strengthbar.value = 50;
+              security_level.innerHTML= "Security Level: Low"
+              break;
+        
+            case 3:
+              strengthbar.value = 75;
+              security_level.innerHTML= "Security Level: Medium"
+              break;
+        
+            case 4:
+            security_level.innerHTML= "Security Level: High"
+              strengthbar.value = 100;
+              break;
+          }
+          }
+          
+        }
+        
+        $('#id_password1').keyup(function(){
+          $("#passwordcheck").attr('value', 'false');
+          $("#passwordcheck").prop('checked', false); 
+        });
+        
+        $('#check_password').click(function() {
+            var hashed_password= CryptoJS.SHA1(code.value);
+
+            $.ajax({
+            type:"GET",
+            url: "https://exposed.notrust.eu/v1/hash/"+ hashed_password,
+            beforeSend: function(xhr) {
+            xhr.setRequestHeader( 'accept','application/json')
+            xhr.setRequestHeader('X-eXposed-APIKey', '8fdd8329-f769-448f-92f6-c39ebd2f17bc');
+            },
+            success: function(data) {
+            if (data == 0){
+                $("#passwordcheck").attr('value', 'true');
+                $("#passwordcheck").prop('checked', true);
+                $("#check_password_message").html("<h5> No match found </h5>")
+            }
+            else{
+                $("#passwordcheck").attr('value', 'false');
+                $("#passwordcheck").prop('checked', false);
+                $("#check_password_message").html("<h5> Match found </h5>")
+            }
+            
+            
+            },
+            contentType : "application/json"
+            });
+        })
+        
+        
+    </script>
     {% endblock %}

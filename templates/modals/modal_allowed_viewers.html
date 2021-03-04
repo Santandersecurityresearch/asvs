@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">      
-                <h4 class="modal-title" id="modaliphostslabel">Allowed users {{ project.project_allowed_viewers }} {{project.project_name}} {{project.project_id}}</h4>
+                <h4 class="modal-title" id="modaliphostslabel">Allowed users:</h4>
             </div>
             <form method="POST" action="{% url 'modify_allowed_users' projectid=project.project_id %}" id="modal-modify_alowed_viewers">
             <div class="modal-body">
