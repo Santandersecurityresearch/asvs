@@ -2,7 +2,7 @@
 # If the user sends a HTTP POST, with a username and password, check supplied values and allow auth.
 # If not, show the sign up form
 
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from rest_framework import views, permissions
@@ -14,7 +14,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from accountauth.models import CustomUser
 from django.http import Http404, HttpResponse, HttpResponseForbidden
-
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import logout
 class UserCreateForm(UserCreationForm):
    
     
@@ -102,3 +103,33 @@ def profile(request):
         return render(request, 'auth/profile.html')
     else:
         return HttpResponseForbidden('You need to be authenticated to see this page.')
+
+def modify_password(request):
+    data = dict()
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            update_session_auth_hash(request, form.user)
+        else:
+            data['form_is_valid'] = False
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return redirect('profile')     
+
+def custom_logout(request):
+    print('Loggin out {}'.format(request.user))
+    my_device= None
+    devices = devices_for_user(request.user, confirmed=None)
+    for device in devices:
+        if isinstance(device, TOTPDevice):
+            my_device= device
+    my_device.confirmed = False
+    my_device.save()
+    request.user.is_two_factor_enabled=False
+    request.user.save()
+    logout(request)
+
+    print(request.user)
+    return redirect('home')
