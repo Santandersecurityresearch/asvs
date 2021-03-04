@@ -2,7 +2,6 @@
 
 import django.contrib.auth.models
 from django.db import migrations, models
-from django.contrib.postgres.fields import ArrayField
 
 
 class Migration(migrations.Migration):
