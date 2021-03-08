@@ -133,3 +133,11 @@ def custom_logout(request):
 
     print(request.user)
     return redirect('home')
+
+def modify_username(request):
+    data = dict()
+    if request.method == 'POST':
+        new_username= request.POST.get('new_username1')
+        request.user.username = new_username
+        request.user.save()
+    return redirect('profile')    
