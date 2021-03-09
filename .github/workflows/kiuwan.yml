@@ -1,4 +1,4 @@
-name: "Kiuwan"
+name: "kiuwan"
 
 on:
   push:
@@ -8,8 +8,12 @@ on:
     branches: [master]
   schedule:
     - cron: '0 6 * * 4'
+jobs:
+  kiuwan:
+    name: Scan
+    runs-on: ubuntu-latest    
 
-steps:
+    steps:
       - name: Checkout the repository
         uses: actions/checkout@v1
       - name: Kiuwan Baseline Analysis
