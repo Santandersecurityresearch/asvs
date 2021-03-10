@@ -1,24 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h2 id="navbars">
+                    <br><h3>Hello {{ user.username }}</h3> </h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
     {% include "modals/modal_change_password.html" %}
     {% include "modals/modal_change_username.html" %}
-    <h3>Hello {{ user.username }}</h3>
-    <p> This will eventually be your profile page where you will be able to:
-    <ul>
-        <li>QR Code scanning for 2FA/TOTP</li>
-        <li>Ability to change your password</li>
-        <li>Ability to update your email address</li>
-        <li>Ability to add/remove yourself from a project</li>
-    </ul>
-    
-    </p>
+        <div class="col-lg-12">
+            
+            <p> This will eventually be your profile page where you will be able to:
+            <ul>
+                <li>QR Code scanning for 2FA/TOTP</li>
+                <li>Ability to change your password</li>
+                <li>Ability to update your email address</li>
+                <li>Ability to add/remove yourself from a project</li>
+            </ul>
+            
+            </p>
 
-    <pre>{{ userdata }}</pre>
+            <pre>{{ userdata }}</pre>
 
-    <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-password" id="changepassword" title="Change Password" >Change Password</button>
-    <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-username" id="changeusername" title="Change Username" >Change Username</button>
+            <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-password" id="changepassword" title="Change Password" >Change Password</button>
+            <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-username" id="changeusername" title="Change Username" >Change Username</button>
+        </div>
+    </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

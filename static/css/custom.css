@@ -94,3 +94,28 @@
     font-size: 20px;
     fill: #008cba !important;
 }
+
+.page-header{
+    padding-bottom:9px;
+    margin:40px 0 20px;
+    border-bottom:1px solid #008cba
+}
+
+.levels-box{
+    background: #F1F1F1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    margin-left:auto;
+    margin-right: auto;
+    border-radius: 25px;
+}
+#level-card:hover {
+    -ms-transform: scale(1.02); /* IE 9 */
+    -webkit-transform: scale(1.02); /* Safari 3-8 */
+    transform: scale(1.02); 
+}
+
+#card-level{
+    flex-direction: row;
+}
