@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="margin-left:auto;margin-right:auto;">
                 <div class="bs-component">
                     <div class="card border-primary mb-3" style="max-width: 40rem;">
                         <div class="card-header">Create a new user account</div>
@@ -33,15 +33,17 @@
                                     <div id="div_id_password1" class="form-group {% if form.password1.errors %} has-error{% endif %}">
                                         <label for="id_password1" class="control-label requiredField">Password<span class="asteriskField">*</span> </label>
                                         <div class="form-group has-feedback">
-                                            <input type="password" name="password1" class="textinput textInput form-control" required="" id="id_password1" minlength="12" maxlength="128">
+                                            <input type="password" name="password1" class="textinput textInput form-control" required="" id="id_password1" minlength="10" maxlength="128">
                                             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                            <progress max="100" value="0" id="meter"></progress><div id="security_level"></div>
-                                            <div class="wrapper">
-                                                <button class="btn btn-default" id="check_password">Password Breach Detection</button>
-                                                <div id="pass_msg"><p id="check_password_message" ></p></div>
-                                                <div>Check to see if your chosen password is weak, or known via password breaches:<input type="checkbox" id="passwordcheck" value="false" required="required" onclick="return false;"/></div>
-                                              </div>     
+                                              
+                                              Security password Level:  
+                                            <progress max="100" value="0" id="meter"></progress><div id="security_level"></div>  
+                                            <div>Is it a valid password?<span class="asteriskField">*</span><input type="checkbox" id="passwordcheck" value="false" required="required" onclick="return false;"/></div>
+                                            <div>Is it a passphrase?<input type="checkbox" id="passphrasecheck" value="false"  onclick="return false;"/></div>
+                                            <div class="wrapper" id="password_errors">                                              
                                             <p id="hint_id_password1" class="help-block"></p><ul><li>We don't advise using personal information</li><li>Passphrases are amazing (and easy to remember too)</li><li>We check to see if your password has already been cracked (via password breaches)</li><li>Use a different passphrase for every site.</li></ul><p></p>
+                                            </div>     
+
                                         </div>
                                     </div>
                               
@@ -74,6 +76,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/nowsecure/owasp-password-strength-test/master/owasp-password-strength-test.js"></script>
     <script>
         var code = document.getElementById("id_password1");
         
@@ -81,94 +84,39 @@
         var security_level = document.getElementById("security_level");
         
         code.addEventListener("keyup", function() {
-          checkpassword(code.value);
-        });
-        
-        
-        function checkpassword(password) {
-          var strength = 0;
-          if (password.match(/[a-z]+/)) {
-            strength += 1;
-          }
-          if (password.match(/[A-Z]+/)) {
-            strength += 1;
-          }
-          if (password.match(/[0-9]+/)) {
-            strength += 1;
-          }
-          if (password.match(/[$@#&!]+/)) {
-            strength += 1;
-        
-          }
-        
-          if (password.length < 12) {
-            security_level.innerHTML = "Minimum number of characters is 12";
-            strengthbar.value = 0;
-          }
-          else {
-          switch (strength) {
-            case 0:
-              strengthbar.value = 0;
-              security_level.innerHTML= "Security Level: None"
-              break;
-        
-            case 1:
-              strengthbar.value = 25;
-              security_level.innerHTML= "Security Level: Very Low"
-              break;
-        
-            case 2:
-              strengthbar.value = 50;
-              security_level.innerHTML= "Security Level: Low"
-              break;
-        
-            case 3:
-              strengthbar.value = 75;
-              security_level.innerHTML= "Security Level: Medium"
-              break;
-        
-            case 4:
-            security_level.innerHTML= "Security Level: High"
-              strengthbar.value = 100;
-              break;
-          }
-          }
-          
+        var result = owaspPasswordStrengthTest.test(code.value);
+        errors_text = "<ul>";
+        for (i = 0; i < result.errors.length; i++) {
+          errors_text += "<li><span class='glyphicon glyphicon-warning-sign'></span>" + result.errors[i] + "</li>";
         }
+        errors_text += "</ul>";
+        $("#password_errors").html(errors_text)
         
-        $('#id_password1').keyup(function(){
-          $("#passwordcheck").attr('value', 'false');
-          $("#passwordcheck").prop('checked', false); 
-        });
-        
-        $('#check_password').click(function() {
-            var hashed_password= CryptoJS.SHA1(code.value);
+        totalTests= result.failedTests.length + result.passedTests.length + 1
 
-            $.ajax({
-            type:"GET",
-            url: "https://exposed.notrust.eu/v1/hash/"+ hashed_password,
-            beforeSend: function(xhr) {
-            xhr.setRequestHeader( 'accept','application/json')
-            xhr.setRequestHeader('X-eXposed-APIKey', '8fdd8329-f769-448f-92f6-c39ebd2f17bc');
-            },
-            success: function(data) {
-            if (data == 0){
-                $("#passwordcheck").attr('value', 'true');
-                $("#passwordcheck").prop('checked', true);
-                $("#check_password_message").html("<h5> No match found </h5>")
-            }
-            else{
-                $("#passwordcheck").attr('value', 'false');
-                $("#passwordcheck").prop('checked', false);
-                $("#check_password_message").html("<h5> Match found </h5>")
-            }
-            
-            
-            },
-            contentType : "application/json"
-            });
-        })
-        
+        isPassphrase = ((result.isPassphrase==true) ? 1 : 0);
+        strengthbar.value = parseFloat((result.passedTests.length+isPassphrase)/totalTests*100);
+        if (result.errors.length==0){
+          $("#passwordcheck").attr('value', 'true');
+          $("#passwordcheck").prop('checked', true);
+        }
+        else{
+          
+          $("#passwordcheck").attr('value', 'false');
+          $("#passwordcheck").prop('checked', false);
+        }
+        if (result.isPassphrase==true){
+          $("#passphrasecheck").attr('value', 'true');
+          $("#passphrasecheck").prop('checked', true);
+        }
+        else{
+          
+          $("#passphrasecheck").attr('value', 'false');
+          $("#passphrasecheck").prop('checked', false);
+  
+        }
+      });
+              
         
     </script>
     {% endblock %}
