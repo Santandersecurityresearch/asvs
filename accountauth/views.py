@@ -16,6 +16,10 @@ from accountauth.models import CustomUser
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import logout
+from projects.models import Projects
+from django.db.models import Q
+import hashlib
+
 class UserCreateForm(UserCreationForm):
    
     
@@ -100,7 +104,12 @@ class TOTPVerifyView(views.APIView):
 
 def profile(request):
     if request.user.is_authenticated:
-        return render(request, 'auth/profile.html')
+        if request.user.is_superuser:
+            projects = Projects.objects.all().values()
+        else:
+            projects = Projects.objects.filter(Q(project_owner=request.user.username) | Q(
+                project_allowed_viewers__icontains=request.user.username)).values()
+        return render(request, 'auth/profile.html', {'projects':projects})
     else:
         return HttpResponseForbidden('You need to be authenticated to see this page.')
 
@@ -140,4 +149,20 @@ def modify_username(request):
         new_username= request.POST.get('new_username1')
         request.user.username = new_username
         request.user.save()
-    return redirect('profile')    
+    return redirect('profile') 
+
+def removefromproject(request,projectid):
+    phash = (hashlib.sha3_256('{0}{1}'.format(
+            request.user.username, projectid).encode('utf-8')).hexdigest())
+    change = Projects.objects.get(id=projectid)
+    allowed_users = change.project_allowed_viewers.split(",")
+    if change.project_owner!=request.user.username:
+        allowed_users.remove(request.user.username)
+        new_allowed_viewers=""
+        for u in allowed_users:
+            new_allowed_viewers+= u+","
+
+        change.project_allowed_viewers= new_allowed_viewers[:-1]
+        change.save()
+    return redirect('profile') 
+ 
