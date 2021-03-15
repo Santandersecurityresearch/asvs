@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    asvs:
+        volumes:
+          - .:/app
+        ports:
+            - '8000:8000'
+        build:
+          context: .
+          dockerfile: Dockerfile
+         
