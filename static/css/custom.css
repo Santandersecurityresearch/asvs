@@ -119,3 +119,17 @@
 #card-level{
     flex-direction: row;
 }
+progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+  }
+  
+progress::-webkit-progress-bar {
+    background:rgb(219, 217, 217);
+    border-radius: 50px;
+  }
+  progress::-webkit-progress-value {  
+    background-color: var(--c,blue);
+  }

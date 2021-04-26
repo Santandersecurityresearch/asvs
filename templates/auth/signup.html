@@ -96,6 +96,21 @@
 
         isPassphrase = ((result.isPassphrase==true) ? 1 : 0);
         strengthbar.value = parseFloat((result.passedTests.length+isPassphrase)/totalTests*100);
+        if (strengthbar.value>75){
+          strengthbar.style.setProperty("--c", "green");
+        }
+        else if (strengthbar.value>=62.5){
+          strengthbar.style.setProperty("--c", "yellowgreen");
+        }
+        else if (strengthbar.value>=50){
+          strengthbar.style.setProperty("--c", "yellow");
+        }
+        else if (strengthbar.value>=37.5){
+          strengthbar.style.setProperty("--c", "orange");
+        }
+        else{
+          strengthbar.style.setProperty("--c", "red");
+        }              
         if (result.errors.length==0){
           $("#passwordcheck").attr('value', 'true');
           $("#passwordcheck").prop('checked', true);

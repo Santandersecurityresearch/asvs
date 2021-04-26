@@ -117,7 +117,7 @@ def modify_password(request):
     data = dict()
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
-        if form.is_valid():
+        if form.is_valid() and request.POST.get('new_password2') == request.POST.get('new_password1') :
             form.save()
             data['form_is_valid'] = True
             update_session_auth_hash(request, form.user)
