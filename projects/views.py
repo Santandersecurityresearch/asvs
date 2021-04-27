@@ -12,6 +12,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 import time
+import datetime as dt
 
 def is_2fa_authenticated(user):
     try:
@@ -127,7 +128,7 @@ def project_view(request, projectid):
         request.user.username, projectid).encode('utf-8')).hexdigest())
     project = load_template(phash)
     allowed_users = project['project_allowed_viewers'].split(",")
-    project['project_created']=  time.strftime("%m/%d/%Y %H:%M:%S",time.strptime(project['project_created'][:19], "%Y-%m-%dT%H:%M:%S"))
+    project['project_created']=  add_one_hour(time.strftime("%m/%d/%Y %H:%M:%S",time.strptime(project['project_created'][:19], "%Y-%m-%dT%H:%M:%S")))
     if project['project_owner'] == request.user.username or request.user.username in allowed_users:
         percentage = calculate_completion(project['requirements'])
 
@@ -267,3 +268,9 @@ def modify_allowed_users(request, projectid):
         change.project_allowed_viewers = request.POST.get('viewers')
         change.save()
         return redirect('projectsmanage')
+
+#Adjust UTC timestamp to "Europe/London" Timezone
+def add_one_hour(time_string):
+    the_time = dt.datetime.strptime(time_string, '%m/%d/%Y %H:%M:%S')
+    new_time = the_time + dt.timedelta(hours=1)
+    return new_time.strftime('%m/%d/%Y %H:%M:%S')
