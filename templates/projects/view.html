@@ -131,7 +131,7 @@
                                             
 
                                         {% endif %}
-                                        <td>{{ d.Description }}</td>
+                                        <td id="description">{{ d.Description }}</td>
                                         <td>
                                             {% if d.enabled > 0 %}
                                                 <input type="checkbox" id="{{ d.Item }}enabled"  name="{{ d.Item }}enabled" onclick="uncheckOthers('{{ d.Item }}enabled')" value="1" checked="true">
@@ -230,6 +230,9 @@
                 }
             }    
         }
+        if (rows[i].getElementsByTagName("td")[1]){
+            rows[i].getElementsByTagName("td")[1].innerHTML= urlify(rows[i].getElementsByTagName("td")[1].innerText) 
+        }
     }
 
     //Draw Circles
@@ -312,7 +315,15 @@
         }
 
     }
-      
+
+    function urlify(text) {
+        var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+
+        return text.replace(urlRegex, function(url) {
+            return '<a href="' + url + '">' + url + '</a>';
+        })
+    } 
+
 </script>
 
 {% endblock content %}
