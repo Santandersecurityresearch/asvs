@@ -11,7 +11,7 @@ from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
-
+import time
 
 def is_2fa_authenticated(user):
     try:
@@ -127,6 +127,7 @@ def project_view(request, projectid):
         request.user.username, projectid).encode('utf-8')).hexdigest())
     project = load_template(phash)
     allowed_users = project['project_allowed_viewers'].split(",")
+    project['project_created']=  time.strftime("%m/%d/%Y %H:%M:%S",time.strptime(project['project_created'][:19], "%Y-%m-%dT%H:%M:%S"))
     if project['project_owner'] == request.user.username or request.user.username in allowed_users:
         percentage = calculate_completion(project['requirements'])
 
