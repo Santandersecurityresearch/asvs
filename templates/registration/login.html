@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h2 id="navbars">
+                    <br>User Login </h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="bs-component">
+                <div class="card border-primary mb-4" style="max-width: 35rem;margin-left: auto;margin-right: auto;">
+                    <div class="card-header">Login</div>
+                    <div class="card-body">
+                        <form role="form" action="{% url 'totp-login' %}" method="POST">
+                            {% csrf_token %} {{ form | crispy }}
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+                        </form>
+                        <a href="{% url 'signup' %}" class="text-center">Register a new account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

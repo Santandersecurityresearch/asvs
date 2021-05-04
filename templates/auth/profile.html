@@ -26,7 +26,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>                                  
                     {% for p in projects %}
                     <tr>
                         <td>{{ p.project_created }}</td>
@@ -46,6 +46,25 @@
             </table>
             </p>
 
+            <h5>{{ user.username }} devices: </h5>
+            <table id="devices" class="table table-bordered dataTable" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Device Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in devices %}
+                    <tr>
+                        <td>{{ d }}  
+                            <a href="{% url 'unauthenticate_device' device=d %}" title="Unauthenticate Device">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             <pre>{{ userdata }}</pre>
 
             <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-password" id="changepassword" title="Change Password" >Change Password</button>

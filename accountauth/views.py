@@ -19,6 +19,11 @@ from django.contrib.auth import logout
 from projects.models import Projects
 from django.db.models import Q
 import hashlib
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 class UserCreateForm(UserCreationForm):
    
@@ -45,14 +50,14 @@ def signup(request):
             user = authenticate(username=username, password=raw_password, is_two_factor_enabled=False, is_superuser=False)
             
             login(request, user)
-            secret= user.totpdevice_set.create(confirmed=False)
+            secret= user.totpdevice_set.create(confirmed=False,name=request.META['HTTP_USER_AGENT'])
             return render(request, '2fa.html', {'secret':secret.config_url})
     else:
         form = UserCreateForm()
     return render(request, 'auth/signup.html', {'form': form})
 
 def authenticate_2fa(request):
-    secret= request.user.totpdevice_set.create(confirmed=False)
+    secret= request.user.totpdevice_set.create(confirmed=False,name=request.META['HTTP_USER_AGENT'])
     return render(request, '2fa.html', {'secret':secret.config_url})
 
 
@@ -71,7 +76,7 @@ class TOTPCreateView(views.APIView):
         user.is_two_factor_enabled=False
         device = get_user_totp_device(self, user)
         if not device:
-            device = user.totpdevice_set.create(confirmed=False)
+            device = user.totpdevice_set.create(confirmed=False,name=request.META['HTTP_USER_AGENT'])
         url = device.config_url
         return Response(url, status=status.HTTP_201_CREATED)
 
@@ -89,7 +94,7 @@ class TOTPVerifyView(views.APIView):
            errors=['This user has not setup two factor authentication']),
                 status=status.HTTP_400_BAD_REQUEST
             )
-        if not device == None and device.verify_token(request.POST['verification_code']):
+        if device.verify_token(request.POST['verification_code']):
             if not device.confirmed:
                 device.confirmed = True
                 device.save()
@@ -109,7 +114,10 @@ def profile(request):
         else:
             projects = Projects.objects.filter(Q(project_owner=request.user.username) | Q(
                 project_allowed_viewers__icontains=request.user.username)).values()
-        return render(request, 'auth/profile.html', {'projects':projects})
+               
+        devices=request.user.totpdevice_set.all()
+
+        return render(request, 'auth/profile.html', {'projects':projects,'devices':devices})
     else:
         return HttpResponseForbidden('You need to be authenticated to see this page.')
 
@@ -117,7 +125,7 @@ def modify_password(request):
     data = dict()
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
-        if form.is_valid() and request.POST.get('new_password2') == request.POST.get('new_password1') :
+        if form.is_valid() and request.POST.get('password2') == request.POST.get('password1') :
             form.save()
             data['form_is_valid'] = True
             update_session_auth_hash(request, form.user)
@@ -134,13 +142,22 @@ def custom_logout(request):
     for device in devices:
         if isinstance(device, TOTPDevice):
             my_device= device
-    my_device.confirmed = False
-    my_device.save()
+            my_device.confirmed = False
+            my_device.save()
     request.user.is_two_factor_enabled=False
     request.user.save()
     logout(request)
-
     print(request.user)
+    return redirect('home')
+
+def unauthenticate_device(request,device):
+
+    devices = request.user.totpdevice_set.all()
+    for t in devices:
+        if (str(t)==device):
+            t.delete()
+    if isinstance(device, TOTPDevice):
+        custom_logout(request)    
     return redirect('home')
 
 def modify_username(request):
