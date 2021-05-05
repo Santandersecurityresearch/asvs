@@ -16,7 +16,7 @@ import datetime as dt
 
 def is_2fa_authenticated(user):
     try:
-        return user.is_authenticated and user.is_two_factor_enabled is True
+        return user.is_authenticated and user.is_two_factor_enabled is True and len(user.totpdevice_set.all())>0
     except user.DoesNotExist:
         return False
 

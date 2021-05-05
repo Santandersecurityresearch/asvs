@@ -3,3 +3,6 @@ django-crispy-forms
 reportlab
 django_otp
 djangorestframework-jsonapi
+pyyaml 
+ua-parser
+user-agents

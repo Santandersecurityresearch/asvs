@@ -19,6 +19,7 @@ from django.contrib.auth import logout
 from projects.models import Projects
 from django.db.models import Q
 import hashlib
+from user_agents import parse
 # import the logging library
 import logging
 
@@ -50,14 +51,14 @@ def signup(request):
             user = authenticate(username=username, password=raw_password, is_two_factor_enabled=False, is_superuser=False)
             
             login(request, user)
-            secret= user.totpdevice_set.create(confirmed=False,name=request.META['HTTP_USER_AGENT'])
+            secret= user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
             return render(request, '2fa.html', {'secret':secret.config_url})
     else:
         form = UserCreateForm()
     return render(request, 'auth/signup.html', {'form': form})
 
 def authenticate_2fa(request):
-    secret= request.user.totpdevice_set.create(confirmed=False,name=request.META['HTTP_USER_AGENT'])
+    secret= request.user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
     return render(request, '2fa.html', {'secret':secret.config_url})
 
 
@@ -76,7 +77,7 @@ class TOTPCreateView(views.APIView):
         user.is_two_factor_enabled=False
         device = get_user_totp_device(self, user)
         if not device:
-            device = user.totpdevice_set.create(confirmed=False,name=request.META['HTTP_USER_AGENT'])
+            device = user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
         url = device.config_url
         return Response(url, status=status.HTTP_201_CREATED)
 
@@ -156,7 +157,9 @@ def unauthenticate_device(request,device):
     for t in devices:
         if (str(t)==device):
             t.delete()
-    if isinstance(device, TOTPDevice):
+    logger.error(str(parse(request.META['HTTP_USER_AGENT'])))
+    logger.error(device)
+    if str(parse(request.META['HTTP_USER_AGENT'])) in device:
         custom_logout(request)    
     return redirect('home')
 
