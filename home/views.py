@@ -10,6 +10,8 @@ def is_2fa_authenticated(user):
 
 
 def home_page(request):
-    if request.user.is_authenticated and request.user.is_two_factor_enabled is False:
-       return redirect("authenticate_2fa")
+    if request.user:
+        
+        if request.user.is_authenticated and request.user.is_two_factor_enabled is False:
+            return redirect("authenticate_2fa")
     return render(request, 'home/home.html')

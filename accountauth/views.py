@@ -20,11 +20,7 @@ from projects.models import Projects
 from django.db.models import Q
 import hashlib
 from user_agents import parse
-# import the logging library
-import logging
 
-# Get an instance of a logger
-logger = logging.getLogger(__name__)
 
 class UserCreateForm(UserCreationForm):
    
@@ -157,8 +153,7 @@ def unauthenticate_device(request,device):
     for t in devices:
         if (str(t)==device):
             t.delete()
-    logger.error(str(parse(request.META['HTTP_USER_AGENT'])))
-    logger.error(device)
+
     if str(parse(request.META['HTTP_USER_AGENT'])) in device:
         custom_logout(request)    
     return redirect('home')
