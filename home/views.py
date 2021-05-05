@@ -10,8 +10,17 @@ def is_2fa_authenticated(user):
 
 
 def home_page(request):
-    if request.user:
+    request.user.is_two_factor_enabled=False
+    if request.user.is_authenticated:
         
-        if request.user.is_authenticated and request.user.is_two_factor_enabled is False:
+        if request.user.totpdevice_set.all():
+            devices = request.user.totpdevice_set.all()
+           
+            for t in devices:
+
+                if (str(parse(request.META['HTTP_USER_AGENT'])) in str(t)):
+                    request.user.is_two_factor_enabled=True 
+
+    if request.user.is_authenticated and request.user.is_two_factor_enabled is False:
             return redirect("authenticate_2fa")
     return render(request, 'home/home.html')

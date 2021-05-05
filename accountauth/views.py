@@ -74,6 +74,8 @@ class TOTPCreateView(views.APIView):
         device = get_user_totp_device(self, user)
         if not device:
             device = user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
+        if str(parse(request.META['HTTP_USER_AGENT'])) in user.totpdevice_set.all():
+             user.is_two_factor_enabled=True    
         url = device.config_url
         return Response(url, status=status.HTTP_201_CREATED)
 
