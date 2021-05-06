@@ -5,13 +5,27 @@
 <head>
   <link rel="shortcut icon" href="../static/img/logoicon2.png" />
   <title>OWASP Application Security Verification Standard (ASVS) 4.0.1</title>
-  <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" />
   <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
     integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <style>
+    @font-face {
+      font-family: SantanderTextW05-Bold;
+      src: url("{% static 'fonts/SantanderTextW05-Bold.woff' %}" ) format("woff");
+    }
+    @font-face {
+      font-family: SantanderTextW05-Regular;
+      src: url("{% static 'fonts/SantanderTextW05-Regular.woff' %}" ) format("woff");
+    }
+
+  </style>
+    
 </head>
 
 <body>
+  <div id="wrapper">
   <nav class="navbar navbar-default">
     {% if not user.is_authenticated or user.is_two_factor_enabled %}
     <div class="container-fluid">
@@ -149,6 +163,7 @@
   {% endblock script %}
   </div>
   </div>
+</div>
 </body>
 
 </html>

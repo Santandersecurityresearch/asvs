@@ -133,3 +133,7 @@ progress::-webkit-progress-bar {
   progress::-webkit-progress-value {  
     background-color: var(--c,blue);
   }
+
+#wrapper{
+    font-family: 'SantanderTextW05-Regular'
+} 
