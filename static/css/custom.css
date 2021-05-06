@@ -58,6 +58,12 @@
         outline: none;
         background-color: #000 !important;
     }
+    .collapse:not(.show) {
+        display:block;
+    }
+    .row{
+       display: -webkit-inline-box; 
+    }
 }
 
 .side-nav>li>ul {
