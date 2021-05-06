@@ -61,11 +61,13 @@
     .collapse:not(.show) {
         display:block;
     }
+
+    
     .row{
        display: -webkit-inline-box; 
     }
 }
-
+.row:before, .row:after {display: none !important;}
 .side-nav>li>ul {
     padding: 0;
 }
