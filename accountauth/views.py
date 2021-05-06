@@ -69,13 +69,14 @@ class TOTPCreateView(views.APIView):
     """
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, format=None):
-        user = request.user
-        user.is_two_factor_enabled=False
-        device = get_user_totp_device(self, user)
-        if not device:
-            device = user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
-        if str(parse(request.META['HTTP_USER_AGENT'])) in user.totpdevice_set.all():
-             user.is_two_factor_enabled=True    
+        
+        devices=list(request.user.totpdevice_set.all())
+        
+        device = user.totpdevice_set.create(confirmed=True,name=str(parse(request.META['HTTP_USER_AGENT'])))
+   
+        device.confirmed=True   
+        user.is_two_factor_enabled=True   
+        user.save() 
         url = device.config_url
         return Response(url, status=status.HTTP_201_CREATED)
 
@@ -86,8 +87,18 @@ class TOTPVerifyView(views.APIView):
     permission_classes = (permissions.IsAuthenticated, )
     def post(self, request, format=None):
         user = request.user
-        device = get_user_totp_device(self, user)
         
+        devices=list(request.user.totpdevice_set.all())
+        verified_devices=[]
+        for d in devices:
+            if str(parse(request.META['HTTP_USER_AGENT'])) in str(d):
+                device=d
+        
+                device.confirmed = True
+                device.save()   
+                user.is_two_factor_enabled=True
+                user.save()
+
         if not device:
              return Response(dict(
            errors=['This user has not setup two factor authentication']),
@@ -99,26 +110,33 @@ class TOTPVerifyView(views.APIView):
                 device.save()
                 if user.username=="admin":
                     user.is_superuser=True
-                user.is_two_factor_enabled=True
-                user.save()
+            user.is_two_factor_enabled=True
+            user.save()    
                 
             return render(request, 'verified.html',{'user':user})
         return render(request, '2fa.html', {'secret':device.config_url})
 
 
 def profile(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_two_factor_enabled:
         if request.user.is_superuser:
             projects = Projects.objects.all().values()
         else:
             projects = Projects.objects.filter(Q(project_owner=request.user.username) | Q(
                 project_allowed_viewers__icontains=request.user.username)).values()
                
-        devices=request.user.totpdevice_set.all()
+        devices=list(request.user.totpdevice_set.all())
+        verified_devices=[]
+        for d in devices:
+            if d.confirmed==True:
+                verified_devices.append(d)
 
-        return render(request, 'auth/profile.html', {'projects':projects,'devices':devices})
+        return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices})
     else:
-        return HttpResponseForbidden('You need to be authenticated to see this page.')
+        if request.user.is_authenticated  and not request.user.is_two_factor_enabled:
+            return redirect("authenticate_2fa") 
+        else:    
+            return HttpResponseForbidden('You need to be authenticated to see this page.')
 
 def modify_password(request):
     data = dict()
@@ -136,15 +154,9 @@ def modify_password(request):
 
 def custom_logout(request):
     print('Loggin out {}'.format(request.user))
-    my_device= None
-    devices = devices_for_user(request.user, confirmed=None)
-    for device in devices:
-        if isinstance(device, TOTPDevice):
-            my_device= device
-            my_device.confirmed = False
-            my_device.save()
-    request.user.is_two_factor_enabled=False
-    request.user.save()
+
+
+
     logout(request)
     print(request.user)
     return redirect('home')

@@ -53,10 +53,10 @@
                         <th>Device Name</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>                  
                     {% for d in devices %}
                     <tr>
-                        <td>{{ d }}  
+                        <td>{{ d }} 
                             <a href="{% url 'unauthenticate_device' device=d %}" title="Unauthenticate Device">
                                 <i class="far fa-trash-alt"></i>
                             </a>
