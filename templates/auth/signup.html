@@ -132,28 +132,9 @@
   
         }
         var hashed_password = CryptoJS.SHA1(code.value);     
-<<<<<<< HEAD
-      
-        $.ajax({
-          type:"GET",
-          url: "https://api.pwnedpasswords.com/range/"+ CryptoJS.enc.Hex.stringify(hashed_password).substring(0,5),
-          beforeSend: function(xhr) {
-          xhr.setRequestHeader( 'accept','application/json')
-          },
-          success: function(data) {
-            $("#passwordcheck").attr('value', 'false');
-            $("#passwordcheck").prop('checked', false);
-            $("#password_errors").html("Password is pwned, try a different one")
-          },
-          error: function(data){
 
-            $("#passwordcheck").attr('value', 'true');
-            $("#passwordcheck").prop('checked', true);
-            
-          },
-          contentType : "application/json"
-        });  
-=======
+        //We use Troy Hunts HIBP API to check the quality of the password.
+        //https://haveibeenpwned.com/API/v3#PwnedPasswords
         
         $.ajax({
           type:"GET",
@@ -167,14 +148,13 @@
               
               $("#passwordcheck").attr('value', 'false');
               $("#passwordcheck").prop('checked', false);
-              $("#password_errors").html("<ul><li style='color:red'>Password is pwned, try a different one</li></ul>")
+              $("#password_errors").html("<ul><li style='color:red'>Oh no, your chosen password is already known, try a different one</li></ul>")
             } 
           },
           error: function(jqXHR, textStatus, errorThrown){
             alert(textStatus);
           }
         });
->>>>>>> 7453599c1b6982465cf2931cfd0add90bbd1be65
       });
       
         
