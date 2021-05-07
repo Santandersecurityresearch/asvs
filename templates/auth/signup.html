@@ -95,6 +95,7 @@
         totalTests= result.failedTests.length + result.passedTests.length + 1
 
         isPassphrase = ((result.isPassphrase==true) ? 1 : 0);
+
         strengthbar.value = parseFloat((result.passedTests.length+isPassphrase)/totalTests*100);
         if (strengthbar.value>75){
           strengthbar.style.setProperty("--c", "green");
@@ -130,8 +131,29 @@
           $("#passphrasecheck").prop('checked', false);
   
         }
-      });
+        var hashed_password = CryptoJS.SHA1(code.value);     
+        
+        $.ajax({
+          type:"GET",
+          dataType:"text",
+          async: false,
+          cors: true ,
+          secure:true,
+          url: "https://api.pwnedpasswords.com/range/"+ CryptoJS.enc.Hex.stringify(hashed_password).toUpperCase().substring(0,5),
+          success: function(data) {
+            if (data.includes(CryptoJS.enc.Hex.stringify(hashed_password).toUpperCase().slice(5))){
               
+              $("#passwordcheck").attr('value', 'false');
+              $("#passwordcheck").prop('checked', false);
+              $("#password_errors").html("<ul><li style='color:red'>Password is pwned, try a different one</li></ul>")
+            } 
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+            alert(textStatus);
+          }
+        });
+      });
+      
         
     </script>
     {% endblock %}
