@@ -132,6 +132,7 @@
   
         }
         var hashed_password = CryptoJS.SHA1(code.value);     
+<<<<<<< HEAD
       
         $.ajax({
           type:"GET",
@@ -152,6 +153,28 @@
           },
           contentType : "application/json"
         });  
+=======
+        
+        $.ajax({
+          type:"GET",
+          dataType:"text",
+          async: false,
+          cors: true ,
+          secure:true,
+          url: "https://api.pwnedpasswords.com/range/"+ CryptoJS.enc.Hex.stringify(hashed_password).toUpperCase().substring(0,5),
+          success: function(data) {
+            if (data.includes(CryptoJS.enc.Hex.stringify(hashed_password).toUpperCase().slice(5))){
+              
+              $("#passwordcheck").attr('value', 'false');
+              $("#passwordcheck").prop('checked', false);
+              $("#password_errors").html("<ul><li style='color:red'>Password is pwned, try a different one</li></ul>")
+            } 
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+            alert(textStatus);
+          }
+        });
+>>>>>>> 7453599c1b6982465cf2931cfd0add90bbd1be65
       });
       
         
