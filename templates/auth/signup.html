@@ -23,7 +23,7 @@
                                     <div id="div_id_first_name" class="form-group">
                                         <label for="username" class="control-label  requiredField">Username<span class="asteriskField">*</span></label>
                                         <div class="form-group has-feedback">
-                                            <input type="text" name="username" maxlength="30" class="textinput textInput form-control" required="" id="id_first_name" value="{{form.username.value|default_if_none:""}}">
+                                            <input type="text" name="username" maxlength="30" class="textinput textInput form-control" required="" id="id_first_name" value="{{form.username.value|default_if_none:}}"">
                                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                             <p id="hint_id_first_name" class="help-block">Enter Username</p>
                                         </div>
@@ -95,6 +95,7 @@
         totalTests= result.failedTests.length + result.passedTests.length + 1
 
         isPassphrase = ((result.isPassphrase==true) ? 1 : 0);
+
         strengthbar.value = parseFloat((result.passedTests.length+isPassphrase)/totalTests*100);
         if (strengthbar.value>75){
           strengthbar.style.setProperty("--c", "green");
@@ -130,8 +131,29 @@
           $("#passphrasecheck").prop('checked', false);
   
         }
+        var hashed_password = CryptoJS.SHA1(code.value);     
+      
+        $.ajax({
+          type:"GET",
+          url: "https://api.pwnedpasswords.com/range/"+ CryptoJS.enc.Hex.stringify(hashed_password).substring(0,5),
+          beforeSend: function(xhr) {
+          xhr.setRequestHeader( 'accept','application/json')
+          },
+          success: function(data) {
+            $("#passwordcheck").attr('value', 'false');
+            $("#passwordcheck").prop('checked', false);
+            $("#password_errors").html("Password is pwned, try a different one")
+          },
+          error: function(data){
+
+            $("#passwordcheck").attr('value', 'true');
+            $("#passwordcheck").prop('checked', true);
+            
+          },
+          contentType : "application/json"
+        });  
       });
-              
+      
         
     </script>
     {% endblock %}
