@@ -23,7 +23,7 @@
                                     <div id="div_id_first_name" class="form-group">
                                         <label for="username" class="control-label  requiredField">Username<span class="asteriskField">*</span></label>
                                         <div class="form-group has-feedback">
-                                            <input type="text" name="username" maxlength="30" class="textinput textInput form-control" required="" id="id_first_name" value="">
+                                            <input type="text" onkeypress="return blockSpecialChar(event)" name="username" maxlength="30" class="textinput textInput form-control" required="" id="id_first_name" value="">
                                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                             <p id="hint_id_first_name" class="help-block">Enter Username</p>
                                         </div>
@@ -157,6 +157,11 @@
         });
       });
       
-        
+      function blockSpecialChar(e){
+        var k;
+        document.all ? k = e.keyCode : k = e.which;
+        return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57));
+        }  
+
     </script>
     {% endblock %}
