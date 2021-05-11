@@ -21,11 +21,6 @@ from django.db.models import Q
 import hashlib
 from user_agents import parse
 
-# import the logging library
-import logging
-
-# Get an instance of a logger
-logger = logging.getLogger(__name__)
 
 
 class UserCreateForm(UserCreationForm):
@@ -147,23 +142,14 @@ def profile(request):
 def modify_password(request):
     data = dict()
     if request.method == 'POST':
-        logger.error("if")
-        
         form = PasswordChangeForm(user=request.user, data=request.POST)
-        
-        logger.error(form.errors)
-        logger.error(form.is_valid())
-        logger.error(request.POST.get('new_password2'))
-        logger.error(request.POST.get('new_password1'))
         if form.is_valid() and request.POST.get('new_password2') == request.POST.get('new_password1') :
-            logger.error("if2")
             form.save()
             data['form_is_valid'] = True
             update_session_auth_hash(request, form.user)
         else:
             data['form_is_valid'] = False
     else:
-        logger.error("else")
         form = PasswordChangeForm(user=request.user)
     return redirect('profile')     
 
