@@ -15,10 +15,10 @@ def load_json_file(level):
     #         else:
     #             results[r['sectionTitle']] = [r['title']]
     # else:
-    for r in data['requirements']:
-        bob = 'L{0}'.format(level)
+    for r in data['requirements']:   
+        bob = 'level{0}'.format(level)
         if r.get(bob):
-            results.setdefault(r['Name'], []).append(r)
+            results.setdefault(r['section_name'], []).append(r)
             # if results.get(r['sectionTitle']):
             #     results[r['sectionTitle']].append(r['title'])
             # else:

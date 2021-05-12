@@ -76,46 +76,46 @@
                                 <tbody>
                                     {% for d in data %}
                                     <tr>
-                                        {% if "Architecture" in d.Name %}
-                                        <td style="background-color:#F6C2AE">{{ d.Name }}</td>
+                                        {% if "Architecture" in d.chapter_name %}
+                                        <td style="background-color:#F6C2AE">{{ d.chapter_name }}</td>
                                         {% else %}
-                                                {% if "Authentication" in d.Name %}
-                                                <td style="background-color:#AEF6EE">{{ d.Name }}</td>
+                                                {% if "Authentication" in d.chapter_name %}
+                                                <td style="background-color:#AEF6EE">{{ d.chapter_name }}</td>
                                                 {% else %}
-                                                    {% if "Session" in d.Name %}
-                                                            <td style="background-color:#AECEF6">{{ d.Name }}</td>
+                                                    {% if "Session" in d.chapter_name %}
+                                                            <td style="background-color:#AECEF6">{{ d.chapter_name }}</td>
                                                     {% else %}
-                                                        {% if "Access" in d.Name %}
-                                                            <td style="background-color:#F5F6AE">{{ d.Name }}</td>
+                                                        {% if "Access" in d.chapter_name %}
+                                                            <td style="background-color:#F5F6AE">{{ d.chapter_name }}</td>
                                                         {% else %}  
-                                                            {% if "Validation" in d.Name %}
-                                                                <td style="background-color:#97E995">{{ d.Name }}</td>
+                                                            {% if "Validation" in d.chapter_name %}
+                                                                <td style="background-color:#97E995">{{ d.chapter_name }}</td>
                                                             {% else %}  
-                                                                {% if "Cryptography" in d.Name %}
-                                                                    <td style="background-color:#7CC4A5">{{ d.Name }}</td>
+                                                                {% if "Cryptography" in d.chapter_name %}
+                                                                    <td style="background-color:#7CC4A5">{{ d.chapter_name }}</td>
                                                                 {% else %}  
-                                                                    {% if "Error" in d.Name %}
-                                                                        <td style="background-color:#FF8282">{{ d.Name }}</td>
+                                                                    {% if "Error" in d.chapter_name %}
+                                                                        <td style="background-color:#FF8282">{{ d.chapter_name }}</td>
                                                                     {% else %}  
-                                                                        {% if "Data" in d.Name %}
-                                                                            <td style="background-color:#C290BA">{{ d.Name }}</td>
+                                                                        {% if "Data" in d.chapter_name %}
+                                                                            <td style="background-color:#C290BA">{{ d.chapter_name }}</td>
                                                                         {% else %}  
-                                                                            {% if "Communications" in d.Name %}
-                                                                                <td style="background-color:#6986A0">{{ d.Name }}</td>
+                                                                            {% if "Communications" in d.chapter_name %}
+                                                                                <td style="background-color:#6986A0">{{ d.chapter_name }}</td>
                                                                             {% else %}  
-                                                                                {% if "Malicious" in d.Name %}
-                                                                                    <td style="background-color:#AFBA7F">{{ d.Name }}</td>
+                                                                                {% if "Malicious" in d.chapter_name %}
+                                                                                    <td style="background-color:#AFBA7F">{{ d.chapter_name }}</td>
                                                                                 {% else %}  
-                                                                                    {% if "BusLogic" in d.Name %}
-                                                                                        <td style="background-color:#FFB962">{{ d.Name }}</td>
+                                                                                    {% if "BusLogic" in d.chapter_name %}
+                                                                                        <td style="background-color:#FFB962">{{ d.chapter_name }}</td>
                                                                                     {% else %}  
-                                                                                        {% if "Files" in d.Name %}
-                                                                                            <td style="background-color:#73E2D7">{{ d.Name }}</td>
+                                                                                        {% if "Files" in d.chapter_name %}
+                                                                                            <td style="background-color:#73E2D7">{{ d.chapter_name }}</td>
                                                                                         {% else %}  
-                                                                                            {% if "API" in d.Name %}
-                                                                                                <td style="background-color:#80DAAD">{{ d.Name }}</td>
+                                                                                            {% if "API" in d.chapter_name %}
+                                                                                                <td style="background-color:#80DAAD">{{ d.chapter_name }}</td>
                                                                                             {% else %}  
-                                                                                                <td style="background-color:#C7ABDD">{{ d.Name }}</td>
+                                                                                                <td style="background-color:#C7ABDD">{{ d.chapter_name }}</td>
                                                                                             {% endif %} 
                                                                                         {% endif %} 
                                                                                     {% endif %} 
@@ -131,29 +131,29 @@
                                             
 
                                         {% endif %}
-                                        <td id="description">{{ d.Description }}</td>
+                                        <td id="description">{{ d.req_description }}</td>
                                         <td>
                                             {% if d.enabled > 0 %}
-                                                <input type="checkbox" id="{{ d.Item }}enabled"  name="{{ d.Item }}enabled" onclick="uncheckOthers('{{ d.Item }}enabled')" value="1" checked="true">
+                                                <input type="checkbox" id="{{ d.req_id }}enabled"  name="{{ d.req_id }}enabled" onclick="uncheckOthers('{{ d.req_id }}enabled')" value="1" checked="true">
                                             {% else %}
-                                                <input type="checkbox" id="{{ d.Item }}enabled" name="{{ d.Item }}enabled" onclick="uncheckOthers('{{ d.Item }}enabled')" value="0">
+                                                <input type="checkbox" id="{{ d.req_id }}enabled" name="{{ d.req_id }}enabled" onclick="uncheckOthers('{{ d.req_id }}enabled')" value="0">
                                             {% endif %}
                                         </td>
                                         <td>
                                             {% if d.disabled > 0 %}
-                                                <input type="checkbox" id="{{ d.Item }}disabled" name="{{ d.Item }}disabled" onclick="uncheckOthers('{{ d.Item }}disabled')"value="1" checked="true">
+                                                <input type="checkbox" id="{{ d.req_id }}disabled" name="{{ d.req_id }}disabled" onclick="uncheckOthers('{{ d.req_id }}disabled')"value="1" checked="true">
                                             {% else %}
-                                                <input type="checkbox" id="{{ d.Item }}disabled" name="{{ d.Item }}disabled" onclick="uncheckOthers('{{ d.Item }}disabled')" value="0"   >
+                                                <input type="checkbox" id="{{ d.req_id }}disabled" name="{{ d.req_id }}disabled" onclick="uncheckOthers('{{ d.req_id }}disabled')" value="0"   >
                                             {% endif %}
                                         </td>
                                          
                                         <td>
                                             {% if d.enabled == 0 and  d.disabled == 0 %}
-                                                <input type="checkbox"  id="{{ d.Item }}na" name="{{ d.Item }}na" onclick="uncheckOthers('{{ d.Item }}na')" value="1" checked="true">
+                                                <input type="checkbox"  id="{{ d.req_id }}na" name="{{ d.req_id }}na" onclick="uncheckOthers('{{ d.req_id }}na')" value="1" checked="true">
                                             {% elif not d.enabled and not d.disabled%}
-                                                <input type="checkbox"  id="{{ d.Item }}na" name="{{ d.Item }}na" onclick="uncheckOthers('{{ d.Item }}na')" value="1" checked="true">
+                                                <input type="checkbox"  id="{{ d.req_id }}na" name="{{ d.req_id }}na" onclick="uncheckOthers('{{ d.req_id }}na')" value="1" checked="true">
                                             {% else %}
-                                                <input type="checkbox" id="{{ d.Item }}na" name="{{ d.Item }}na" onclick="uncheckOthers('{{ d.Item }}na')" value="0"  >
+                                                <input type="checkbox" id="{{ d.req_id }}na" name="{{ d.req_id }}na" onclick="uncheckOthers('{{ d.req_id }}na')" value="0"  >
                                             {% endif %}
                                         </td>
                                          

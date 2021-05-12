@@ -26,7 +26,7 @@ def load_json_file(level):
     with open('common/asvs.json') as f:
         data = json.load(f)
         for r in data['requirements']:
-            bob = 'L{0}'.format(level)
+            bob = 'level{0}'.format(level)
             if r.get(bob):
                 results.append(r)
     return results
@@ -146,15 +146,15 @@ def project_update(request):
                 pass
             else:
                 for r in project['requirements']:
-                    if request.POST.get(r['Item']+'enabled') == "1":
+                    if request.POST.get(r['req_id']+'enabled') == "1":
                         r['enabled'] = 1
                     else:
                         r['enabled'] = 0
-                    if request.POST.get(r['Item']+'disabled') == "1":
+                    if request.POST.get(r['req_id']+'disabled') == "1":
                         r['disabled'] = 1
                     else:
                         r['disabled'] = 0
-                    if request.POST.get(r['Item']+'na') == "1":
+                    if request.POST.get(r['req_id']+'na') == "1":
                         r['enabled'] = 0
                         r['disabled'] = 0
 
@@ -203,9 +203,9 @@ def generate_pdf(request, projectid):
     data.append(["Requirements"])
     data.append([" "])
     for r in project['requirements']:
-        data.append([r['Name']+":"])
+        data.append([r['chapter_name']+":"])
         data.append([" "])
-        split_description = chunkstring(r['Description'], 123)
+        split_description = chunkstring(r['req_description'], 123)
         for sd in split_description:
             data.append([sd])
         if r.get('enabled') and r['enabled'] > 0:

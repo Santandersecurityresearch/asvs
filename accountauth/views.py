@@ -21,11 +21,7 @@ from django.db.models import Q
 import hashlib
 from user_agents import parse
 from django.contrib import messages
-# import the logging library
-import logging
 
-# Get an instance of a logger
-logger = logging.getLogger(__name__)
 
 class UserCreateForm(UserCreationForm):
    
