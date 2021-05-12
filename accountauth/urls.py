@@ -5,7 +5,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .views import signup, TOTPVerifyView, authenticate_2fa, profile, modify_password, custom_logout, modify_username, removefromproject, unauthenticate_device
 from django.urls import re_path
 from .import views
-
+handler404 = 'asvs.views.handler404'
+handler500 = 'asvs.views.handler500'
 
 urlpatterns = [
     re_path(r'^totp/create/$', views.TOTPCreateView.as_view(), name='totp-create'),
@@ -19,5 +20,6 @@ urlpatterns = [
     url(r'modify_password$', modify_password, name="modify_password"),  
     url(r'modify_username$', modify_username, name="modify_username"),
     url(r'^removefromproject/(?P<projectid>\S+)$', removefromproject, name="removefromproject"),
-    url(r'^unauthenticate_device/(?P<device>[\w\s(),.:;/<>]+)$', unauthenticate_device, name="unauthenticate_device")
+    url(r'^unauthenticate_device/(?P<device>[\w\s(),.:;/<>]+)$', unauthenticate_device, name="unauthenticate_device"),
+    
 ]

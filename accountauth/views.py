@@ -20,8 +20,12 @@ from projects.models import Projects
 from django.db.models import Q
 import hashlib
 from user_agents import parse
+from django.contrib import messages
+# import the logging library
+import logging
 
-
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 class UserCreateForm(UserCreationForm):
    
@@ -37,22 +41,24 @@ class UserCreateForm(UserCreationForm):
 
 
 
-def signup(request):
+def signup(request):     
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
 
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password, is_two_factor_enabled=False, is_superuser=False)
-            
-            login(request, user)
-            secret= user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
-            return render(request, '2fa.html', {'secret':secret.config_url})
+        if form.is_valid() and len(CustomUser.objects.filter(username=form.cleaned_data.get('username')))==0:
+                form.save()
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password1')
+                user = authenticate(username=username, password=raw_password, is_two_factor_enabled=False, is_superuser=False)
+                
+                login(request, user)
+                secret= user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
+                return render(request, '2fa.html', {'secret':secret.config_url}) 
+        else:
+            return render(request, 'auth/signup.html', {'message': 'User already exists'})
     else:
         form = UserCreateForm()
-    return render(request, 'auth/signup.html', {'form': form})
+        return render(request, 'auth/signup.html', {'form': form})
 
 def authenticate_2fa(request):
     secret= request.user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
