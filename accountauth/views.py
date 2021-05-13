@@ -20,12 +20,10 @@ from projects.models import Projects
 from django.db.models import Q
 import hashlib
 from user_agents import parse
-from django.contrib import messages
+import json
 
 
 class UserCreateForm(UserCreationForm):
-   
-    
 
     class Meta:
         fields = ('username','password1','password2','is_two_factor_enabled','is_superuser')
@@ -125,8 +123,12 @@ def profile(request):
         if request.user.is_superuser:
             projects = Projects.objects.all().values()
         else:
-            projects = Projects.objects.filter(Q(project_owner=request.user.username) | Q(
-                project_allowed_viewers__icontains=request.user.username)).values()
+            projects = list(Projects.objects.filter(Q(project_owner=request.user.username) | Q(
+                project_allowed_viewers__contains=request.user.username)).values())
+            for p in projects:
+                #This code was written to fix a problem with django not distinguishing uppercase and lowercase on .filter
+                if p['project_owner']!=request.user.username and request.user.username not in p['project_allowed_viewers'].split(","):
+                    projects.remove(p)
                
         devices=list(request.user.totpdevice_set.all())
         verified_devices=[]
@@ -142,6 +144,20 @@ def profile(request):
             return HttpResponseForbidden('You need to be authenticated to see this page.')
 
 def modify_password(request):
+
+    #Getting user info
+    if request.user.is_superuser:
+        projects = Projects.objects.all().values()
+    else:
+        projects = Projects.objects.filter(Q(project_owner__exact=request.user.username) | Q(
+            project_allowed_viewers__contains=request.user.username)).values()
+        
+    devices=list(request.user.totpdevice_set.all())
+    verified_devices=[]
+    for d in devices:
+        if d.confirmed==True:
+            verified_devices.append(d)
+
     data = dict()
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
@@ -153,13 +169,10 @@ def modify_password(request):
             data['form_is_valid'] = False
     else:
         form = PasswordChangeForm(user=request.user)
-    return redirect('profile')     
+    return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices,'message':"Your password was changed"})     
 
 def custom_logout(request):
     print('Loggin out {}'.format(request.user))
-
-
-
     logout(request)
     print(request.user)
     return redirect('home')
@@ -176,17 +189,69 @@ def unauthenticate_device(request,device):
     return redirect('home')
 
 def modify_username(request):
-    data = dict()
+    #Getting user prjects and devices
+    if request.user.is_superuser:
+        projects = Projects.objects.all().values()
+    else:
+        projects = list(Projects.objects.filter(Q(project_owner__exact=request.user.username) | Q(
+            project_allowed_viewers__contains=request.user.username)).values())
+
+        
+    devices=list(request.user.totpdevice_set.all())
+    verified_devices=[]
+    for d in devices:
+        if d.confirmed==True:
+            verified_devices.append(d)
+    
+    #Modify and render
     if request.method == 'POST':
-        new_username= request.POST.get('new_username1')
-        request.user.username = new_username
-        request.user.save()
-    return redirect('profile') 
+        if len(CustomUser.objects.filter(username=request.POST.get('new_username1')))==0 :
+            new_username= request.POST.get('new_username1')
+            for p in projects:
+                #This code was written to fix a problem with django not distinguishing uppercase and lowercase on .filter
+                if p['project_owner']!=request.user.username and request.user.username not in p['project_allowed_viewers'].split(","):
+                    projects.remove(p)
+            for p in projects:
+                if p['project_owner']==request.user.username or request.user.username  in p['project_allowed_viewers'].split(","):
+                    project_change=Projects.objects.get(id=p['id'])
+                    phash = (hashlib.sha3_256('{0}{1}'.format(project_change.project_name, p['id']).encode('utf-8')).hexdigest())
+                    project = load_template(phash)
+            
+                    update_template(phash, project)
+                    #If its the owner of the project modify project owner with the new username (for the project and its template)
+                    if project['project_owner']==request.user.username:
+                        project['project_owner']=new_username
+                        project_change.project_owner=new_username
+                    #If he is an allowed user for the project, change the username (for the project and its template)
+                    if request.user.username in p['project_allowed_viewers'].split(","):
+                        changed_list=""
+                        for viewer in p['project_allowed_viewers'].split(","):
+                            if viewer == request.user.username:
+                                changed_list=changed_list+new_username+","
+                            else:
+                                changed_list=changed_list+viewer+","
+                        
+                        project['project_allowed_viewers']= changed_list[:-1]
+                        project_change.project_allowed_viewers= changed_list[:-1]  
+                    #We update template and project    
+                    update_template(phash, project) 
+                    project_change.save()   
+                    
+
+            user=CustomUser.objects.get(username=request.user.username)   
+            user.username=new_username
+            user.save()
+            request.user=user
+            request.user.save()
+        else: 
+            return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices,'message':"Username already exists, the username wasnt changed"})
+        return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices,'message':"Username changed to "+ request.POST.get('new_username1')})
 
 def removefromproject(request,projectid):
-    phash = (hashlib.sha3_256('{0}{1}'.format(
-            request.user.username, projectid).encode('utf-8')).hexdigest())
     change = Projects.objects.get(id=projectid)
+    phash = (hashlib.sha3_256('{0}{1}'.format(change.project_name, projectid).encode('utf-8')).hexdigest())
+    project = load_template(phash)
+    
     allowed_users = change.project_allowed_viewers.split(",")
     if change.project_owner!=request.user.username:
         allowed_users.remove(request.user.username)
@@ -195,6 +260,20 @@ def removefromproject(request,projectid):
             new_allowed_viewers+= u+","
 
         change.project_allowed_viewers= new_allowed_viewers[:-1]
+        project['project_allowed_viewers']= new_allowed_viewers[:-1]
         change.save()
     return redirect('profile') 
  
+
+def load_template(phash):
+    with open('storage/{0}.json'.format(phash), 'r') as template:
+        data = json.load(template)
+        template.close()
+        return data
+
+
+def update_template(phash, data):
+    with open('storage/{0}.json'.format(phash), 'w') as template:
+        json.dump(data, template, indent=2)
+    template.close()
+    return

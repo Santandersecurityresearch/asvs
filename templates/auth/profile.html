@@ -71,6 +71,7 @@
             <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-username" id="changeusername" title="Change Username" >Change Username</button>
         </div>
     </div>
+    <input type="hidden" id="message" value="{{message}}">
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -110,5 +111,15 @@
     });
 
     
+</script>
+
+<script>
+    $( document ).ready(function() {
+        var message = document.getElementById("message").value
+        if (message){
+        alert('{{ message }}');
+        location.href = "/";
+        }
+    });
 </script>
 {% endblock %}

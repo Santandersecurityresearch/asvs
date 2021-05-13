@@ -48,7 +48,7 @@ def create_template(requirements, project):
     data['requirements'] = requirements
     data['project_allowed_viewers'] = project['project_owner']
     phash = (hashlib.sha3_256('{0}{1}'.format(
-        project['project_owner'], project['id']).encode('utf-8')).hexdigest())
+        project['project_name'], project['id']).encode('utf-8')).hexdigest())
     with open('storage/{0}.json'.format(phash), 'w') as output:
         project_file = File(output)
         json.dump(data, project_file, indent=2)
@@ -82,14 +82,19 @@ def calculate_completion(requirements):
     return {'total': total, 'enabled': enabled, 'percentage': '{0:.1f}'.format(percentage)}
 
 
-@user_passes_test(is_2fa_authenticated, login_url='/home')
+@user_passes_test(is_2fa_authenticated)
 def project_all(request):
+
     if is_2fa_authenticated(request.user):
         if request.user.is_superuser:
             projects = Projects.objects.all().values()
         else:
-            projects = Projects.objects.filter(Q(project_owner=request.user.username) | Q(
-                project_allowed_viewers__icontains=request.user.username)).values()
+            projects = Projects.objects.filter(Q(project_owner__exact=request.user.username) | Q(
+                project_allowed_viewers__contains=request.user.username)).values()
+            for p in projects:
+                #This code was written to fix a problem with django not distinguishing uppercase and lowercase on .filter
+                if p['project_owner']!=request.user.username and request.user.username not in p['project_allowed_viewers']:
+                    projects.remove(p) 
         return render(request, 'projects/manage.html', {'projects': projects, 'user': request.user})
 
 
@@ -114,31 +119,40 @@ def project_add(request):
 
 @user_passes_test(is_2fa_authenticated)
 def project_delete(request, projectid):
+    p = Projects.objects.get(id=projectid)
     Projects.objects.filter(
-        project_owner=request.user.username, pk=projectid).delete()
+    project_owner=request.user.username, pk=projectid).delete()
     phash = (hashlib.sha3_256('{0}{1}'.format(
-        request.user.username, projectid).encode('utf-8')).hexdigest())
+        p.project_name, projectid).encode('utf-8')).hexdigest())
     os.remove('storage/{0}.json'.format(phash))
+    p.delete()
     return redirect('projectsmanage')
 
 
 @user_passes_test(is_2fa_authenticated)
 def project_view(request, projectid):
+    p = Projects.objects.get(id=projectid)
+
     phash = (hashlib.sha3_256('{0}{1}'.format(
-        request.user.username, projectid).encode('utf-8')).hexdigest())
+        p.project_name, projectid).encode('utf-8')).hexdigest())   
     project = load_template(phash)
     allowed_users = project['project_allowed_viewers'].split(",")
     project['project_created']=  add_one_hour(time.strftime("%m/%d/%Y %H:%M:%S",time.strptime(project['project_created'][:19], "%Y-%m-%dT%H:%M:%S")))
-    if project['project_owner'] == request.user.username or request.user.username in allowed_users:
-        percentage = calculate_completion(project['requirements'])
+    percentage = calculate_completion(project['requirements'])
 
+    if project['project_owner'] == request.user.username or request.user.username in allowed_users:
         return render(request, "projects/view.html", {'data': project['requirements'], 'project': project, 'percentage': percentage})
+    else:
+        return redirect('projectsmanage')    
 
 
 @user_passes_test(is_2fa_authenticated)
 def project_update(request):
+    p = Projects.objects.get(id=request.POST.get(
+            'projectid'))
     if request.method == 'POST':
-        phash = (hashlib.sha3_256('{0}{1}'.format(request.user.username, request.POST.get(
+        
+        phash = (hashlib.sha3_256('{0}{1}'.format(p.project_name, request.POST.get(
             'projectid')).encode('utf-8')).hexdigest())
         project = load_template(phash)
         for k, v in request.POST.items():
@@ -164,8 +178,9 @@ def project_update(request):
 
 @user_passes_test(is_2fa_authenticated)
 def project_download(request, projectid):
+    p = Projects.objects.get(id=projectid)
     phash = (hashlib.sha3_256('{0}{1}'.format(
-        request.user.username, projectid).encode('utf-8')).hexdigest())
+        p.project_name, projectid).encode('utf-8')).hexdigest())
     filename = 'storage/{0}.json'.format(phash)
     with open(filename, 'rb') as fh:
         response = HttpResponse(
@@ -177,8 +192,9 @@ def project_download(request, projectid):
 
 @user_passes_test(is_2fa_authenticated)
 def generate_pdf(request, projectid):
+    p = Projects.objects.get(id=projectid)
     phash = (hashlib.sha3_256('{0}{1}'.format(
-        request.user.username, projectid).encode('utf-8')).hexdigest())
+        p.project_name, projectid).encode('utf-8')).hexdigest())
     project = load_template(phash)
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="ProjectReport.pdf"'
@@ -260,9 +276,10 @@ def chunkstring(text, length):
 
 
 def modify_allowed_users(request, projectid):
+    p = Projects.objects.get(id=projectid)
     if request.method == 'POST':
         phash = (hashlib.sha3_256('{0}{1}'.format(
-            request.user.username, projectid).encode('utf-8')).hexdigest())
+            p.project_name, projectid).encode('utf-8')).hexdigest())
 
         change = Projects.objects.get(id=projectid)
         change.project_allowed_viewers = request.POST.get('viewers')
