@@ -97,5 +97,24 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        var accordion= document.getElementById("accordion")
+        var rows = [].slice.call(accordion.getElementsByTagName("li"));
+        for (row in rows){
+            rows[row].innerHTML=urlify(rows[row].innerHTML)
+        }
+      
+    });
 
+
+    function urlify(text) {
+        var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+
+        return text.replace(urlRegex, function(url) {
+            return '<a href="' + url + '" target="_blank">' + url + ' <i class="fas fa-link"></i></a>';
+        })
+    } 
+</script>
 {% endblock content %}
