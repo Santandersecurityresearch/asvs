@@ -147,5 +147,22 @@ progress::-webkit-progress-bar {
   }
 
 #wrapper{
-    font-family: 'SantanderTextW05-Regular'
+    font-family: 'SantanderTextW05-Regular';
+    height:100%
 } 
+
+#dark_mode{
+    cursor: pointer;
+}
+#html_body{
+    background: white;
+    margin-top: -39px;
+    min-height: 100%;
+    height:max-content;
+}
+body,html{
+    height:100%
+}
+.card-header{
+    color:black
+}
