@@ -10,7 +10,7 @@
                   <div id="div_id_new_username1" class="form-group {% if form.new_username1.errors %} has-error{% endif %}">
                       <label for="id_new_username1" class="control-label requiredField">New username<span class="asteriskField">*</span> </label>
                       <div class="form-group has-feedback">
-                          <input type="username" name="new_username1" class="textinput textInput form-control" minlength="1"  required="" id="id_new_username1" autocomplete="off" maxlength="128">                                   
+                          <input type="username" name="new_username1" onkeypress="return blockSpecialChar(event)" class="textinput textInput form-control" minlength="1"  required="" id="id_new_username1" autocomplete="off" maxlength="128">                                   
                           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                       </div>
                   </div>
@@ -25,3 +25,10 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function blockSpecialChar(e){
+        var k;
+        document.all ? k = e.keyCode : k = e.which;
+        return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57)) || k==95   ;
+        }  
+</script>
