@@ -86,7 +86,7 @@
         var strengthbar = document.getElementById("meter");
         var security_level = document.getElementById("security_level");
         
-        code.addEventListener("keyup", function() {
+        code.addEventListener("keyup", delayTyping(function() {
         var result = owaspPasswordStrengthTest.test(code.value);
         errors_text = "<ul>";
         for (i = 0; i < result.errors.length; i++) {
@@ -158,14 +158,25 @@
             alert(textStatus);
           }
         });
-      });
+      },400));
       
       function blockSpecialChar(e){
         var k;
         document.all ? k = e.keyCode : k = e.which;
         return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57) || k == 95 || k == 45 );
         }  
-
+      
+      function delayTyping(callback, ms) {
+        var timer = 0;
+        return function() {
+          var context = this, args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            callback.apply(context, args);
+          }, ms || 0);
+        };
+      }
+  
     </script>
     <script>
      var message = document.getElementById("message").value
