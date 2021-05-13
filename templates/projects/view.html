@@ -323,6 +323,20 @@
             return '<a href="' + url + '">' + url + '</a>';
         })
     } 
+    //When clicking one of the categories, scroll to the requirements
+    $(".funds-allocated-meter").click(function() {
+       
+        var elementText=$($(this).children()[$(this).children().length -1])[0].textContent
+
+        console.log(elementText)
+        var elems = $('td').filter(function(){
+            return this.textContent.includes(elementText)
+        });
+
+    $('html,body').animate({
+        scrollTop: $(elems[0]).offset().top-60},
+        'slow');
+    });
 
 </script>
 

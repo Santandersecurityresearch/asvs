@@ -96,6 +96,10 @@
     font-size: 14px;
     fill: #008cba !important;
 }
+
+.funds-allocated-meter{
+    cursor: pointer;
+}
   
 .percent-complete {
     font-family: 'Roboto Condensed',      sans-serif;
