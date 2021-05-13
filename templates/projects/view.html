@@ -320,7 +320,7 @@
         var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 
         return text.replace(urlRegex, function(url) {
-            return '<a href="' + url + '">' + url + '</a>';
+            return '<a href="' + url + '" target="_blank">' + url + ' <i class="fas fa-link"></i></a>';
         })
     } 
     //When clicking one of the categories, scroll to the requirements
