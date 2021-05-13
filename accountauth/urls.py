@@ -20,6 +20,6 @@ urlpatterns = [
     url(r'modify_password$', modify_password, name="modify_password"),  
     url(r'modify_username$', modify_username, name="modify_username"),
     url(r'^removefromproject/(?P<projectid>\S+)$', removefromproject, name="removefromproject"),
-    url(r'^unauthenticate_device/(?P<device>[\w\s(),.:;/<>]+)$', unauthenticate_device, name="unauthenticate_device"),
+    url(r'^unauthenticate_device/(?P<device>[\w\s(),.:;/<>_-]+)$', unauthenticate_device, name="unauthenticate_device"),
     
 ]
