@@ -87,14 +87,15 @@ def project_all(request):
 
     if is_2fa_authenticated(request.user):
         if request.user.is_superuser:
-            projects = Projects.objects.all().values()
+            projects = list(Projects.objects.all().values())
         else:
-            projects = Projects.objects.filter(Q(project_owner__exact=request.user.username) | Q(
-                project_allowed_viewers__contains=request.user.username)).values()
-            for p in projects:
-                #This code was written to fix a problem with django not distinguishing uppercase and lowercase on .filter
-                if p['project_owner']!=request.user.username and request.user.username not in p['project_allowed_viewers']:
-                    projects.remove(p) 
+            projects = list(Projects.objects.filter(Q(project_owner__exact=request.user.username) | Q(
+                project_allowed_viewers__contains=request.user.username)).values())
+            if len(projects)>0:    
+                for p in projects:
+                    #This code was written to fix a problem with django not distinguishing uppercase and lowercase on .filter
+                    if p['project_owner']!=request.user.username and request.user.username not in p['project_allowed_viewers']:
+                        projects.remove(p) 
         return render(request, 'projects/manage.html', {'projects': projects, 'user': request.user})
 
 
