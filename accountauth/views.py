@@ -44,7 +44,6 @@ def signup(request):
                 username = form.cleaned_data.get('username')
                 raw_password = form.cleaned_data.get('password1')
                 user = authenticate(username=username, password=raw_password, is_two_factor_enabled=False, is_superuser=False)
-                
                 login(request, user)
                 secret= user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
                 return render(request, '2fa.html', {'secret':secret.config_url}) 
@@ -89,8 +88,7 @@ class TOTPVerifyView(views.APIView):
     def post(self, request, format=None):
         user = request.user
         
-        devices=list(request.user.totpdevice_set.all())
-        verified_devices=[]
+        devices=list(request.user.totpdevice_set.all())     
         for d in devices:
             if str(parse(request.META['HTTP_USER_AGENT'])) in str(d):
                 device=d
@@ -112,8 +110,8 @@ class TOTPVerifyView(views.APIView):
                 if user.username=="admin":
                     user.is_superuser=True
             user.is_two_factor_enabled=True
-            user.save()    
-                
+            user.save() 
+            
             return render(request, 'verified.html',{'user':user})
         return render(request, '2fa.html', {'secret':device.config_url})
 
