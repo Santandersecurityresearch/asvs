@@ -189,11 +189,23 @@ body,html{
     border-radius: 60px;
   }
   
-  #btnTop:hover {
+#btnTop:hover {
     background-color: #555;
-  }
+}
+
 .btn {
     color:white;
     background-color: #008cba;
     text-align: center;
+}
+
+.header .sign:after{
+    content:"+";
+    display:inline-block;  
+    cursor: pointer;     
+  }
+
+.header.expand {
+    content:"-";
+    cursor: pointer;
 }

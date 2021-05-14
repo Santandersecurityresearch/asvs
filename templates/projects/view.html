@@ -74,8 +74,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     {% for d in data %}
-                                    <tr>
+                                    <tr id="{{d.req_id}}">
                                         {% if "Architecture" in d.chapter_name %}
                                         <td style="background-color:#F6C2AE">{{ d.chapter_name }}</td>
                                         {% else %}
@@ -155,12 +156,11 @@
                                             {% else %}
                                                 <input type="checkbox" id="{{ d.req_id }}na" name="{{ d.req_id }}na" onclick="uncheckOthers('{{ d.req_id }}na')" value="0"  >
                                             {% endif %}
-                                        </td>
-                                         
-                                       
-                                    </tr>
+                                        </td>                                       
+                                    </tr>                                   
                                     {% endfor %}
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>
@@ -199,6 +199,46 @@
                 }
             });
         });
+    //Create headers    
+    var categories=[]
+    var rows = table.getElementsByTagName("tr");
+    for(var i=0;i<rows.length;i++){
+        if (rows[i].getElementsByTagName("td")){   
+            if (rows[i].getElementsByTagName("td")[0]){
+                
+                //If it is the first requirement for a category (is not in our array), add header
+                if (!categories.includes(rows[i].getElementsByTagName("td")[0].innerText)){
+                    var colour= rows[i].getElementsByTagName("td")[0].style.backgroundColor
+                    var newHeader= document.createElement('tr')
+                    var category=rows[i].getElementsByTagName("td")[0].innerText 
+                    newHeader.innerHTML=" <th colspan='5'>"+category+"&nbsp;&nbsp;&nbsp;<i class='fas fa-angle-down'></i><th>"
+                    //Deleting a blank th we dont need    
+                    newHeader.getElementsByTagName("th")[1].remove()
+                    newHeader.style.backgroundColor=colour
+                    newHeader.className="header expand"
+                    rows[i].parentNode.insertBefore(newHeader,rows[i])
+                    categories.push(category)
+                    
+                }
+
+            }
+        }
+    }
+    //Expand Collapse headers
+    $('.header').click(function(){
+        var arrow = $(this)[0].getElementsByTagName("i")[0]
+        if (arrow.classList[1]==="fa-angle-down"){
+            arrow.classList.remove("fa-angle-down");
+            arrow.classList.add("fa-angle-up")
+        }
+        else{
+            arrow.classList.remove("fa-angle-up");
+            arrow.classList.add("fa-angle-down")
+        }
+        
+    $(this).nextUntil('tr.header').slideToggle(0);
+    });
+        
     });
 
 
@@ -286,7 +326,6 @@
             .text(c.replace(" Verification Requirements","").replace(", Sanitization and Encoding","").replace(" and Logging Verification Requirements","").replace(" and Logging","").replace("Architecture, Design and Threat Modeling Requirements","Architecture & Design"));
       
 
-        
     }
     function uncheckOthers(itemcheckbox){
         var item = itemcheckbox.replace("enabled","").replace("disabled","").replace("na","")
@@ -329,13 +368,12 @@
        
         var elementText=$($(this).children()[$(this).children().length -1])[0].textContent
 
-        console.log(elementText)
-        var elems = $('td').filter(function(){
+        var elems = $('th').filter(function(){
             return this.textContent.includes(elementText)
         });
 
     $('html,body').animate({
-        scrollTop: $(elems[0]).offset().top-60},
+        scrollTop: $(elems[0]).offset().top-59},
         'slow');
     });
 
