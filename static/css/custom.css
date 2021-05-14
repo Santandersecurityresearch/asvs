@@ -166,3 +166,9 @@ body,html{
 .card-header{
     color:black
 }
+
+#accordion{
+    width:100%;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
