@@ -236,7 +236,7 @@
             arrow.classList.add("fa-angle-down")
         }
         
-    $(this).nextUntil('tr.header').slideToggle(0);
+    $(this).nextUntil('tr.header').animate({ opacity: "toggle" },300);
     });
         
     });
