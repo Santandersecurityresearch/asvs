@@ -163,48 +163,71 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js "
     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ "
     crossorigin="anonymous "></script>
-  <script>
+    <script>
   
-    var settings = loadSettings();
-    var background = localStorage.getItem("settings.background");
-    if (background==="white"){
-      html_body.style.background="white"
-      html_body.style.color="black"
-      document.getElementById("dark_mode").innerHTML="<i  class='fas fa-moon' onclick='darkMode()'></i>"
-      localStorage.setItem("settings.background", "white");
-    }
-    else{
-      html_body.style.background="rgb(25, 39, 52)"
-      html_body.style.color="white"
-      document.getElementById("dark_mode").innerHTML="<i  class='fas fa-sun' onclick='darkMode()'></i>"
-      localStorage.setItem("settings.background", "dark");
+      var settings = loadSettings();
+      var background = localStorage.getItem("settings.background");
+      var html_body= document.getElementById("html_body")
+      var cardbodies= document.getElementsByClassName("card-body")
+      if (background==="white"){
+        html_body.style.background="white"
+        html_body.style.color="black"
+        for (r in cardbodies){
+          if(cardbodies[r].style){
+            cardbodies[r].style.background="white"
+          }
+        }
+        document.getElementById("dark_mode").innerHTML="<i  class='fas fa-moon' onclick='darkMode()'></i>"
+        localStorage.setItem("settings.background", "white");
+      }
+      else{
+        html_body.style.background="rgb(25, 39, 52)"
+        html_body.style.color="white"
+        for (r in cardbodies){
+          if(cardbodies[r].style){
+            cardbodies[r].style.background="#F0F0F0"
+          }
+        }
+        document.getElementById("dark_mode").innerHTML="<i  class='fas fa-sun' onclick='darkMode()'></i>"
+        localStorage.setItem("settings.background", "dark");
+      }
+      
+    
+    
+    function darkMode(){
+      var background = localStorage.getItem("settings.background");
+      var html_body= document.getElementById("html_body")
+      var cardbodies= document.getElementsByClassName("card-body")
+      if (background==="dark"){
+        html_body.style.background="white"
+        html_body.style.color="black"
+        for (r in cardbodies){
+          if(cardbodies[r].style){
+            cardbodies[r].style.background="white"
+          }
+        }
+        document.getElementById("dark_mode").innerHTML="<i  class='fas fa-moon' onclick='darkMode()'></i>"
+        localStorage.setItem("settings.background", "white");
+      }
+      else{
+        html_body.style.background="rgb(25, 39, 52)"
+        html_body.style.color="white"
+        for (r in cardbodies){
+          if(cardbodies[r].style){
+            cardbodies[r].style.background="#F0F0F0"
+          }
+        }
+        document.getElementById("dark_mode").innerHTML="<i  class='fas fa-sun' onclick='darkMode()'></i>"
+        localStorage.setItem("settings.background", "dark");
+      }
     }
     
-  
-
-  function darkMode(){
-    var background = localStorage.getItem("settings.background");
-    var html_body= document.getElementById("html_body")
-    if (background==="dark"){
-      html_body.style.background="white"
-      html_body.style.color="black"
-      document.getElementById("dark_mode").innerHTML="<i  class='fas fa-moon' onclick='darkMode()'></i>"
-      localStorage.setItem("settings.background", "white");
-    }
-    else{
-      html_body.style.background="rgb(25, 39, 52)"
-      html_body.style.color="white"
-      document.getElementById("dark_mode").innerHTML="<i  class='fas fa-sun' onclick='darkMode()'></i>"
-      localStorage.setItem("settings.background", "dark");
-    }
-  }
-
-  function loadSettings() {
-    var background = localStorage.getItem("settings.background");
-
-    return { background: background }
-  }  
-  </script>
+    function loadSettings() {
+      var background = localStorage.getItem("settings.background");
+    
+      return { background: background }
+    }  
+    </script>
   {% endblock script %}
   </div>
   </div>

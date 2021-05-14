@@ -14,61 +14,66 @@
     {% include "modals/modal_change_password.html" %}
     {% include "modals/modal_change_username.html" %}
         <div class="col-lg-12">
-            
-            <h4>Projects {{ user.username }} is allowed to watch: </h4>
-            <table id="case-results" class="table table-bordered dataTable" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Created</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Level</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>                                  
-                    {% for p in projects %}
-                    <tr>
-                        <td>{{ p.project_created }}</td>
-                        <td>{{ p.project_name }}</td>
-                        <td>{{ p.project_description }}</td>
-                        <td>{{ p.project_level }} </td>
-                        <td>
-                            {% if not p.project_owner == user.username %}
-                            <a href="{% url 'removefromproject' projectid=p.id %}" title="Remove User from Project">
-                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                            </a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            </p>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Projects {{ user.username }} is allowed to watch: </h4>
+                </div>
+                <div class="card-body">
+                    <table id="case-results" class="table table-bordered dataTable" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Created</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Level</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>                                  
+                            {% for p in projects %}
+                            <tr>
+                                <td>{{ p.project_created }}</td>
+                                <td>{{ p.project_name }}</td>
+                                <td>{{ p.project_description }}</td>
+                                <td>{{ p.project_level }} </td>
+                                <td>
+                                    {% if not p.project_owner == user.username %}
+                                    <a href="{% url 'removefromproject' projectid=p.id %}" title="Remove User from Project">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </p>
 
-            <h5>{{ user.username }} devices: </h5>
-            <table id="devices" class="table table-bordered dataTable" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Device Name</th>
-                    </tr>
-                </thead>
-                <tbody>                  
-                    {% for d in devices %}
-                    <tr>
-                        <td>{{ d }} 
-                            <a href="{% url 'unauthenticate_device' device=d %}" title="Unauthenticate Device">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <pre>{{ userdata }}</pre>
+                    <h5>{{ user.username }} devices: </h5>
+                    <table id="devices" class="table table-bordered dataTable" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Device Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>                  
+                            {% for d in devices %}
+                            <tr>
+                                <td>{{ d }} 
+                                    <a href="{% url 'unauthenticate_device' device=d %}" title="Unauthenticate Device">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <pre>{{ userdata }}</pre>
 
-            <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-password" id="changepassword" title="Change Password" >Change Password</button>
-            <button style="margin-bottom: 30px; text-align: center;" class="btn js-change-username" id="changeusername" title="Change Username" >Change Username</button>
+                    <button class="btn js-change-password" id="changepassword" title="Change Password" >Change Password</button>
+                    <button class="btn js-change-username" id="changeusername" title="Change Username" >Change Username</button>
+                </div>
+            </div>
         </div>
     </div>
     <input type="hidden" id="message" value="{{message}}">

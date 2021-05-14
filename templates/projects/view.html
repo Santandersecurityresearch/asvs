@@ -171,7 +171,7 @@
                     </div>
                 </div>
             </form>
-            <a href="{% url 'generate_pdf' projectid=project.project_id %}" style="margin-bottom: 30px; text-align: center;"><button style="margin-bottom: 30px;" class="btn" id="pdfreport" style="background-color:#dd4b39; color:white">PDF Report</button></a>
+            <a href="{% url 'generate_pdf' projectid=project.project_id %}" style="margin-bottom: 30px; text-align: center;"><button style="margin-bottom: 30px;background-color:#dd4b39; color:white" class="btn" id="pdfreport"> PDF Report <i class="fas fa-file"></i></button></a>
             {% if user.is_authenticated and user.is_two_factor_enabled and user.is_superuser %}
             <button style="margin-bottom: 30px; text-align: center;" class="btn js-allowed-users" id="allowedusers" title="Change allowed users" >Modify Allowed Users</button>
             {% endif %}
