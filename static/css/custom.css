@@ -172,3 +172,23 @@ body,html{
     margin-bottom: 15px;
     margin-left: 15px;
 }
+
+#btnTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 50%;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #0079a1;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 60px;
+  }
+  
+  #btnTop:hover {
+    background-color: #555;
+  }
