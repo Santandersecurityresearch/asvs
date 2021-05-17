@@ -384,4 +384,5 @@ def detailsBackground(canvas,colour):
     path.lineTo(0.7*cm,24*cm)
     path.lineTo(20*cm,24*cm)
     path.lineTo(20*cm,16.5*cm)
+    path.lineTo(0.7*cm,16.5*cm)
     canvas.drawPath(path,True,True)     
