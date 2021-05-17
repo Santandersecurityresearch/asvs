@@ -18,6 +18,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 import time
 import datetime as dt
+import textwrap
 
 def is_2fa_authenticated(user):
     try:
@@ -344,10 +345,7 @@ def generate_pdf(request, projectid):
 
 
 def chunkstring(text, length):
-
-    list_of_strings = []
-    for i in range(0, len(text), length):
-        list_of_strings.append(text[i:length+i])
+    list_of_strings=textwrap.wrap(text, length)    
     return(list_of_strings)
 
 
