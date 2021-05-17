@@ -208,7 +208,7 @@ def generate_pdf(request, projectid):
     pdfmetrics.registerFont(TTFont('SantanderTextW05-Bold', "./static/fonts/SantanderText-Bold.ttf"))
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
-    data = [['PROJECT REPORT']]
+    data = [[],[],[],[],[],['PROJECT REPORT']] #First eements to give a space for the logo image
     data.append([" "])
     # Create the PDF object, using the BytesIO object as its "file."
     data.append(["•Project Owner:"]) 
@@ -223,6 +223,7 @@ def generate_pdf(request, projectid):
     data.append(["   "+str(project['project_created'])])
     data.append(["•Project Level:"])
     data.append(["   "+str(project['project_level'])])
+    data.append([" "])
     data.append(["COMPLETION"])
     data.append([str(calculate_completion(project['requirements'])['percentage'])+"%"])
     data.append([" "])
@@ -262,9 +263,10 @@ def generate_pdf(request, projectid):
                 canvasBackground(p,"#E3FFFA")
                 if pagenumber==0:
                     detailsBackground(p,"#D3D3D3")
+                    p.drawImage('./static/img/logoicon3.jpg',230,730,width = 100, height =100)
                 
-                p.drawImage('./static/img/logoicon3.jpg',530,40,width = 40, height =40)
-                table_style =  TableStyle([('FONTNAME', (0,0), (0,-1), 'SantanderTextW05-Regular')])
+                p.drawImage('./static/img/logoicon3.jpg',530,40,width = 40, height =40)     
+                table_style =  TableStyle([('FONTNAME', (0,0), (0,-1), 'SantanderTextW05-Regular')])              
                 for row, values, in enumerate(smalldata):
                     for column, value in enumerate(values):
                         if (value=="PROJECT REPORT" or value=="Requirements:" or value=="•Project Owner:" or value=="•Project Name:" or value=="•Project ID:" or value=="•Project Description:" or value=="•Project Created:" or value=="•Project Level:"or value=="COMPLETION"):
@@ -375,8 +377,8 @@ def canvasBackground(canvas,colour):
 def detailsBackground(canvas,colour):
     canvas.setFillColor(colour)
     path = canvas.beginPath()
-    path.moveTo(0.7*cm,19.7*cm)
-    path.lineTo(0.7*cm,27.2*cm)
-    path.lineTo(20*cm,27.2*cm)
-    path.lineTo(20*cm,19.7*cm)
+    path.moveTo(0.7*cm,16.5*cm)
+    path.lineTo(0.7*cm,24*cm)
+    path.lineTo(20*cm,24*cm)
+    path.lineTo(20*cm,16.5*cm)
     canvas.drawPath(path,True,True)     
