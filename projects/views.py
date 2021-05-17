@@ -226,6 +226,7 @@ def generate_pdf(request, projectid):
     data.append([" "])
     data.append(["COMPLETION"])
     data.append([str(calculate_completion(project['requirements'])['percentage'])+"%"])
+    data.append([str(calculate_completion(project['requirements'])['enabled'])+"/"+str(calculate_completion(project['requirements'])['total'])])
     data.append([" "])
     data.append(["Requirements:"])
     data.append([" "])
@@ -274,7 +275,9 @@ def generate_pdf(request, projectid):
                         if (value=="COMPLETION" or value=="PROJECT REPORT"):
                             table_style.add('ALIGN', (column, row), (column, row), "CENTRE")   
                             table_style.add('ALIGN', (column, row+1), (column, row+1), "CENTRE") 
-                            table_style.add('SIZE', (column, row), (column, row), 12)   
+                            table_style.add('SIZE', (column, row), (column, row), 12) 
+                            if (value=="COMPLETION"):
+                                table_style.add('ALIGN', (column, row+2), (column, row+2), "CENTRE")  
                         if value == "Complete":
                             table_style.add('TEXTCOLOR', (column, row), (column, row), "#49b675") 
                         if value == "Incomplete":
