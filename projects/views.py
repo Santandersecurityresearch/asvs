@@ -9,6 +9,11 @@ import os
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
+from reportlab.lib.units import cm
+from reportlab.lib import colors
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase.pdfmetrics import registerFontFamily
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 import time
@@ -199,64 +204,128 @@ def generate_pdf(request, projectid):
     project = load_template(phash)
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="ProjectReport.pdf"'
+    pdfmetrics.registerFont(TTFont('SantanderTextW05-Regular', "./static/fonts/SantanderText-Regular.ttf"))
+    pdfmetrics.registerFont(TTFont('SantanderTextW05-Bold', "./static/fonts/SantanderText-Bold.ttf"))
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
     data = [['PROJECT REPORT']]
+    data.append([" "])
     # Create the PDF object, using the BytesIO object as its "file."
-
-    data.append(["Project Owner:"])
-    data.append([str(project['project_owner'])])
-    data.append(["Project Name:"])
-    data.append([str(project['project_name'])])
-    data.append(["Project ID:"])
-    data.append([str(project['project_id'])])
-    data.append(["Project Description:"])
-    data.append([str(project['project_description'])])
-    data.append(["Project Created:"])
-    data.append([str(project['project_created'])])
-    data.append(["Project Level:"])
-    data.append([str(project['project_level'])])
+    data.append(["•Project Owner:"]) 
+    data.append(["   "+str(project['project_owner'])])
+    data.append(["•Project Name:"])
+    data.append(["   "+str(project['project_name'])])
+    data.append(["•Project ID:"])
+    data.append(["   "+str(project['project_id'])])
+    data.append(["•Project Description:"])
+    data.append(["   "+str(project['project_description'])])
+    data.append(["•Project Created:"])
+    data.append(["   "+str(project['project_created'])])
+    data.append(["•Project Level:"])
+    data.append(["   "+str(project['project_level'])])
+    data.append(["COMPLETION"])
+    data.append([str(calculate_completion(project['requirements'])['percentage'])+"%"])
     data.append([" "])
-    data.append(["Requirements"])
+    data.append(["Requirements:"])
     data.append([" "])
-    for r in project['requirements']:
+    data.append([" "])
+    for r in project['requirements']:   
         data.append([r['chapter_name']+":"])
         data.append([" "])
-        split_description = chunkstring(r['req_description'], 123)
+        split_description = chunkstring("("+r['req_id']+") "+r['req_description'], 123)
         for sd in split_description:
             data.append([sd])
         if r.get('enabled') and r['enabled'] > 0:
-            data.append(["Complete ✓"])
+            data.append([" "])
+            data.append(["Complete"])
             data.append([" "])
 
         elif r.get('disabled') and r['disabled'] > 0:
-            data.append(["Incomplete ✕"])
+            data.append([" "])
+            data.append(["Incomplete"])
             data.append([" "])
         else:
-            data.append(["N/A "])
             data.append([" "])
+            data.append(["N/A"])
+            data.append([" "])   
 
     if len(data) >= 40:
+        pagenumber=0
         for x in range(len(data)+1):
             if (((x % 40 == 0) and (x > 0)) or x == len(data)):
+                
                 smalldata = data[x-40:x]
                 width = 800
                 height = 200
                 x = 20
-                y = 80
-                f = Table(smalldata)
+                y = 90
+                canvasBackground(p,"#E3FFFA")
+                if pagenumber==0:
+                    detailsBackground(p,"#D3D3D3")
+                
+                p.drawImage('./static/img/logoicon3.jpg',530,40,width = 40, height =40)
+                table_style =  TableStyle([('FONTNAME', (0,0), (0,-1), 'SantanderTextW05-Regular')])
+                for row, values, in enumerate(smalldata):
+                    for column, value in enumerate(values):
+                        if (value=="PROJECT REPORT" or value=="Requirements:" or value=="•Project Owner:" or value=="•Project Name:" or value=="•Project ID:" or value=="•Project Description:" or value=="•Project Created:" or value=="•Project Level:"or value=="COMPLETION"):
+                            table_style.add('FONTNAME', (column, row), (column, row), 'SantanderTextW05-Bold')  
+                        if (value=="COMPLETION" or value=="PROJECT REPORT"):
+                            table_style.add('ALIGN', (column, row), (column, row), "CENTRE")   
+                            table_style.add('ALIGN', (column, row+1), (column, row+1), "CENTRE")  
+                        if value == "Complete":
+                            table_style.add('TEXTCOLOR', (column, row), (column, row), "#49b675") 
+                        if value == "Incomplete":
+                            table_style.add('TEXTCOLOR', (column, row), (column, row), "#e71837")
+                        if value == "N/A":
+                            table_style.add('TEXTCOLOR', (column, row), (column, row), "#0e4bef")    
+                        if value.startswith("Architecture"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#F6C2AE")
+                        if value.startswith("Authentication"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#AEF6EE") 
+                        if value.startswith("Session"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#AECEF6")    
+                        if value.startswith("Access"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#F5F6AE") 
+                        if value.startswith("Validation"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#97E995")
+                        if value.startswith("Cryptography") or value.startswith("Stored Cryptography"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#7CC4A5")
+                        if value.startswith("Error"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#FF8282")
+                        if value.startswith("Data"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#C290BA")
+                        if value.startswith("Communications"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#6986A0") 
+                        if value.startswith("Malicious"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#AFBA7F")  
+                        if value.startswith("BusLogic") or value.startswith("Business Logic"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#FFB962")  
+                        if value.startswith("Files") or value.startswith("File"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#73E2D7") 
+                        if value.startswith("API"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#80DAAD") 
+                        if value.startswith("Configuration"):
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#CD0C2E")               
+
+
+                f = Table(smalldata,style=table_style)
                 f.wrapOn(p, width, height)
-                f.drawOn(p, x, y)
+                f.drawOn(p, x, y)               
                 p.showPage()
+                pagenumber=pagenumber+1
 
     else:
         width = 800
         height = 200
         x = 20
         y = 767-17*len(data)
-        f = Table(data)
+        canvasBackground(p,"#E3FFFA")
+        detailsBackground(p,"#D3D3D3")
+        p.drawImage('./static/img/logoicon3.jpg',530,40,width = 40, height =40)
+        grid = [('FONTNAME', (0,0), (0,-1), 'SantanderTextW05-Regular')]
+        f = Table(data,style=TableStyle(grid))
         f.wrapOn(p, width, height)
-        f.drawOn(p, x, y)
+        f.drawOn(p, x, y)       
         p.showPage()
 
     p.save()
@@ -292,3 +361,21 @@ def add_one_hour(time_string):
     the_time = dt.datetime.strptime(time_string, '%m/%d/%Y %H:%M:%S')
     new_time = the_time + dt.timedelta(hours=1)
     return new_time.strftime('%m/%d/%Y %H:%M:%S')
+
+def canvasBackground(canvas,colour):
+    canvas.setFillColor(colour)
+    path = canvas.beginPath()
+    path.moveTo(0*cm,0*cm)
+    path.lineTo(0*cm,30*cm)
+    path.lineTo(25*cm,30*cm)
+    path.lineTo(25*cm,0*cm)
+    canvas.drawPath(path,True,True)  
+
+def detailsBackground(canvas,colour):
+    canvas.setFillColor(colour)
+    path = canvas.beginPath()
+    path.moveTo(0.7*cm,19.7*cm)
+    path.lineTo(0.7*cm,27.2*cm)
+    path.lineTo(20*cm,27.2*cm)
+    path.lineTo(20*cm,19.7*cm)
+    canvas.drawPath(path,True,True)     
