@@ -271,7 +271,8 @@ def generate_pdf(request, projectid):
                             table_style.add('FONTNAME', (column, row), (column, row), 'SantanderTextW05-Bold')  
                         if (value=="COMPLETION" or value=="PROJECT REPORT"):
                             table_style.add('ALIGN', (column, row), (column, row), "CENTRE")   
-                            table_style.add('ALIGN', (column, row+1), (column, row+1), "CENTRE")  
+                            table_style.add('ALIGN', (column, row+1), (column, row+1), "CENTRE") 
+                            table_style.add('SIZE', (column, row), (column, row), 12)   
                         if value == "Complete":
                             table_style.add('TEXTCOLOR', (column, row), (column, row), "#49b675") 
                         if value == "Incomplete":
