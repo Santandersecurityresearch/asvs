@@ -19,8 +19,7 @@ from django.db.models import Q
 import time
 import datetime as dt
 import textwrap
-from reportlab.graphics.charts.piecharts import Pie
-from reportlab.graphics.shapes import Drawing, String
+
 
 def is_2fa_authenticated(user):
     try:
