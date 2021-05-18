@@ -6,7 +6,7 @@
             "urls": [
                 {
                     "title": "Threat Modeling Cheat Sheet ",
-                    "url": "https://www.owasp.org/index.php/Application_Security_Architecture_Cheat_Sheet"
+                    "url": "https://www.owasp.org/index.php/Threat_Modeling_Cheat_Sheet"
                 },
                 {
                     "title": "Attack Surface Analysis Cheat Sheet",
@@ -219,8 +219,8 @@
                     "url": "https://www.owasp.org/index.php/Testing_for_business_logic"
                 },
                 {
-                    "title": "OWASP Cheat Sheet: Business Logic",
-                    "url": "https://www.owasp.org/index.php/Business_Logic_Security_Cheat_Sheet"
+                    "title": "Business logic vulnerability",
+                    "url": "https://owasp.org/www-community/vulnerabilities/Business_logic_vulnerability"
                 }
             ]
         },
