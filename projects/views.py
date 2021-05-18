@@ -19,6 +19,8 @@ from django.db.models import Q
 import time
 import datetime as dt
 import textwrap
+from reportlab.graphics.charts.piecharts import Pie
+from reportlab.graphics.shapes import Drawing, String
 
 def is_2fa_authenticated(user):
     try:
@@ -221,13 +223,13 @@ def generate_pdf(request, projectid):
     data.append(["•Project Description:"])
     data.append(["   "+str(project['project_description'])])
     data.append(["•Project Created:"])
-    data.append(["   "+str(project['project_created'])])
+    data.append(["   "+str(add_one_hour(time.strftime("%m/%d/%Y %H:%M:%S",time.strptime(project['project_created'][:19], "%Y-%m-%dT%H:%M:%S"))))])
     data.append(["•Project Level:"])
     data.append(["   "+str(project['project_level'])])
     data.append([" "])
     data.append(["COMPLETION"])
     data.append([str(calculate_completion(project['requirements'])['percentage'])+"%"])
-    data.append([str(calculate_completion(project['requirements'])['enabled'])+"/"+str(calculate_completion(project['requirements'])['total'])])
+    data.append([str(calculate_completion(project['requirements'])['enabled'])+"/"+str(calculate_completion(project['requirements'])['total'])])  
     data.append([" "])
     data.append(["Requirements:"])
     data.append([" "])
@@ -265,7 +267,7 @@ def generate_pdf(request, projectid):
                 canvasBackground(p,"#E3FFFA")
                 if pagenumber==0:
                     detailsBackground(p,"#D3D3D3")
-                    p.drawImage('./static/img/logoicon3.jpg',230,730,width = 100, height =100)
+                    p.drawImage('./static/img/logoicon3.jpg',227.5,730,width = 100, height = 100)
                 
                 p.drawImage('./static/img/logoicon3.jpg',530,40,width = 40, height =40)     
                 table_style =  TableStyle([('FONTNAME', (0,0), (0,-1), 'SantanderTextW05-Regular')])              
@@ -312,8 +314,7 @@ def generate_pdf(request, projectid):
                         if value.startswith("API"):
                             table_style.add('BACKGROUND', (column, row), (column, row), "#80DAAD") 
                         if value.startswith("Configuration"):
-                            table_style.add('BACKGROUND', (column, row), (column, row), "#CD0C2E")               
-
+                            table_style.add('BACKGROUND', (column, row), (column, row), "#CD0C2E")     
 
                 f = Table(smalldata,style=table_style)
                 f.wrapOn(p, width, height)
