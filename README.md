@@ -1,9 +1,9 @@
 # Welcome To The OWASP Application Security Verification Standard (ASVS) Web App - Release Name: **SCANROUTE**
 
-The OWASP Application Security Verification Standard (ASVS) is a community-effort to
+The OWASP Application Security Verification Standard [ASVS)](https://owasp.org/www-project-application-security-verification-standard/]) is a community-effort to
 establish a framework of security requirements and controls that focus on normalising the functional and non-functional security controls required when designing, developing and testing modern web applications.
 
-You can access the ASVS via Github, but we wanted to make this more accessible to all as a web application (based on django). The key aim of the web application is to allow individuals or companies a quick and easy way to understand the ASVS controls, and where to find information on meeting those controls. For this second release, we've also added 2FA authentication so as to offer more security for sensitive projects. 
+You can access the ASVS via [Github](https://github.com/OWASP/ASVS/tree/v4.0.2/4.0), but we wanted to make this more accessible to all as a web application (based on django). The key aim of the web application is to allow individuals or companies a quick and easy way to understand the ASVS controls, and where to find information on meeting those controls. For this second release, we've also added 2FA authentication so as to offer more security for sensitive projects. 
 
 When we built Marbles (the original release), our aim was the following:
 
