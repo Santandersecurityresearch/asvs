@@ -22,7 +22,7 @@
                     <strong>Useful Links: </strong>
                 </p>
                 {% for u in data.urls %}
-                <a href="{{ u.url }}" target="_blank" class="card-link">{{ u.title }} <i class="fas fa-link"></i></a>
+                <a href="{{ u.url }}" target="_blank" class="card-link" rel="noopener noreferrer">{{ u.title }} <i class="fas fa-link"></i></a>
                 <br> {% endfor %}
             </div>
         </div>
