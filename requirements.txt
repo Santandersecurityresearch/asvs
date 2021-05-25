@@ -6,3 +6,4 @@ djangorestframework-jsonapi
 pyyaml 
 ua-parser
 user-agents
+requirements-parser
