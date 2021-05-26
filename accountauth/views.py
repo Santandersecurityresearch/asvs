@@ -21,7 +21,11 @@ from django.db.models import Q
 import hashlib
 from user_agents import parse
 import json
+# import the logging library
+import logging
 
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 class UserCreateForm(UserCreationForm):
 
@@ -70,10 +74,8 @@ class TOTPCreateView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, format=None):
         
-        devices=list(request.user.totpdevice_set.all())
-        
+        #devices=list(request.user.totpdevice_set.all())
         device = user.totpdevice_set.create(confirmed=True,name=str(parse(request.META['HTTP_USER_AGENT'])))
-   
         device.confirmed=True   
         user.is_two_factor_enabled=True   
         user.save() 
@@ -87,16 +89,12 @@ class TOTPVerifyView(views.APIView):
     permission_classes = (permissions.IsAuthenticated, )
     def post(self, request, format=None):
         user = request.user
-        
+
         devices=list(request.user.totpdevice_set.all())     
         for d in devices:
             if str(parse(request.META['HTTP_USER_AGENT'])) in str(d):
                 device=d
         
-                device.confirmed = True
-                device.save()   
-                user.is_two_factor_enabled=True
-                user.save()
 
         if not device:
              return Response(dict(
@@ -109,8 +107,8 @@ class TOTPVerifyView(views.APIView):
                 device.save()
                 if user.username=="admin":
                     user.is_superuser=True
-            user.is_two_factor_enabled=True
-            user.save() 
+                user.is_two_factor_enabled=True
+                user.save() 
             
             return render(request, 'verified.html',{'user':user})
         return render(request, '2fa.html', {'secret':device.config_url})
