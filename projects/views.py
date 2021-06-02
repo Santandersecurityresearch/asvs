@@ -179,7 +179,8 @@ def project_update(request):
                     if request.POST.get(r['req_id']+'na') == "1":
                         r['enabled'] = 0
                         r['disabled'] = 0
-
+                    r['note']= request.POST.get(r['req_id']+'note')   
+        p.save()
         update_template(phash, project)
         return redirect('projectsview', projectid=request.POST.get('projectid'))
 
@@ -242,15 +243,21 @@ def generate_pdf(request, projectid):
         if r.get('enabled') and r['enabled'] > 0:
             data.append([" "])
             data.append(["Complete"])
+            if (len(r['note'])>0):
+                data.append(['"'+str(r['note'])+'"'])
             data.append([" "])
 
         elif r.get('disabled') and r['disabled'] > 0:
             data.append([" "])
             data.append(["Incomplete"])
+            if (len(r['note'])>0):
+                data.append(['"'+str(r['note'])+'"'])
             data.append([" "])
         else:
-            data.append([" "])
+            data.append([" "])  
             data.append(["N/A"])
+            if (len(r['note'])>0):
+                data.append(['"'+str(r['note'])+'"'])
             data.append([" "])   
 
     if len(data) >= 40:

@@ -208,8 +208,6 @@ def modify_username(request):
                     project_change=Projects.objects.get(id=p['id'])
                     phash = (hashlib.sha3_256('{0}{1}'.format(project_change.project_name, p['id']).encode('utf-8')).hexdigest())
                     project = load_template(phash)
-            
-                    update_template(phash, project)
                     #If its the owner of the project modify project owner with the new username (for the project and its template)
                     if project['project_owner']==request.user.username:
                         project['project_owner']=new_username

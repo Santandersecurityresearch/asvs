@@ -77,6 +77,7 @@
                                         <th>Complete</th>
                                         <th>Incomplete</th>
                                         <th>N/A</th>
+                                        <th>Note</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -166,7 +167,10 @@
                                             {% else %}
                                                 <input type="checkbox" id="{{ d.req_id }}na" name="{{ d.req_id }}na" onclick="uncheckOthers('{{ d.req_id }}na')" value="0"  >
                                             {% endif %}
-                                        </td>                                       
+                                        </td> 
+                                        <td>
+                                            <textarea id="{{ d.req_id }}note" name="{{ d.req_id}}note" rows="10" cols="50" style="width:100px;height:100px" >{{d.note}}</textarea>
+                                        </td>                                      
                                     </tr>                                   
                                     {% endfor %}
                                 </tbody>
@@ -223,7 +227,7 @@
                     var colour= rows[i].getElementsByTagName("td")[0].style.backgroundColor
                     var newHeader= document.createElement('tr')
                     var category=rows[i].getElementsByTagName("td")[0].innerText 
-                    newHeader.innerHTML=" <th colspan='5'>"+category+"&nbsp;&nbsp;&nbsp;<i class='fas fa-angle-down'></i><th>"
+                    newHeader.innerHTML=" <th colspan='"+rows[i].getElementsByTagName("td").length+"'>"+category+"&nbsp;&nbsp;&nbsp;<i class='fas fa-angle-down'></i><th>"
                     //Deleting a blank th we dont need    
                     newHeader.getElementsByTagName("th")[1].remove()
                     newHeader.style.backgroundColor=colour
