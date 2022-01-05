@@ -40,10 +40,6 @@ def load_json_file(level):
 
 
 def create_template(requirements, project):
-    # delete all the levels out of the requirements as not needed in the template
-    # for r in requirements:
-    #     del r['levels']
-    #     r['enabled'] = 0
     # build the template with project information and requirements
     data = {}
     data['project_owner'] = project['project_owner']
