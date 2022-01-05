@@ -8,21 +8,10 @@ def load_json_file(level):
 
     with open('common/asvs.json') as f:
         data = json.load(f)
-    # if level == 0:
-    #     for r in data['requirements']:
-    #         if results.get(r['sectionTitle']):
-    #             results[r['sectionTitle']].append(r['title'])
-    #         else:
-    #             results[r['sectionTitle']] = [r['title']]
-    # else:
     for r in data['requirements']:   
         bob = 'level{0}'.format(level)
         if r.get(bob):
             results.setdefault(r['section_name'], []).append(r)
-            # if results.get(r['sectionTitle']):
-            #     results[r['sectionTitle']].append(r['title'])
-            # else:
-            #     results[r['sectionTitle']] = [r['title']]
     return results
 
 

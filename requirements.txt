@@ -7,3 +7,4 @@ pyyaml
 ua-parser
 user-agents
 requirements-parser
+psycopg2-binary

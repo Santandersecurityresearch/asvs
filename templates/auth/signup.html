@@ -181,7 +181,7 @@
     <script>
      var message = document.getElementById("message").value
      if (message){
-      alert('{{ message }}');
+      alert('{{ message|json_script:"message" }}');
     }
     </script>
     {% endblock %}

@@ -52,6 +52,18 @@ This is the second release and we already have some new "features" in the planni
 
 ![projectmanagement](screenshots/projectmanagement.png)
 
+## Code Security
+
+It would be pretty silly if an app about application security made use of insecure code and infrastructure. As such, we are pretty strict about this and make use of both [CodeQL](https://codeql.github.com/), a brilliant semantic code analysis engine from GitHub, [Semgrep](https://semgrep.dev/), a super fast static analysis tool as well as [Snyk's](https://snyk.io/learn/docker-security-scanning/) Docker scan. 
+
+![docker_scan](screenshots/docker_sec_scan.png)
+
+Once code is committed, we make use of GitHub's Actions to run futher security tests
+
+![GitHub Actions](screenshots/github_actions.png)
+
+![GitHub Actions](screenshots/github_actions2.png)
+
 
 
 ## Who Are We?
