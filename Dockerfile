@@ -10,10 +10,8 @@ WORKDIR /app
 
 # install psycopg2 dependencies
 RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev postgresql-libs zlib-dev jpeg-dev
+    && apk add postgresql-dev gcc python3-dev musl-dev postgresql-libs zlib-dev jpeg-dev harfbuzz-dev postgresql zlib jpeg
 
-RUN apk update
-RUN apk add postgresql zlib jpeg
 RUN pip install psycopg2 Pillow
 RUN pip3 install -r requirements.txt
 RUN python manage.py makemigrations
