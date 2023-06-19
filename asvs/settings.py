@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'levels',
     'accountauth',
     'crispy_forms',
+    'crispy_bootstrap3',
     'projects',
     'django_otp',
     'django_otp.plugins.otp_totp',
