@@ -1,0 +1,721 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:344cb3ff-6647-43e9-bfe9-4b523bd9c761",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2023-08-29T16:09:23.016Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "9.6.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@9.6.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@9.6.1"
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "Prabhu Subramanian",
+        "email": "prabhu@appthreat.com"
+      }
+    ],
+    "component": {
+      "group": "",
+      "name": "asvs",
+      "version": "latest",
+      "type": "application",
+      "bom-ref": "pkg:pypi/asvs@latest",
+      "purl": "pkg:pypi/asvs@latest",
+      "components": []
+    }
+  },
+  "components": [
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "pyyaml",
+      "version": "6.0.1",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/pyyaml@6.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyyaml@6.0.1",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "instrumentation",
+              "confidence": 1,
+              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "crispy-bootstrap3",
+      "version": "2022.1",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/crispy-bootstrap3@2022.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/crispy-bootstrap3@2022.1",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "instrumentation",
+              "confidence": 1,
+              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "django-crispy-forms",
+      "version": "2.0",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/django-crispy-forms@2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/django-crispy-forms@2.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "Django",
+      "version": "4.2.4",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/django@4.2.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/django@4.2.4",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "asgiref",
+      "version": "3.7.2",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/asgiref@3.7.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/asgiref@3.7.2",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "typing-extensions",
+      "version": "4.7.1",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/typing-extensions@4.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.7.1",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "sqlparse",
+      "version": "0.4.4",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/sqlparse@0.4.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sqlparse@0.4.4",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "django-otp",
+      "version": "1.2.2",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/django-otp@1.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/django-otp@1.2.2",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "instrumentation",
+              "confidence": 1,
+              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "djangorestframework-jsonapi",
+      "version": "6.1.0",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/djangorestframework-jsonapi@6.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/djangorestframework-jsonapi@6.1.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "instrumentation",
+              "confidence": 1,
+              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "djangorestframework",
+      "version": "3.14.0",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/djangorestframework@3.14.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/djangorestframework@3.14.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "inflection",
+      "version": "0.5.1",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/inflection@0.5.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/inflection@0.5.1",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "psycopg2-binary",
+      "version": "2.9.7",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/psycopg2-binary@2.9.7",
+      "type": "library",
+      "bom-ref": "pkg:pypi/psycopg2-binary@2.9.7",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "instrumentation",
+              "confidence": 1,
+              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "reportlab",
+      "version": "4.0.4",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/reportlab@4.0.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/reportlab@4.0.4",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "instrumentation",
+              "confidence": 1,
+              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "Pillow",
+      "version": "10.0.0",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/pillow@10.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pillow@10.0.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "requirements-parser",
+      "version": "0.5.0",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/requirements-parser@0.5.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requirements-parser@0.5.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "instrumentation",
+              "confidence": 1,
+              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "types-setuptools",
+      "version": "68.1.0.0",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/types-setuptools@68.1.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/types-setuptools@68.1.0.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "user-agents",
+      "version": "2.2.0",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/user-agents@2.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/user-agents@2.2.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "instrumentation",
+              "confidence": 1,
+              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "ua-parser",
+      "version": "0.18.0",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:pypi/ua-parser@0.18.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ua-parser@0.18.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
+        }
+      ]
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "actions",
+      "name": "checkout",
+      "version": "v2",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:github/actions/checkout@v2",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/checkout@v2"
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "returntocorp",
+      "name": "semgrep-action",
+      "version": "v1",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:github/returntocorp/semgrep-action@v1",
+      "type": "library",
+      "bom-ref": "pkg:github/returntocorp/semgrep-action@v1"
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "github/codeql-action/init",
+      "version": "v2",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:github/github/codeql-action/init@v2",
+      "type": "library",
+      "bom-ref": "pkg:github/github/codeql-action/init@v2"
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "github/codeql-action/autobuild",
+      "version": "v2",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:github/github/codeql-action/autobuild@v2",
+      "type": "library",
+      "bom-ref": "pkg:github/github/codeql-action/autobuild@v2"
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "",
+      "name": "github/codeql-action/analyze",
+      "version": "v2",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:github/github/codeql-action/analyze@v2",
+      "type": "library",
+      "bom-ref": "pkg:github/github/codeql-action/analyze@v2"
+    },
+    {
+      "author": "",
+      "publisher": "",
+      "group": "andrewmcodes",
+      "name": "bundler-audit-action",
+      "version": "main",
+      "description": "",
+      "licenses": [],
+      "purl": "pkg:github/andrewmcodes/bundler-audit-action@main",
+      "type": "library",
+      "bom-ref": "pkg:github/andrewmcodes/bundler-audit-action@main"
+    }
+  ],
+  "services": [],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/asvs@latest",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pyyaml@6.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/django-crispy-forms@2.0",
+      "dependsOn": [
+        "pkg:pypi/django@4.2.4"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/django@4.2.4",
+      "dependsOn": [
+        "pkg:pypi/asgiref@3.7.2",
+        "pkg:pypi/sqlparse@0.4.4"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/asgiref@3.7.2",
+      "dependsOn": [
+        "pkg:pypi/typing-extensions@4.7.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/typing-extensions@4.7.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/sqlparse@0.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/crispy-bootstrap3@2022.1",
+      "dependsOn": [
+        "pkg:pypi/django-crispy-forms@2.0",
+        "pkg:pypi/django@4.2.4"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/django-otp@1.2.2",
+      "dependsOn": [
+        "pkg:pypi/django@4.2.4"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/djangorestframework@3.14.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/inflection@0.5.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/djangorestframework-jsonapi@6.1.0",
+      "dependsOn": [
+        "pkg:pypi/django@4.2.4",
+        "pkg:pypi/djangorestframework@3.14.0",
+        "pkg:pypi/inflection@0.5.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/psycopg2-binary@2.9.7",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pillow@10.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/reportlab@4.0.4",
+      "dependsOn": [
+        "pkg:pypi/pillow@10.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/types-setuptools@68.1.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/requirements-parser@0.5.0",
+      "dependsOn": [
+        "pkg:pypi/types-setuptools@68.1.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/ua-parser@0.18.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/user-agents@2.2.0",
+      "dependsOn": [
+        "pkg:pypi/ua-parser@0.18.0"
+      ]
+    }
+  ]
+}

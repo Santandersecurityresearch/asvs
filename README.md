@@ -64,6 +64,15 @@ Once code is committed, we make use of GitHub's Actions to run futher security t
 
 ![GitHub Actions](screenshots/github_actions2.png)
 
+## Software Bill of Materials (SBOM) 
+
+We are firm supporters of the SBOM movement, as it's a key building block in software security and software supply chain risk management. A SBOM is a nested inventory, a list of ingredients that make up software components and as such, here's our recipe:
+
+![Dependency Tree](screenshots/sbom1.png)
+![Software Bill of Materials](screenshots/sbom1.png)
+
+There is also a *bom.json* file in the main repo for use by automated tools. 
+
 
 
 ## Who Are We?
