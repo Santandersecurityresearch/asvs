@@ -1,0 +1,814 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://openvex.dev/docs/public/vex-9d23df2ceee03be31eaf5ae857a11656e0205ee751e3f07f5ef8aafb7208ba80",
+  "author": "Unknown Author",
+  "timestamp": "2024-10-07T15:29:31.801353+02:00",
+  "last_updated": "2024-10-07T15:29:33.417625+02:00",
+  "version": 67,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2023-41164"
+      },
+      "timestamp": "2024-10-07T15:29:31.801353+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-43665"
+      },
+      "timestamp": "2024-10-07T15:29:31.826796+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-46695"
+      },
+      "timestamp": "2024-10-07T15:29:31.85113+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:31.875303+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/libwebp-sys2@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:31.899333+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/libwebp-sys@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:31.923829+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/webp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:31.947865+02:00",
+      "products": [
+        {
+          "@id": "pkg:golang/github.com/chai2010/webp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:31.971863+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/electron@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:31.996064+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/SkiaSharp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:32.020366+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:32.044464+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-hdri-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:32.068324+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:32.092693+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:32.117216+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-openmp-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:32.142091+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4863"
+      },
+      "timestamp": "2024-10-07T15:29:32.165986+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/pillow@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.190663+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/libwebp-sys2@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.214725+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/libwebp-sys@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.239265+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/webp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.263001+02:00",
+      "products": [
+        {
+          "@id": "pkg:golang/github.com/chai2010/webp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.287072+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/electron@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.310935+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/SkiaSharp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.335337+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.359958+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-hdri-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.383846+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.40885+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.433784+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-openmp-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.458573+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-50447"
+      },
+      "timestamp": "2024-10-07T15:29:32.482973+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/pillow@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.508021+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/libwebp-sys2@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.53201+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/libwebp-sys@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.556519+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/webp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.580379+02:00",
+      "products": [
+        {
+          "@id": "pkg:golang/github.com/chai2010/webp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.605216+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/electron@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.6296+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/SkiaSharp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.65393+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.680026+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-hdri-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.704181+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.730524+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.754909+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-openmp-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.779906+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-5129"
+      },
+      "timestamp": "2024-10-07T15:29:32.804052+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/pillow@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-21520"
+      },
+      "timestamp": "2024-10-07T15:29:32.828548+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/djangorestframework@3.14.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-24680"
+      },
+      "timestamp": "2024-10-07T15:29:32.853323+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-27351"
+      },
+      "timestamp": "2024-10-07T15:29:32.877863+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:32.901809+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/libwebp-sys2@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:32.926663+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/libwebp-sys@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:32.95214+02:00",
+      "products": [
+        {
+          "@id": "pkg:cargo/webp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:32.977617+02:00",
+      "products": [
+        {
+          "@id": "pkg:golang/github.com/chai2010/webp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.002817+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/electron@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.027819+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/SkiaSharp@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.05181+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.07601+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-hdri-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.100033+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q16-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.124755+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-anycpu@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.148819+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-openmp-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.173512+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/magick.net-q8-x64@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28219"
+      },
+      "timestamp": "2024-10-07T15:29:33.197574+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/pillow@10.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-38875"
+      },
+      "timestamp": "2024-10-07T15:29:33.22224+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-39329"
+      },
+      "timestamp": "2024-10-07T15:29:33.247535+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-39330"
+      },
+      "timestamp": "2024-10-07T15:29:33.271961+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-39614"
+      },
+      "timestamp": "2024-10-07T15:29:33.295657+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-41989"
+      },
+      "timestamp": "2024-10-07T15:29:33.320474+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-41990"
+      },
+      "timestamp": "2024-10-07T15:29:33.345022+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-41991"
+      },
+      "timestamp": "2024-10-07T15:29:33.368855+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-42005"
+      },
+      "timestamp": "2024-10-07T15:29:33.393298+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/django@4.2.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-4340"
+      },
+      "timestamp": "2024-10-07T15:29:33.417625+02:00",
+      "products": [
+        {
+          "@id": "pkg:pypi/sqlparse@0.4.4"
+        }
+      ],
+      "status": "under_investigation"
+    }
+  ]
+}
