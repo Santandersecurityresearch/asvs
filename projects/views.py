@@ -28,13 +28,23 @@ def is_2fa_authenticated(user):
         return False
 
 
+def add_chapter_name(requirement, categories):
+    requirement['chapter_name'] = categories[int(requirement['chapter_id'][1:])]
+
+
 def load_json_file(level):
+    categories = {}
+    with open('common/category.json') as j:
+        categories_json = json.load(j)
+        for c in categories_json['categories']:
+            categories[c['id']] = c['title']
     results = []
     with open('common/asvs.json') as f:
         data = json.load(f)
         for r in data['requirements']:
             bob = 'level{0}'.format(level)
             if r.get(bob):
+                add_chapter_name(r, categories)
                 results.append(r)
     return results
 
