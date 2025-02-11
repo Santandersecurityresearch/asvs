@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} {% load dict_filters %} {% load static %} {% block content %}
 {% include "modals/modal_allowed_viewers.html" %}
 <div class="container">
     <div class="row">
@@ -84,65 +84,8 @@
                                     
                                     {% for d in data %}
                                     <tr id="{{d.req_id}}">
-                                        {% if "Architecture" in d.chapter_name %}
-                                            <td style="background-color:#F6C2AE">{{ d.chapter_name }}</td>
-                                        {% else %}
-                                                {% if "Authentication" in d.chapter_name %}
-                                                    <td style="background-color:#AEF6EE">{{ d.chapter_name }}</td>
-                                                {% else %}
-                                                    {% if "Session" in d.chapter_name %}
-                                                        <td style="background-color:#AECEF6">{{ d.chapter_name }}</td>
-                                                    {% else %}
-                                                        {% if "Access" in d.chapter_name %}
-                                                            <td style="background-color:#F5F6AE">{{ d.chapter_name }}</td>
-                                                        {% else %}  
-                                                            {% if "Validation" in d.chapter_name %}
-                                                                <td style="background-color:#97E995">{{ d.chapter_name }}</td>
-                                                            {% else %}  
-                                                                {% if "Cryptography" in d.chapter_name %}
-                                                                    <td style="background-color:#7CC4A5">{{ d.chapter_name }}</td>
-                                                                {% else %}  
-                                                                    {% if "Error" in d.chapter_name %}
-                                                                        <td style="background-color:#FF8282">{{ d.chapter_name }}</td>
-                                                                    {% else %}  
-                                                                        {% if "Data" in d.chapter_name %}
-                                                                            <td style="background-color:#C290BA">{{ d.chapter_name }}</td>
-                                                                        {% else %}  
-                                                                            {% if "Communications" in d.chapter_name %}
-                                                                                <td style="background-color:#6986A0">{{ d.chapter_name }}</td>
-                                                                            {% else %}  
-                                                                                {% if "Malicious" in d.chapter_name %}
-                                                                                    <td style="background-color:#AFBA7F">{{ d.chapter_name }}</td>
-                                                                                {% else %}  
-                                                                                    {% if "BusLogic" in d.chapter_name or "Business Logic" in d.chapter_name %}
-                                                                                        <td style="background-color:#FFB962">{{ d.chapter_name }}</td>
-                                                                                    {% else %} 
-                                                                                        {% if "Configuration" in d.chapter_name%}
-                                                                                            <td style="background-color:#CD0C2E">{{ d.chapter_name }}</td>
-                                                                                        {% else %}                                                             
-                                                                                            {% if "API" in d.chapter_name %}
-                                                                                                <td style="background-color:#80DAAD">{{ d.chapter_name }}</td>
-                                                                                            {% else %}
-                                                                                            {% if "Files" or "File" in d.chapter_name %}
-                                                                                                <td style="background-color:#73E2D7">{{ d.chapter_name }}</td>
-                                                                                            {% else %}    
-                                                                                                <td style="background-color:#C7ABDD">{{ d.chapter_name }}</td>
-                                                                                                {% endif %} 
-                                                                                            {% endif %} 
-                                                                                        {% endif %} 
-                                                                                    {% endif %} 
-                                                                                {% endif %} 
-                                                                            {% endif %} 
-                                                                        {% endif %} 
-                                                                    {% endif %} 
-                                                                {% endif %} 
-                                                            {% endif %}    
-                                                        {% endif %}    
-                                                    {% endif %}        
-                                                {% endif %}
-                                            
+                                        <td style="background-color:{{ styles|dict_get:d.chapter_name }}">{{ d.chapter_name }}</td>
 
-                                        {% endif %}
                                         <td id="description">({{ d.req_id }}) {{ d.req_description }}</td>
                                         <td>
                                             {% if d.enabled > 0 %}
