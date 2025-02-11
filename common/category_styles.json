@@ -1,0 +1,64 @@
+{
+    "categories": [
+        {
+            "title": "Architecture, Design and Threat Modeling",
+            "style": "#F6C2AE"
+        },
+        {
+            "title": "Authentication",
+            "style": "#AEF6EE"
+        },
+        {
+            "title": "Session Management",
+            "style": "#AECEF6"
+        },
+        {
+            "title": "Access Control",
+            "style": "#F5F6AE"
+        },
+        {
+            "title": "Validation, Sanitization and Encoding",
+            "style": "#97E995"
+        },
+        {
+            "title": "Stored Cryptography",
+            "style": "#7CC4A5"
+        },
+        {
+            "title": "Error Handling and Logging",
+            "style": "#FF8282"
+        },
+        {
+            "title": "Data Protection",
+            "style": "#C290BA"
+        },
+        {
+            "title": "Communication",
+            "style": "#6986A0"
+        },
+        {
+            "title": "Malicious Code",
+            "style": "#AFBA7F"
+        },
+        {
+            "title": "Business Logic",
+            "style": "#FFB962"
+        },
+        {
+            "title": "Files and Resources",
+            "style": "#73E2D7"
+        },
+        {
+            "title": "API and Web Service",
+            "style": "#80DAAD"
+        },
+        {
+            "title": "Configuration",
+            "style": "#CD0C2E"
+        },
+        {
+            "title": "Other",
+            "style": "#C7ABDD"
+        }
+    ]
+}
