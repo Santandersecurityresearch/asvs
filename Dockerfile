@@ -1,9 +1,5 @@
 FROM alpine:latest
-ENV VIRTUAL_ENV=/opt/venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
 RUN apk add --no-cache python3 && \
-    python3 -m venv $VIRTUAL_ENV && \
     python3 -m ensurepip && \
     pip3 install --upgrade pip setuptools && \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
