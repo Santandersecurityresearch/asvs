@@ -143,6 +143,16 @@ def project_delete(request, projectid):
     return redirect('projectsmanage')
 
 
+def get_chapter_styles():
+    category_styles = {}
+    with open('common/category_styles.json') as f:
+        categories_json = json.load(f)
+        for c in categories_json.get('categories'):
+            category_styles[c.get('title')] = c.get('style')
+
+    return category_styles
+
+
 @user_passes_test(is_2fa_authenticated)
 def project_view(request, projectid):
     p = Projects.objects.get(id=projectid)
@@ -153,9 +163,10 @@ def project_view(request, projectid):
     allowed_users = project['project_allowed_viewers'].split(",")
     project['project_created']=  add_one_hour(time.strftime("%m/%d/%Y %H:%M:%S",time.strptime(project['project_created'][:19], "%Y-%m-%dT%H:%M:%S")))
     percentage = calculate_completion(project['requirements'])
+    styles = get_chapter_styles()
 
     if project['project_owner'] == request.user.username or request.user.username in allowed_users:
-        return render(request, "projects/view.html", {'data': project['requirements'], 'project': project, 'percentage': percentage})
+        return render(request, "projects/view.html", {'data': project['requirements'], 'project': project, 'percentage': percentage, 'styles': styles})
     else:
         return redirect('projectsmanage')    
 
