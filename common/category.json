@@ -2,7 +2,7 @@
     "categories": [
         {
             "id": 1,
-            "title": "Architecture, design and threat modelling",
+            "title": "Architecture, Design and Threat Modeling",
             "urls": [
                 {
                     "title": "Threat Modeling Cheat Sheet ",
@@ -40,7 +40,7 @@
         },
         {
             "id": 3,
-            "title": "Session management",
+            "title": "Session Management",
             "text": "One of the core components of any web-based application is the mechanism by which it controls and maintains the state for a user interacting with it. This is referred to this as Session Management and is defined as the set of all controls governing state-full interaction between a user and the web-based application.<br><br>Ensure that a verified application satisfies the following high level session management requirements:<br><li class='circle'>Sessions are unique to each individual and cannot be guessed or shared</li><br><li class='circle'>Sessions are invalidated when no longer required and timed out during periods of inactivity.</li>",
             "urls": [
                 {
@@ -55,7 +55,7 @@
         },
         {
             "id": 4,
-            "title": "Access control",
+            "title": "Access Control",
             "text": "Authorisation is the concept of allowing access to resources only to those permitted to use them.<br><br>Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Persons accessing resources holds valid credentials to do so.</li><br><li class='circle'>Users are associated with a well-defined set of roles and privileges.</li><br><li class='circle'>Role and permission metadata is protected from replay or tampering.</li>",
             "urls": [
                 {
@@ -70,7 +70,7 @@
         },
         {
             "id": 5,
-            "title": "Malicious input handling",
+            "title": "Validation, Sanitization and Encoding",
             "text": "The most common web application security weakness is the failure to properly validate input coming from the client or from the environment before using it. This weakness leads to almost all of the major vulnerabilities in web applications, such as cross site scripting, SQL injection, interpreter injection, locale/Unicode attacks, file system attacks, and buffer overflows.<br><br>Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>All input is validated to be correct and fit for the intended purpose.</li><br><li class='circle'>Data from an external entity or client should never be trusted and should be handled accordingly.</li>",
             "urls": [
                 {
@@ -112,8 +112,8 @@
             ]
         },
         {
-            "id": 7,
-            "title": "Cryptography at rest",
+            "id": 6,
+            "title": "Stored Cryptography",
             "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>That all cryptographic modules fail in a secure manner and that errors are handled correctly.</li><br><li class='circle'>That a suitable random number generator is used when randomness is required.</li><br><li class='circle'>That access to keys is managed in a secure way.</li>",
             "urls": [
                 {
@@ -127,8 +127,8 @@
             ]
         },
         {
-            "id": 8,
-            "title": "Error handling and logging",
+            "id": 7,
+            "title": "Error Handling and Logging",
             "text": "The primary objective of error handling and logging is to provide a useful reaction by the user, administrators, and incident response teams. The objective is not to create massive amounts of logs, but high quality logs, with more signal than discarded noise.<br><br>If logs contain private or sensitive data, the definition of which varies from country to country, the logs become some of the most sensitive information held by the application and thus very attractive to attackers in their own right.<br><br>High quality logs will often contain sensitive data, and must be protected as per local data privacy laws or directives. This should include:<br><li class='circle'>Not collecting or logging sensitive information if not specifically required.</li><br><li class='circle'>Ensuring all logged information is handled securely and protected as per its data classification.</li><br><li class='circle'>Ensuring that logs are not forever, but have an absolute lifetime that is as short as possible.</li>",
             "urls": [
                 {
@@ -138,8 +138,8 @@
             ]
         },
         {
-            "id": 9,
-            "title": "Data protection",
+            "id": 8,
+            "title": "Data Protection",
             "text": "There are three key elements to sound data protection: Confidentiality, Integrity and Availability (CIA). This standard assumes that data protection is enforced on a trusted system, such as a server, which has been hardened and has sufficient protections.<br><br>Applications have to assume that all user devices are compromised in some way. Where an application transmits or stores sensitive information on insecure devices, such as shared computers, phones and tablets, the application is responsible for ensuring data stored on these devices is encrypted and cannot be easily illicitly obtained, altered or disclosed.<br><br>Ensure that a verified application satisfies the following high level data protection requirements:<br><li class='circle'><strong>Confidentiality: </strong>Data should be protected from unauthorised observation or disclosure both in transit and when stored.</li><br><li class='circle'><strong>Integrity: </strong>Data should be protected being maliciously created, altered or deleted by unauthorised attackers.</li><br><li class='circle'><strong>Availability: </strong>Data should be available to authorised users as required</li>",
             "urls": [
                 {
@@ -149,8 +149,8 @@
             ]
         },
         {
-            "id": 10,
-            "title": "Communications",
+            "id": 9,
+            "title": "Communication",
             "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>That TLS is used where sensitive data is transmitted</li><br><li class='circle'>That strong algorithms and ciphers are used at all times.</li>",
             "urls": [
                 {
@@ -180,27 +180,8 @@
             ]
         },
         {
-            "id": 11,
-            "title": "HTTP security configuration",
-            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>The application server is suitably hardened from a default configuration</li><br><li class='circle'>HTTP responses contain a safe character set in the content type header.</li>",
-            "urls": [
-                {
-                    "title": "OWASP Testing Guide 4.0: Testing for HTTP Verb Tampering",
-                    "url": "https://www.owasp.org/index.php/Testing_for_HTTP_Verb_Tampering_%28OTG-INPVAL-003%29"
-                },
-                {
-                    "title": "Adding Content-Disposition to API responses helps prevent many attacks based on misunderstanding on the MIME type between client and server, and the 'filename' option specifically helps prevent Reflected File Download attacks",
-                    "url": "https://www.blackhat.com/docs/eu-14/materials/eu-14-Hafif-Reflected-File-Download-A-New-Web-Attack-Vector.pdf"
-                },
-                {
-                    "title": "OWASP Cheat Sheet: Content Security Policy",
-                    "url": "https://www.owasp.org/index.php?title=Content_Security_Policy_Cheat_Sheet&setlang=en"
-                }
-            ]
-        },
-        {
-            "id": 13,
-            "title": "Malicious controls",
+            "id": 10,
+            "title": "Malicious Code",
             "text": "Malicious code is extremely rare, and is difficult to detect. Manual line by line code review can assist looking for logic bombs, but even the most experienced code reviewer will struggle to find malicious code even if they know it exists. This section is not possible to complete without access to source code, including as many third party libraries as possible.<br><br>Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Malicious activity is handled securely and properly as to not affect the rest of the application.</li><br><li class='circle'>Do not have time bombs or other time based attacks built into them</li><br><li class='circle'>do not “phone home” to malicious or unauthorised destinations</li><br><li class='circle'>Applications do not have back doors, Easter eggs, salami attacks, or logic flaws that can be controlled by an attacker</li>",
             "urls": [
                 {
@@ -210,8 +191,8 @@
             ]
         },
         {
-            "id": 15,
-            "title": "Business logic",
+            "id": 11,
+            "title": "Business Logic",
             "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>The business logic flow is sequential and in order</li><br><li class='circle'>Business logic includes limits to detect and prevent automated attacks, such as continuous small funds transfers, or adding a million friends one at a time, and so on.</li><br><li class='circle'>High value business logic flows have considered abuse cases and malicious actors, and have protections against spoofing, tampering, repudiation, information disclosure, and elevation of privilege attacks.</li>",
             "urls": [
                 {
@@ -225,8 +206,8 @@
             ]
         },
         {
-            "id": 16,
-            "title": "File and resources",
+            "id": 12,
+            "title": "Files and Resources",
             "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Untrusted file data should be handled accordingly and in a secure manner</li><br><li class='circle'>Obtained from untrusted sources are stored outside the webroot and limited permissions.</li>",
             "urls": [
                 {
@@ -236,23 +217,8 @@
             ]
         },
         {
-            "id": 17,
-            "title": "Mobile",
-            "text": "This section contains controls that are mobile application specific. These controls have been de-duplicated from 2.0, so must be taken in conjunction with all other sections of the relevant ASVS Verification Level.<br><br>Mobile applications should:<br><li class='circle'>Should have the same level of security controls within the mobile client as found in the server, by enforcing security controls in a trusted environment</li><br><li class='circle'>Sensitive information assets stored on the device should be done so in a secure manner</li><br><li class='circle'>All sensitive data transmitted from the device should be done so with transport layer security in mind.</li>",
-            "urls": [
-                {
-                    "title": "OWASP Mobile Security Project",
-                    "url": "https://www.owasp.org/index.php/OWASP_Mobile_Security_Project"
-                },
-                {
-                    "title": "iOS Developer Cheat Sheet",
-                    "url": "https://www.owasp.org/index.php/IOS_Developer_Cheat_Sheet"
-                }
-            ]
-        },
-        {
-            "id": 18,
-            "title": "Web services",
+            "id": 13,
+            "title": "API and Web Service",
             "text": "Ensure that a verified application that uses RESTful or SOAP based web services has:<br><li class='circle'>Adequate authentication, session management and authorisation of all web services</li><br><li class='circle'>Input validation of all parameters that transit from a lower to higher trust level</li><br><li class='circle'>Basic interoperability of SOAP web services layer to promote API use</li>",
             "urls": [
                 {
@@ -270,7 +236,7 @@
             ]
         },
         {
-            "id": 19,
+            "id": 14,
             "title": "Configuration",
             "text": "Ensure that a verified application has:<br><li class='circle'>Up to date libraries and platform(s).</li><br><li class='circle'>A secure by default configuration.</li><br><li class='circle'>Sufficient hardening that user initiated changes to default configuration do not unnecessarily expose or create security weaknesses or flaws to underlying systems.</li>",
             "urls": [
