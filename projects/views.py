@@ -126,7 +126,7 @@ def project_add(request):
         # Build the template
         controls = load_json_file(project_level)
         project = Projects.objects.filter(
-            project_owner=request.user.username, project_name=project_name).values()[0]
+            project_owner=request.user.username, project_name=project_name, project_level=project_level).values()[0]
         create_template(controls, project)
         return redirect('projectsmanage')
 
