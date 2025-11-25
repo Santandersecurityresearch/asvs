@@ -93,8 +93,12 @@
 
 .description {
     font-family: 'SantanderTextW05-Bold',      sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     fill: #008cba !important;
+}
+
+#docsChart {
+    text-align: center;
 }
 
 .funds-allocated-meter{

@@ -245,6 +245,39 @@
                     "url": "https://www.owasp.org/index.php/Testing_for_configuration_management"
                 }
             ]
+        },
+        {
+            "id": 15,
+            "title": "Secure Coding and Architecture",
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Application documentation defines risk based remediation time frames for 3rd party component versions with vulnerabilities and for updating libraries in general.</li><br><li class='circle'>Secure coding practices are followed throughout the development lifecycle.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Secure Coding Practices Quick Reference Guide",
+                    "url": "https://owasp.org/www-pdf-archive/OWASP_SCP_Quick_Reference_Guide_v2.pdf"
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "title": "Security Logging and Error Handling",
+            "text": "Ensure that a verified application satisfies the following high level requirements:<br><li class='circle'>Logging is performed at each layer of the application's technology stack.</li><br><li class='circle'>Events are logged with appropriate detail and in a consistent format.</li><br><li class='circle'>Logs are stored securely and access is controlled.</li>",
+            "urls": [
+                {
+                    "title": "OWASP Logging Cheat Sheet",
+                    "url": "https://www.owasp.org/index.php/Logging_Cheat_Sheet"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "title": "WebRTC",
+            "text": "Ensure that a verified application satisfies the following high level requirements for WebRTC:<br><li class='circle'>TURN service only allows access to valid IP addresses.</li><br><li class='circle'>WebRTC communications are secure and authenticated.</li>",
+            "urls": [
+                {
+                    "title": "WebRTC Security Considerations",
+                    "url": "https://tools.ietf.org/html/rfc8827"
+                }
+            ]
         }
     ]
 }
