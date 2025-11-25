@@ -22,4 +22,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Run migrations at container startup, not build time
+# Note: For production with multiple replicas, use a separate migration job
 CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]

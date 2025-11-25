@@ -60,8 +60,3 @@ bom.vex.json
 
 # Storage JSON files (generated at runtime)
 storage/*.json
-
-# Docker files
-Dockerfile
-docker-compose.yml
-.dockerignore
