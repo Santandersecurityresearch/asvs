@@ -97,6 +97,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
     <script>
+        // Password configuration constants (should match backend validators)
+        var PASSWORD_MIN_LENGTH = 8;
+        var PASSWORD_MAX_LENGTH = 128;
+        
         var passwordInput = document.getElementById("id_password1");
         var confirmInput = document.getElementById("id_password2");
         var strengthBar = document.getElementById("strength-bar");
@@ -118,6 +122,7 @@
         
         var isBreached = false;
         var currentStrengthScore = 0;
+        var lastCheckedPassword = ''; // Cache to avoid redundant API calls
         
         function updateStrengthMeter(password) {
             if (!password || password.length === 0) {
@@ -165,12 +170,18 @@
         }
         
         function checkPasswordBreach(password) {
-            if (!password || password.length < 8) {
+            if (!password || password.length < PASSWORD_MIN_LENGTH) {
                 isBreached = false;
                 breachWarning.style.display = 'none';
                 updateSubmitButton();
                 return;
             }
+            
+            // Skip if password hasn't changed (simple caching)
+            if (password === lastCheckedPassword) {
+                return;
+            }
+            lastCheckedPassword = password;
             
             var hashedPassword = CryptoJS.SHA1(password);
             var hashHex = CryptoJS.enc.Hex.stringify(hashedPassword).toUpperCase();
@@ -181,6 +192,7 @@
             $.ajax({
                 type: "GET",
                 dataType: "text",
+                timeout: 5000, // 5 second timeout
                 url: "https://api.pwnedpasswords.com/range/" + prefix,
                 success: function(data) {
                     if (data.includes(suffix)) {
@@ -222,7 +234,7 @@
         function updateSubmitButton() {
             var password = passwordInput.value;
             var confirm = confirmInput.value;
-            var passwordsMatch = password === confirm && password.length >= 8;
+            var passwordsMatch = password === confirm && password.length >= PASSWORD_MIN_LENGTH;
             var isStrong = currentStrengthScore >= 2; // Fair or better
             var notBreached = !isBreached;
             
