@@ -86,20 +86,23 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
+# Modern password policy: supports passphrases, minimum 8 chars, max 128 chars
+# Client-side uses zxcvbn for strength checking
 
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'accountauth.validators.ModernPasswordValidator',
+        'OPTIONS': {
+            'min_length': 8,
+            'max_length': 128,
+        },
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    }, 
 ]
 
 

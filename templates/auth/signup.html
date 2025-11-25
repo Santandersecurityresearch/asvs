@@ -16,7 +16,7 @@
                     <div class="card border-primary mb-3" style="max-width: 40rem;">
                         <div class="card-header">Create a new user account</div>
                         <div class="card-body">
-                            <form role="form" method="post" action="{% url 'signup' %}" class="js-register-account-form">
+                            <form role="form" method="post" action="{% url 'signup' %}" class="js-register-account-form" id="signup-form">
                                 {% csrf_token %}
                               
                                 
@@ -32,26 +32,42 @@
                               
                               
                                     <div id="div_id_password1" class="form-group {% if form.password1.errors %} has-error{% endif %}">
-                                        <label for="id_password1" class="control-label requiredField">Password<span class="asteriskField">*</span> </label>
+                                        <label for="id_password1" class="control-label requiredField">Password or Passphrase<span class="asteriskField">*</span> </label>
                                         <div class="form-group has-feedback">
-                                            <input type="password" name="password1" class="textinput textInput form-control" required="" id="id_password1" minlength="10" maxlength="128">
+                                            <input type="password" name="password1" class="textinput textInput form-control" required="" id="id_password1" minlength="8" maxlength="128">
                                             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                              
-                                              Security password Level:  
-                                            <progress max="100" value="0" id="meter"></progress><div id="security_level"></div>  
-                                            <div>Is it a valid password?<span class="asteriskField">*</span><input type="checkbox" id="passwordcheck" value="false" required="required" onclick="return false;"/></div>
-                                            <div>Is it a passphrase?<input type="checkbox" id="passphrasecheck" value="false"  onclick="return false;"/></div>
-                                            <div class="wrapper" id="password_errors">                                              
-                                            <p id="hint_id_password1" class="help-block"></p><ul><li>We don't advise using personal information</li><li>Passphrases are amazing (and easy to remember too)</li><li>We check to see if your password has already been cracked (via password breaches)</li><li>Use a different passphrase for every site.</li></ul><p></p>
-                                            </div>     
+                                            
+                                            <div id="strength-container" style="margin-top: 10px;">
+                                                <label>Password Strength:</label>
+                                                <div id="strength-bar-container" style="background-color: #e0e0e0; border-radius: 4px; height: 20px; width: 100%;">
+                                                    <div id="strength-bar" style="height: 100%; border-radius: 4px; width: 0%; transition: width 0.3s, background-color 0.3s;"></div>
+                                                </div>
+                                                <div id="strength-text" style="margin-top: 5px; font-weight: bold;"></div>
+                                            </div>
+                                            
+                                            <div id="password_feedback" style="margin-top: 10px;">
+                                                <div class="alert alert-info" style="padding: 10px;">
+                                                    <strong>Tips for a strong password:</strong>
+                                                    <ul style="margin-bottom: 0; padding-left: 20px;">
+                                                        <li>Use a passphrase - a sequence of random words (e.g., "correct horse battery staple")</li>
+                                                        <li>Longer is stronger - aim for at least 15 characters</li>
+                                                        <li>Avoid personal information like names or birthdays</li>
+                                                        <li>Use a unique password for every site</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="password_warnings" style="margin-top: 10px; display: none;"></div>
+                                            <div id="breach_warning" style="margin-top: 10px; display: none;"></div>
+                                            <input type="hidden" id="password_valid" name="password_valid" value="false">
 
                                         </div>
                                     </div>
                               
                                     <div id="div_id_password2" class="form-group {% if form.password2.errors %} has-error{% endif %}">
-                                        <label for="id_password2" class="control-label  requiredField">Password confirmation<span class="asteriskField">*</span> </label>
+                                        <label for="id_password2" class="control-label  requiredField">Confirm Password<span class="asteriskField">*</span> </label>
                                         <div class="form-group has-feedback">
-                                            <input type="password" name="password2" class="textinput textInput form-control" required="" id="id_password2" minlength="12" maxlength="128">
+                                            <input type="password" name="password2" class="textinput textInput form-control" required="" id="id_password2" minlength="8" maxlength="128">
                                             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                                             {% if form.password2.errors %}
                                               {% for error in form.password2.errors %}
@@ -60,13 +76,14 @@
                                             {% else %}
                                               <p id="hint_id_password2" class="help-block">Enter the same password as before, for verification.</p>
                                             {% endif %}
+                                            <div id="password_match" style="margin-top: 5px;"></div>
                                         </div>
                                     </div>
                               
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  <button type="submit" class="btn btn-primary js-register-account-button">Register</button>
+                                  <button type="submit" class="btn btn-primary js-register-account-button" id="submit-btn">Register</button>
                                 </div>
                               </form>
                         </div>
@@ -78,110 +95,192 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://rawgit.com/nowsecure/owasp-password-strength-test/master/owasp-password-strength-test.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
     <script>
-
-        var code = document.getElementById("id_password1");
+        // Password configuration constants (should match backend validators)
+        var PASSWORD_MIN_LENGTH = 8;
+        var PASSWORD_MAX_LENGTH = 128;
         
-        var strengthbar = document.getElementById("meter");
-        var security_level = document.getElementById("security_level");
+        var passwordInput = document.getElementById("id_password1");
+        var confirmInput = document.getElementById("id_password2");
+        var strengthBar = document.getElementById("strength-bar");
+        var strengthText = document.getElementById("strength-text");
+        var passwordWarnings = document.getElementById("password_warnings");
+        var breachWarning = document.getElementById("breach_warning");
+        var passwordMatch = document.getElementById("password_match");
+        var passwordValid = document.getElementById("password_valid");
+        var submitBtn = document.getElementById("submit-btn");
         
-        code.addEventListener("keyup", delayTyping(function() {
-        var result = owaspPasswordStrengthTest.test(code.value);
-        errors_text = "<ul>";
-        for (i = 0; i < result.errors.length; i++) {
-          errors_text += "<li><span class='glyphicon glyphicon-warning-sign'></span>" + result.errors[i] + "</li>";
-        }
-        errors_text += "</ul>";
-        $("#password_errors").html(errors_text)
+        // Strength level colors and labels
+        var strengthLevels = [
+            { color: '#dc3545', label: 'Very Weak', minScore: 0 },
+            { color: '#fd7e14', label: 'Weak', minScore: 1 },
+            { color: '#ffc107', label: 'Fair', minScore: 2 },
+            { color: '#28a745', label: 'Strong', minScore: 3 },
+            { color: '#20c997', label: 'Very Strong', minScore: 4 }
+        ];
         
-        totalTests= result.failedTests.length + result.passedTests.length + 1
-
-        isPassphrase = ((result.isPassphrase==true) ? 1 : 0);
-
-        strengthbar.value = parseFloat((result.passedTests.length+isPassphrase)/totalTests*100);
-        if (strengthbar.value>75){
-          strengthbar.style.setProperty("--c", "green");
-        }
-        else if (strengthbar.value>=62.5){
-          strengthbar.style.setProperty("--c", "yellowgreen");
-        }
-        else if (strengthbar.value>=50){
-          strengthbar.style.setProperty("--c", "yellow");
-        }
-        else if (strengthbar.value>=37.5){
-          strengthbar.style.setProperty("--c", "orange");
-        }
-        else{
-          strengthbar.style.setProperty("--c", "red");
-        }              
-        if (result.errors.length==0){
-          $("#passwordcheck").attr('value', 'true');
-          $("#passwordcheck").prop('checked', true);
-        }
-        else{
-          
-          $("#passwordcheck").attr('value', 'false');
-          $("#passwordcheck").prop('checked', false);
-        }
-        if (result.isPassphrase==true){
-          $("#passphrasecheck").attr('value', 'true');
-          $("#passphrasecheck").prop('checked', true);
-        }
-        else{
-          
-          $("#passphrasecheck").attr('value', 'false');
-          $("#passphrasecheck").prop('checked', false);
-  
-        }
-        var hashed_password = CryptoJS.SHA1(code.value);     
-
-        //We use Troy Hunts HIBP API to check the quality of the password.
-        //https://haveibeenpwned.com/API/v3#PwnedPasswords
+        var isBreached = false;
+        var currentStrengthScore = 0;
+        var lastCheckedPassword = ''; // Cache to avoid redundant API calls
         
-        $.ajax({
-          type:"GET",
-          dataType:"text",
-          async: false,
-          cors: true ,
-          secure:true,
-          url: "https://api.pwnedpasswords.com/range/"+ CryptoJS.enc.Hex.stringify(hashed_password).toUpperCase().substring(0,5),
-          success: function(data) {
-            if (data.includes(CryptoJS.enc.Hex.stringify(hashed_password).toUpperCase().slice(5))){
-              
-              $("#passwordcheck").attr('value', 'false');
-              $("#passwordcheck").prop('checked', false);
-              $("#password_errors").html("<ul><li style='color:red'>Oh no, your chosen password is already known, try a different one</li></ul>")
-            } 
-          },
-          error: function(jqXHR, textStatus, errorThrown){
-            alert(textStatus);
-          }
+        function updateStrengthMeter(password) {
+            if (!password || password.length === 0) {
+                strengthBar.style.width = '0%';
+                strengthBar.style.backgroundColor = '#e0e0e0';
+                strengthText.textContent = '';
+                passwordWarnings.style.display = 'none';
+                currentStrengthScore = 0;
+                updateSubmitButton();
+                return;
+            }
+            
+            // Use zxcvbn for password strength analysis
+            var result = zxcvbn(password);
+            currentStrengthScore = result.score;
+            
+            // Update strength bar
+            var percentage = ((result.score + 1) / 5) * 100;
+            strengthBar.style.width = percentage + '%';
+            strengthBar.style.backgroundColor = strengthLevels[result.score].color;
+            strengthText.textContent = strengthLevels[result.score].label;
+            strengthText.style.color = strengthLevels[result.score].color;
+            
+            // Show feedback from zxcvbn
+            var warningHtml = '';
+            if (result.feedback.warning) {
+                warningHtml += '<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> ' + result.feedback.warning + '</div>';
+            }
+            if (result.feedback.suggestions && result.feedback.suggestions.length > 0) {
+                warningHtml += '<div class="alert alert-info"><strong>Suggestions:</strong><ul style="margin-bottom: 0;">';
+                result.feedback.suggestions.forEach(function(suggestion) {
+                    warningHtml += '<li>' + suggestion + '</li>';
+                });
+                warningHtml += '</ul></div>';
+            }
+            
+            if (warningHtml) {
+                passwordWarnings.innerHTML = warningHtml;
+                passwordWarnings.style.display = 'block';
+            } else {
+                passwordWarnings.style.display = 'none';
+            }
+            
+            updateSubmitButton();
+        }
+        
+        function checkPasswordBreach(password) {
+            if (!password || password.length < PASSWORD_MIN_LENGTH) {
+                isBreached = false;
+                breachWarning.style.display = 'none';
+                updateSubmitButton();
+                return;
+            }
+            
+            // Skip if password hasn't changed (simple caching)
+            if (password === lastCheckedPassword) {
+                return;
+            }
+            lastCheckedPassword = password;
+            
+            var hashedPassword = CryptoJS.SHA1(password);
+            var hashHex = CryptoJS.enc.Hex.stringify(hashedPassword).toUpperCase();
+            var prefix = hashHex.substring(0, 5);
+            var suffix = hashHex.slice(5);
+            
+            // Use Troy Hunt's HIBP API with k-anonymity
+            $.ajax({
+                type: "GET",
+                dataType: "text",
+                timeout: 5000, // 5 second timeout
+                url: "https://api.pwnedpasswords.com/range/" + prefix,
+                success: function(data) {
+                    if (data.includes(suffix)) {
+                        isBreached = true;
+                        breachWarning.innerHTML = '<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <strong>Warning:</strong> This password has been found in data breaches. Please choose a different password.</div>';
+                        breachWarning.style.display = 'block';
+                    } else {
+                        isBreached = false;
+                        breachWarning.style.display = 'none';
+                    }
+                    updateSubmitButton();
+                },
+                error: function() {
+                    // If the API fails, don't block the user
+                    isBreached = false;
+                    breachWarning.style.display = 'none';
+                    updateSubmitButton();
+                }
+            });
+        }
+        
+        function checkPasswordMatch() {
+            var password = passwordInput.value;
+            var confirm = confirmInput.value;
+            
+            if (confirm.length === 0) {
+                passwordMatch.innerHTML = '';
+                return;
+            }
+            
+            if (password === confirm) {
+                passwordMatch.innerHTML = '<span style="color: #28a745;"><span class="glyphicon glyphicon-ok"></span> Passwords match</span>';
+            } else {
+                passwordMatch.innerHTML = '<span style="color: #dc3545;"><span class="glyphicon glyphicon-remove"></span> Passwords do not match</span>';
+            }
+            updateSubmitButton();
+        }
+        
+        function updateSubmitButton() {
+            var password = passwordInput.value;
+            var confirm = confirmInput.value;
+            var passwordsMatch = password === confirm && password.length >= PASSWORD_MIN_LENGTH;
+            var isStrong = currentStrengthScore >= 2; // Fair or better
+            var notBreached = !isBreached;
+            
+            if (passwordsMatch && isStrong && notBreached) {
+                passwordValid.value = 'true';
+                submitBtn.disabled = false;
+            } else {
+                passwordValid.value = 'false';
+                // Don't disable the button, let server-side validation handle edge cases
+                submitBtn.disabled = false;
+            }
+        }
+        
+        function delayTyping(callback, ms) {
+            var timer = 0;
+            return function() {
+                var context = this, args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function() {
+                    callback.apply(context, args);
+                }, ms || 0);
+            };
+        }
+        
+        // Password input event handlers
+        passwordInput.addEventListener("keyup", delayTyping(function() {
+            var password = passwordInput.value;
+            updateStrengthMeter(password);
+            checkPasswordBreach(password);
+            checkPasswordMatch();
+        }, 300));
+        
+        confirmInput.addEventListener("keyup", function() {
+            checkPasswordMatch();
         });
-      },400));
-      
-      function blockSpecialChar(e){
-        var k;
-        document.all ? k = e.keyCode : k = e.which;
-        return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57) || k == 95 || k == 45 );
-        }  
-      
-      function delayTyping(callback, ms) {
-        var timer = 0;
-        return function() {
-          var context = this, args = arguments;
-          clearTimeout(timer);
-          timer = setTimeout(function () {
-            callback.apply(context, args);
-          }, ms || 0);
-        };
-      }
-  
+        
+        function blockSpecialChar(e) {
+            var k;
+            document.all ? k = e.keyCode : k = e.which;
+            return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57) || k == 95 || k == 45);
+        }
     </script>
     <script>
-     var message = document.getElementById("message").value
-     if (message){
-      alert('{{ message|json_script:"message" }}');
-    }
+        var message = document.getElementById("message").value;
+        if (message) {
+            alert('{{ message|json_script:"message" }}');
+        }
     </script>
     {% endblock %}
