@@ -1,0 +1,62 @@
+# Git
+.git
+.gitignore
+.github
+
+# Documentation
+README.md
+CONTRIBUTING.md
+SECURITY.md
+LICENSE
+screenshots/
+
+# Build and environment
+*.log
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Testing and coverage
+.tox/
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+htmlcov/
+coverage.xml
+nosetests.xml
+
+# Terraform (infrastructure code not needed in app container)
+terraform/
+
+# Database (will be created at runtime)
+db.sqlite3
+*.sqlite3
+
+# BOM files (not needed for runtime)
+bom.json
+bom.vex.json
+
+# Storage JSON files (generated at runtime)
+storage/*.json
