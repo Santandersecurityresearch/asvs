@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "SantanderTextW05-Regular";
+  src: url("/fonts/SantanderTextW05-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "SantanderTextW05-Bold";
+  src: url("/fonts/SantanderTextW05-Bold.woff") format("woff");
+}
+
+body {
+  font-family: "SantanderTextW05-Regular", sans-serif;
+}
+
+.dark body {
+  background-color: rgb(25, 39, 52);
+  color: white;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition-colors;
+  }
+  .btn-secondary {
+    @apply bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded transition-colors;
+  }
+  .btn-danger {
+    @apply bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded transition-colors;
+  }
+  .input-field {
+    @apply w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500;
+  }
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow p-4;
+  }
+}

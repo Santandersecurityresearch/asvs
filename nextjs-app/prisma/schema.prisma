@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projects    Project[]
+  totpDevices TotpDevice[]
+
+  @@map("users")
+}
+
+model TotpDevice {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  secret    String
+  name      String   // usually the user agent string
+  confirmed Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("totp_devices")
+}
+
+model Project {
+  id               Int      @id @default(autoincrement())
+  projectName      String
+  projectOwner     String
+  projectCreatedAt DateTime @default(now())
+  projectDescription String
+  projectLevel     Int      @default(0)
+  projectAllowedViewers String @default("")
+  dataHash         String   @unique
+
+  owner User @relation(fields: [projectOwner], references: [username])
+
+  @@map("projects")
+}
