@@ -157,4 +157,4 @@ cyclonedx-py environment .venv/bin/python --sv 1.6 --of JSON --output-reproducib
 
 ## Maintainers
 
-Adam Maxwell (@catalyst256) and Daniel Cuthbert (@dcuthbert) are part of the Santander Group Cyber Security Research Team. Daniel is one of the co-authors of the ASVS, and the team released this app so the ASVS could be easier to use as a practical project workspace. If this helps even one team fix authentication properly, we shall consider that a decent use of electricity.
+Adam Maxwell (@catalyst256) and Daniel Cuthbert (@dcuthbert) were and is part of the Santander Group Cyber Security Research Team. Daniel is one of the co-authors of the ASVS, and the team released this app so the ASVS could be easier to use as a practical project workspace. If this helps even one team fix authentication properly, we shall consider that a decent use of electricity.
