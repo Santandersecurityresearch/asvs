@@ -1,20 +1,9 @@
-{% extends "base.html" %} {% load static %} {% block content %}
-
-<div class="container">
-   
-    <div class="row">
-        <div class="card" style="width: 60rem;">
-
-
-            <div class="card-body" style="margin:auto">
-                <p class="card-text">
-                    <strong>Error 404</strong>
-                    <br>
-                </p>
-                
-            </div>
-           
-        </div>
-    </div>
-</div>
+{% extends "base.html" %} {% block title %}Not Found{% endblock title %}
+{% block content %}
+<section class="panel" style="max-width: 560px;">
+  <p class="eyebrow">404</p>
+  <h1>Page not found</h1>
+  <p class="lead">The ASVS workspace page you requested does not exist or is no longer available.</p>
+  <a class="button button--primary" href="{% url 'home' %}">Return Home</a>
+</section>
 {% endblock content %}

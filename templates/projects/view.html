@@ -1,391 +1,232 @@
-{% extends "base.html" %} {% load dict_filters %} {% load static %} {% block content %}
-{% include "modals/modal_allowed_viewers.html" %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-header">
-                <h2 id="navbars">
-                    <br>Project Name: {{ project.project_name }}
-                    <small class="float-sm-right">
-                        Completion: {{ percentage.percentage }}%
-                    </small>
-                </h2>
-            </div>
-        </div>
+{% extends "base.html" %} {% block title %}{{ project.project_name }}{% endblock title %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <p class="eyebrow">ASVS Project Workspace</p>
+    <h1>{{ project.project_name }}</h1>
+    <p class="lead">{{ project.project_description }}</p>
+  </div>
+  <div class="toolbar">
+    <a class="button button--ghost" href="{% url 'projectsdownload' projectid=project.project_id %}">JSON</a>
+    <a class="button button--ghost" href="{% url 'projectsdownloadcsv' projectid=project.project_id %}">CSV</a>
+    <a class="button button--primary" href="{% url 'generate_pdf' projectid=project.project_id %}">PDF Report</a>
+  </div>
+</section>
+
+<section class="grid grid--4" style="margin-bottom: 18px;">
+  <div class="metric">
+    <strong data-metric="percentage">{{ metrics.percentage }}%</strong>
+    <span>Complete</span>
+    <div class="progress-bar"><span data-metric="progress-bar" style="width: {{ metrics.percentage }}%;"></span></div>
+  </div>
+  <div class="metric">
+    <strong data-metric="complete">{{ metrics.complete }}</strong>
+    <span>Complete requirements</span>
+  </div>
+  <div class="metric">
+    <strong data-metric="incomplete">{{ metrics.incomplete }}</strong>
+    <span>Incomplete requirements</span>
+  </div>
+  <div class="metric">
+    <strong data-metric="review">{{ metrics.review }}</strong>
+    <span>Needs review</span>
+  </div>
+</section>
+
+<section class="workspace-layout">
+  <aside class="workspace-sidebar">
+    <div class="panel">
+      <h2>Project</h2>
+      <p class="muted">
+        Owner: {{ project.project_owner }}<br>
+        Created: {{ project.project_created }}<br>
+        Level: {{ project.project_level }}<br>
+        ASVS: {{ project.asvs_version }}<br>
+        Shared with: {{ project.project_allowed_viewers }}
+      </p>
+      {% if can_manage %}
+      <button class="button button--ghost" type="button" data-modal-target="#members-modal">Manage Access</button>
+      {% endif %}
     </div>
 
-    <div class="row">
-        <div class="col-lg-12 col-md-7 col-sm-6">
-            <div class="card border-primary mb-4">
-                <div class="card-body">
-                    <p class="card-text">
-                        <strong>Project Owner: </strong>{{ project.project_owner }}
-                        <br>
-                        <strong>Project Created: </strong>{{ project.project_created }}
-                        <br>
-                        <strong>Project Description: </strong>{{ project.project_description }}
-                        <br>
-                        <strong>Project Level: </strong>{{ project.project_level }}
-                        <br>
-                        <strong>Complete: </strong>{{ percentage.enabled }} / {{ percentage.total }}
-                        <br>
-                    </p>
-                    Download Project:
-                    <a href="{% url 'projectsdownload' projectid=project.project_id %}" title="Download Project">
-                        <i class="fas fa-file-download"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <form class="panel form-grid" method="GET" action="{% url 'projectsview' projectid=project.project_id %}">
+      <h2>Filter</h2>
+      <label class="field">
+        <span>Search</span>
+        <input type="search" name="q" value="{{ query }}" placeholder="Requirement, CWE, NIST, note">
+      </label>
+      <label class="field">
+        <span>Status</span>
+        <select name="status">
+          <option value="">All statuses</option>
+          {% for value, label in status_choices %}
+          <option value="{{ value }}" {% if active_status == value %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <button class="button button--primary" type="submit">Apply</button>
+    </form>
+
+    <div class="panel">
+      <h2>Chapters</h2>
+      <div class="category-list" style="margin-top: 12px;">
+        {% for group in groups %}
+        <a class="category-item" href="#chapter-{{ forloop.counter }}">
+          <strong>{{ group.title }}</strong>
+          <span class="muted">{{ group.complete }}/{{ group.total }} complete · {{ group.percentage }}%</span>
+        </a>
+        {% endfor %}
+      </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12 col-md-7 col-sm-6">
-            <div class="card border-primary mb-4">
-                <div class="card-body">
-                    <div class="radial-progress" id="docsChart" ></div>
-                </div>
-            </div>
-        </div>
+    <div class="panel">
+      <h2>Audit</h2>
+      <ul class="audit-list">
+        {% for event in audit_events %}
+        <li>
+          <strong>{{ event.action }}</strong>
+          <div class="muted">{{ event.actor }} · {{ event.created_at }}</div>
+          {% if event.detail %}<div class="muted">{{ event.detail }}</div>{% endif %}
+        </li>
+        {% empty %}
+        <li class="muted">No activity yet.</li>
+        {% endfor %}
+      </ul>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <form action="{% url 'projectsupdate' %}" method="POST" role="form" class="form-horizontal">
+  </aside>
+
+  <div>
+    {% for group in groups %}
+    <section class="requirement-group" id="chapter-{{ forloop.counter }}">
+      <div class="requirement-group__head">
+        <div>
+          <h2>{{ group.title }}</h2>
+          <p class="muted">{{ group.total }} requirements · {{ group.percentage }}% complete</p>
+        </div>
+        <span class="status-pill status-na">{{ group.complete }}/{{ group.total }}</span>
+      </div>
+
+      {% for requirement in group.requirements %}
+      <article class="requirement-card" data-requirement-card>
+        <div class="requirement-card__head">
+          <span class="req-id">{{ requirement.req_id }}</span>
+          <div>
+            <p class="req-description">{{ requirement.req_description }}</p>
+            <div class="requirement-meta">
+              {{ requirement.section_name }}
+              {% if requirement.cwe %} · CWE {{ requirement.cwe }}{% endif %}
+              {% if requirement.nist %} · NIST {{ requirement.nist }}{% endif %}
+            </div>
+          </div>
+          {% if requirement.status == "complete" %}
+          <span class="status-pill status-complete" data-status-pill>{{ requirement.get_status_display }}</span>
+          {% elif requirement.status == "incomplete" %}
+          <span class="status-pill status-incomplete" data-status-pill>{{ requirement.get_status_display }}</span>
+          {% elif requirement.status == "review" %}
+          <span class="status-pill status-review" data-status-pill>{{ requirement.get_status_display }}</span>
+          {% else %}
+          <span class="status-pill status-na" data-status-pill>{{ requirement.get_status_display }}</span>
+          {% endif %}
+        </div>
+
+        <form class="requirement-controls" method="POST" action="{% url 'project_requirement_update' projectid=project.project_id req_id=requirement.req_id %}" data-autosave-form>
+          {% csrf_token %}
+          <label class="field">
+            <span>Status</span>
+            <select name="status" {% if not can_manage %}disabled{% endif %}>
+              {% for value, label in status_choices %}
+              <option value="{{ value }}" {% if requirement.status == value %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label class="field">
+            <span>Notes</span>
+            <textarea name="note" {% if not can_manage %}disabled{% endif %}>{{ requirement.note }}</textarea>
+          </label>
+          <div class="save-state" data-save-state>{% if can_manage %}Saved{% else %}Read only{% endif %}</div>
+        </form>
+
+        <details class="details-panel">
+          <summary>Evidence, comments, and activity</summary>
+          <div class="grid grid--2" style="margin-top: 12px;">
+            <div>
+              <h3>Evidence</h3>
+              <ul class="audit-list">
+                {% for evidence in requirement.evidence.all %}
+                <li>
+                  {% if evidence.url %}<a href="{{ evidence.url }}" target="_blank" rel="noopener noreferrer"><strong>{{ evidence.title }}</strong></a>{% else %}<strong>{{ evidence.title }}</strong>{% endif %}
+                  <div class="muted">{{ evidence.created_by }} · {{ evidence.created_at }}</div>
+                  {% if evidence.notes %}<div class="muted">{{ evidence.notes }}</div>{% endif %}
+                </li>
+                {% empty %}
+                <li class="muted">No evidence attached.</li>
+                {% endfor %}
+              </ul>
+              {% if can_manage %}
+              <form class="form-grid" method="POST" action="{% url 'project_requirement_evidence_add' projectid=project.project_id req_id=requirement.req_id %}" style="margin-top: 12px;">
                 {% csrf_token %}
-                <input type="hidden" name="projectid" value="{{ project.project_id }}" />
-                <div class="card border-primary mb-4">
-                    <div class="card-header">
-                        <p style="text-align: center; font-weight: bold;">Requirements</p>         
-                        <small class="float-sm-left">
-                            <button class="btn btn-primary" style="background-color:#dd4b39; color:white" class="btn" id="pdfreport"><a style="color:white" href="{% url 'generate_pdf' projectid=project.project_id %}" >  PDF Report  <i class="fas fa-file"></i></a></button>                  
-                        </small>                                                                        
-                        <small class="float-sm-right">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </small>
+                <input type="text" name="title" placeholder="Evidence title" required>
+                <input type="url" name="url" placeholder="https://...">
+                <textarea name="notes" placeholder="Evidence notes"></textarea>
+                <button class="button button--ghost" type="submit">Add Evidence</button>
+              </form>
+              {% endif %}
+            </div>
+            <div>
+              <h3>Comments</h3>
+              <ul class="audit-list">
+                {% for comment in requirement.comments.all %}
+                <li>
+                  <strong>{{ comment.created_by }}</strong>
+                  <div class="muted">{{ comment.created_at }}</div>
+                  <div>{{ comment.body }}</div>
+                </li>
+                {% empty %}
+                <li class="muted">No comments yet.</li>
+                {% endfor %}
+              </ul>
+              {% if can_manage %}
+              <form class="form-grid" method="POST" action="{% url 'project_requirement_comment_add' projectid=project.project_id req_id=requirement.req_id %}" style="margin-top: 12px;">
+                {% csrf_token %}
+                <textarea name="body" placeholder="Add a review note or handoff comment" required></textarea>
+                <button class="button button--ghost" type="submit">Add Comment</button>
+              </form>
+              {% endif %}
+            </div>
+          </div>
+        </details>
+      </article>
+      {% endfor %}
+    </section>
+    {% empty %}
+    <div class="alert">No requirements match the current filter.</div>
+    {% endfor %}
+  </div>
+</section>
 
-                    </div>
-                    <div class="card-body">
-                        <div id="dataTables_wrapper form-inline dt-bootstrap">
-                            &nbsp;
-                            <button class="btn btn-primary" type="button" style="margin-left:-5px; margin-bottom:5px; background-color:#8aa174; color:white" onclick="expandCollapse()"> Expand/Collapse All Categories </button>
-                            <table id="project-results" class="table table-striped table-bordered dataTable"
-                                style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Requirement</th>
-                                        <th>Complete</th>
-                                        <th>Incomplete</th>
-                                        <th>N/A</th>
-                                        <th>Note</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    {% for d in data %}
-                                    <tr id="{{d.req_id}}">
-                                        <td style="background-color:{{ styles|dict_get:d.chapter_name }}">{{ d.chapter_name }}</td>
-
-                                        <td id="description">({{ d.req_id }}) {{ d.req_description }}</td>
-                                        <td>
-                                            {% if d.enabled > 0 %}
-                                                <input type="checkbox" id="{{ d.req_id }}enabled"  name="{{ d.req_id }}enabled" onclick="uncheckOthers('{{ d.req_id }}enabled')" value="1" checked="true">
-                                            {% else %}
-                                                <input type="checkbox" id="{{ d.req_id }}enabled" name="{{ d.req_id }}enabled" onclick="uncheckOthers('{{ d.req_id }}enabled')" value="0">
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            {% if d.disabled > 0 %}
-                                                <input type="checkbox" id="{{ d.req_id }}disabled" name="{{ d.req_id }}disabled" onclick="uncheckOthers('{{ d.req_id }}disabled')"value="1" checked="true">
-                                            {% else %}
-                                                <input type="checkbox" id="{{ d.req_id }}disabled" name="{{ d.req_id }}disabled" onclick="uncheckOthers('{{ d.req_id }}disabled')" value="0"   >
-                                            {% endif %}
-                                        </td>
-                                         
-                                        <td>
-                                            {% if d.enabled == 0 and  d.disabled == 0 %}
-                                                <input type="checkbox"  id="{{ d.req_id }}na" name="{{ d.req_id }}na" onclick="uncheckOthers('{{ d.req_id }}na')" value="1" checked="true">
-                                            {% elif not d.enabled and not d.disabled%}
-                                                <input type="checkbox"  id="{{ d.req_id }}na" name="{{ d.req_id }}na" onclick="uncheckOthers('{{ d.req_id }}na')" value="1" checked="true">
-                                            {% else %}
-                                                <input type="checkbox" id="{{ d.req_id }}na" name="{{ d.req_id }}na" onclick="uncheckOthers('{{ d.req_id }}na')" value="0"  >
-                                            {% endif %}
-                                        </td> 
-                                        <td>
-                                            <textarea id="{{ d.req_id }}note" name="{{ d.req_id}}note" rows="10" cols="50" style="width:100px;height:100px" >{{d.note}}</textarea>
-                                        </td>                                      
-                                    </tr>                                   
-                                    {% endfor %}
-                                </tbody>
-                                
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <small class="float-sm-left">
-                            <button class="btn btn-primary" style="background-color:#dd4b39; color:white" class="btn" id="pdfreport"><a style="color:white" href="{% url 'generate_pdf' projectid=project.project_id %}" >  PDF Report  <i class="fas fa-file"></i></a></button>
-                        </small>
-                        <small class="float-sm-right">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </small>
-                    </div>
-                </div>
-            </form>
-            {% if user.is_authenticated and user.is_two_factor_enabled and user.is_superuser %}
-            <button style="margin-bottom: 30px; text-align: center;" class="btn js-allowed-users" id="allowedusers" title="Change allowed users" >Modify Allowed Users</button>
-            {% endif %}
-            <br>
+{% if can_manage %}
+<div class="modal" id="members-modal" role="dialog" aria-modal="true" aria-labelledby="members-title">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="members-title">Manage Access</h2>
+      </div>
+      <form method="POST" action="{% url 'modify_allowed_users' projectid=project.project_id %}">
+        {% csrf_token %}
+        <div class="modal-body">
+          <label class="field">
+            <span>Allowed users</span>
+            <textarea name="viewers">{{ project.project_allowed_viewers }}</textarea>
+          </label>
+          <p class="muted">Use comma-separated usernames. The owner is always retained.</p>
         </div>
+        <div class="modal-footer">
+          <button class="button button--ghost" type="button" data-modal-close>Cancel</button>
+          <button class="button button--primary" type="submit">Update Access</button>
+        </div>
+      </form>
     </div>
-    <button onclick="topFunction()" id="btnTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+  </div>
 </div>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-
-    $(document).ready(function () {
-        $(".js-allowed-users").click(function () {
-            var btn = $(this);
-            $.ajax({
-                url: btn.attr("data-url"),
-                type: 'get',
-                dataType: 'json',
-                beforeSend: function () {
-                $("#modalallowedusers").modal("show");
-                },
-                success: function (data) {
-                $("#modalallowedusers .modal-content").html(data.html_form);
-                }
-            });
-        });
-    //Create headers    
-    var categories=[]
-    var rows = table.getElementsByTagName("tr");
-    for(var i=0;i<rows.length;i++){
-        if (rows[i].getElementsByTagName("td")){   
-            if (rows[i].getElementsByTagName("td")[0]){
-                
-                //If it is the first requirement for a category (is not in our array), add header
-                if (!categories.includes(rows[i].getElementsByTagName("td")[0].innerText)){
-                    var colour= rows[i].getElementsByTagName("td")[0].style.backgroundColor
-                    var newHeader= document.createElement('tr')
-                    var category=rows[i].getElementsByTagName("td")[0].innerText 
-                    newHeader.innerHTML=" <th colspan='"+rows[i].getElementsByTagName("td").length+"'>"+category+"&nbsp;&nbsp;&nbsp;<i class='fas fa-angle-down'></i><th>"
-                    //Deleting a blank th we dont need    
-                    newHeader.getElementsByTagName("th")[1].remove()
-                    newHeader.style.backgroundColor=colour
-                    newHeader.className="header expand"
-                    rows[i].parentNode.insertBefore(newHeader,rows[i])
-                    categories.push(category)
-                    
-                }
-
-            }
-        }
-    }
-    //Expand Collapse headers
-    $('.header').click(function(){       
-        var arrow = $(this)[0].getElementsByTagName("i")[0]
-        if (arrow.classList[1]==="fa-angle-down"){
-            arrow.classList.remove("fa-angle-down");
-            arrow.classList.add("fa-angle-up")
-        }
-        else{
-            arrow.classList.remove("fa-angle-up");
-            arrow.classList.add("fa-angle-down")
-        }
-
-        $(this).nextUntil('tr.header').animate({ opacity: "toggle" },300);
-    });  
-    
-    //Lets start with categories collapsed
-    expandCollapse()   
-
-    });
-    
-
-    //Get data
-    var table = document.getElementById("project-results");
-    var rows = table.getElementsByTagName("tr");
-    var completion={}
-    for(var i=0;i<rows.length;i++){
-        if (rows[i].getElementsByTagName("td")){
-            if (rows[i].getElementsByTagName("td")[0]){
-                if (rows[i].getElementsByTagName("td")[0].innerText){
-                    var cat=rows[i].getElementsByTagName("td")[0].innerText
-                    if  (completion[cat]){ //If already exists on dict
-                        completion[cat]['total']=completion[cat]['total']+1
-                        if (rows[i].getElementsByTagName("td")[2].getElementsByTagName('input')[0].value=="1"){
-                            completion[cat]['checked']=completion[cat]['checked']+1 
-                        }                       
-                    }
-                    else{ //If this category still doesnt exist on our dict
-                        completion[cat]={}
-                        completion[cat]['total']=1
-                        completion[cat]['colour']=rows[i].getElementsByTagName("td")[0].style.backgroundColor
-                        if (rows[i].getElementsByTagName("td")[2].getElementsByTagName('input')[0].value=="1"){
-                            completion[cat]['checked']=1
-                        }
-                        else{
-                            completion[cat]['checked']=0
-                        }
-                    }
-                }
-            }    
-        }
-        if (rows[i].getElementsByTagName("td")[1]){
-            rows[i].getElementsByTagName("td")[1].innerHTML= urlify(rows[i].getElementsByTagName("td")[1].innerText) 
-        }
-    }
-
-    //Draw Circles
-    for (c in completion){
-
-        var width = 135,
-        height = 135,
-        twoPi = 2 * Math.PI,
-        
-        allocated = completion[c]['checked'],
-        total = completion[c]['total'],
-        progress = allocated/total
-        formatPercent = d3.format(".0%");
-
-        var arc = d3.arc()
-            .startAngle(0)
-            .innerRadius(52)
-            .outerRadius(66);
-
-        var svg = d3.select("#docsChart").append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .style("display", "inline-block")
-            .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-        var meter = svg.append("g")
-            .attr("class", "funds-allocated-meter");
-
-        meter.append("path")
-            .attr("class", "background")
-            .attr("d", arc.endAngle(360));
-
-        var foreground = meter.append("path")
-            .attr("class", "foreground")
-            .attr("style","fill:"+completion[c]['colour'])
-            .attr("d", arc.endAngle(twoPi * progress));
-            
-        var percentComplete = meter.append("text")
-            .attr("text-anchor", "middle")
-            .attr("class", "percent-complete")
-            .attr("dy", "0em")
-            .text(formatPercent(progress));
-
-        var description = meter.append("text")
-            .attr("text-anchor", "middle")
-            .attr("class", "description")
-            .attr("dy", "2.3em")
-            .text(function() {
-                var shortNames = {
-                    "Architecture, Design and Threat Modeling": "Architecture",
-                    "Validation, Sanitization and Encoding": "Input Validation",
-                    "Error Handling and Logging": "Error Handling",
-                    "Secure Coding and Architecture": "Secure Coding",
-                    "Security Logging and Error Handling": "Logging & Errors"
-                };
-                return shortNames[c] || c.replace(" Verification Requirements","").replace(", Sanitization and Encoding","").replace(" and Logging Verification Requirements","").replace(" and Logging","");
-            });
-      
-
-    }
-
-    function expandCollapse(){ 
-        var arrows = Array.from($('#project-results')[0].getElementsByClassName("header expand"))
-        var firstCategory=arrows[0].getElementsByTagName("i")[0].classList[1]
-        for (arrow in arrows){
-            if (firstCategory==="fa-angle-down" && arrows[arrow].getElementsByTagName("i")[0].classList[1]==="fa-angle-down"){
-                arrows[arrow].getElementsByTagName("i")[0].classList.remove("fa-angle-down");
-                arrows[arrow].getElementsByTagName("i")[0].classList.add("fa-angle-up")
-                $(arrows[arrow]).nextUntil('tr.header').animate({ opacity: "toggle" },300);
-            }
-            else if (firstCategory==="fa-angle-up" && arrows[arrow].getElementsByTagName("i")[0].classList[1]==="fa-angle-up"){
-                arrows[arrow].getElementsByTagName("i")[0].classList.remove("fa-angle-up");
-                arrows[arrow].getElementsByTagName("i")[0].classList.add("fa-angle-down")
-                $(arrows[arrow]).nextUntil('tr.header').animate({ opacity: "toggle" },300);
-            }
-        }   
-    };
-
-    function uncheckOthers(itemcheckbox){
-        var item = itemcheckbox.replace("enabled","").replace("disabled","").replace("na","")
-        var enablecheckbox= document.getElementById(item+"enabled")
-        var disablecheckbox= document.getElementById(item+"disabled")
-        var nacheckbox= document.getElementById(item+"na")
-
-       
-        document.getElementById(itemcheckbox).setAttribute("checked","true")
-        document.getElementById(itemcheckbox).checked=true
-        document.getElementById(itemcheckbox).value=1
-
-        if (item+"disabled" != itemcheckbox){
-            disablecheckbox.setAttribute("checked","false")
-            disablecheckbox.checked=false
-            disablecheckbox.value=0
-        }
-        if (item+"enabled" != itemcheckbox){
-            enablecheckbox.setAttribute("checked","false")
-            enablecheckbox.checked=false
-            enablecheckbox.value=0
-        }
-        if (item+"na" != itemcheckbox){
-            nacheckbox.setAttribute("checked","false")
-            nacheckbox.checked=false
-            nacheckbox.value=0
-        }
-
-    }
-
-    function urlify(text) {
-        var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-
-        return text.replace(urlRegex, function(url) {
-            return '<a href="' + url + '" target="_blank">' + url + ' <i class="fas fa-link"></i></a>';
-        })
-    } 
-    //When clicking one of the categories, scroll to the requirements
-    $(".funds-allocated-meter").click(function() {
-       
-        var elementText=$($(this).children()[$(this).children().length -1])[0].textContent
-
-        var elems = $('th').filter(function(){
-            return this.textContent.includes(elementText)
-        });
-
-    $('html,body').animate({
-        scrollTop: $(elems[0]).offset().top-59},
-        'slow');
-    });
-
-</script>
-
-<script>
-    //Get the button
-    var mybutton = document.getElementById("btnTop");
-    
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function() {scrollFunction()};
-    
-    function scrollFunction() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
-      } else {
-        mybutton.style.display = "none";
-      }
-    }
-    
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
-    </script>
+{% endif %}
 {% endblock content %}

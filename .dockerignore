@@ -12,6 +12,7 @@ screenshots/
 
 # Build and environment
 *.log
+staticfiles/
 *.pyc
 __pycache__/
 *.py[cod]

@@ -1,11 +1,24 @@
-version: '3.4'
 services:
-    asvs:
-        volumes:
-          - .:/app
-        ports:
-            - '8000:8000'
-        build:
-          context: .
-          dockerfile: Dockerfile
-         
+  asvs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${ASVS_HOST_PORT:-8000}:8000"
+    environment:
+      DJANGO_DEBUG: "1"
+      DJANGO_SECRET_KEY: "insecure-local-development-key"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1,0.0.0.0"
+      DJANGO_SECURE_SSL_REDIRECT: "0"
+      GUNICORN_WORKERS: "2"
+      PORT: "8000"
+      DJANGO_SQLITE_PATH: "/app/db/db.sqlite3"
+    volumes:
+      - asvs_db:/app/db
+      - asvs_storage:/app/storage
+      - asvs_staticfiles:/app/staticfiles
+
+volumes:
+  asvs_db:
+  asvs_storage:
+  asvs_staticfiles:

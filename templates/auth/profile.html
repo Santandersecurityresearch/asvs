@@ -1,130 +1,105 @@
-{% extends 'base.html' %}
-
+{% extends 'base.html' %} {% block title %}Profile{% endblock title %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-header">
-                <h2 id="navbars">
-                    <br><h3>Hello {{ user.username }}</h3> </h2>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-    {% include "modals/modal_change_password.html" %}
-    {% include "modals/modal_change_username.html" %}
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Projects {{ user.username }} is allowed to watch: </h4>
-                </div>
-                <div class="card-body">
-                    <table id="case-results" class="table table-bordered dataTable" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Created</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Level</th>
-                                <th>Actions</th>          
-                            </tr>
-                        </thead>
-                        <tbody>                                  
-                            {% for p in projects %}
-                            <tr>
-                                <td>{{ p.project_created }}</td>
-                                <td>{{ p.project_name }}</td>
-                                <td>{{ p.project_description }}</td>
-                                <td>{{ p.project_level }} </td>
-                                <td>
-                                    {% if not p.project_owner == user.username %}
-                                    <a href="{% url 'removefromproject' projectid=p.id %}" title="Remove User from Project">
-                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                    </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    </p>
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Account</p>
+    <h1>{{ user.username }}</h1>
+    <p class="lead">Manage project access, trusted devices, and account settings.</p>
+  </div>
+  <div class="toolbar">
+    <button class="button button--ghost" type="button" data-modal-target="#password-modal">Change Password</button>
+    <button class="button button--ghost" type="button" data-modal-target="#username-modal">Change Username</button>
+  </div>
+</section>
 
-                    <h5>{{ user.username }} devices: </h5>
-                    <table id="devices" class="table table-bordered dataTable" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Device Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>                  
-                            {% for d in devices %}
-                            <tr>
-                                <td>{{ d }} 
-                                    <a href="{% url 'unauthenticate_device' device=d %}" title="Unauthenticate Device">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <pre>{{ userdata }}</pre>
+{% if message %}<div class="alert" style="margin-bottom: 18px;">{{ message }}</div>{% endif %}
 
-                    <button class="btn js-change-password" id="changepassword" title="Change Password" >Change Password</button>
-                    <button class="btn js-change-username" id="changeusername" title="Change Username" >Change Username</button>
-                </div>
-            </div>
-        </div>
+<section class="grid grid--2">
+  <article class="panel">
+    <h2>Visible Projects</h2>
+    <div class="table-wrap" style="margin-top: 14px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Owner</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in projects %}
+          <tr>
+            <td><strong>{{ p.project_name }}</strong><div class="muted">{{ p.project_description }}</div></td>
+            <td><span class="status-pill status-na">L{{ p.project_level }}</span></td>
+            <td>{{ p.project_owner }}</td>
+            <td>
+              <div class="inline-actions">
+                <a class="button button--ghost" href="{% url 'projectsview' projectid=p.id %}">Open</a>
+                {% if not p.project_owner == user.username %}
+                <a class="button button--ghost" href="{% url 'removefromproject' projectid=p.id %}">Leave</a>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="4"><div class="alert">No visible projects yet.</div></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-    <input type="hidden" id="message" value="{{message}}">
+  </article>
+
+  <article class="panel">
+    <h2>Trusted Devices</h2>
+    <div class="grid" style="margin-top: 14px;">
+      {% for d in devices %}
+      <div class="category-item">
+        <strong>{{ d }}</strong>
+        <a href="{% url 'unauthenticate_device' device=d %}">Remove device</a>
+      </div>
+      {% empty %}
+      <div class="alert">No verified devices.</div>
+      {% endfor %}
+    </div>
+  </article>
+</section>
+
+<div class="modal" id="password-modal" role="dialog" aria-modal="true" aria-labelledby="password-title">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h2 id="password-title">Change Password</h2></div>
+      <form method="POST" action="{% url 'modify_password' %}">
+        {% csrf_token %}
+        <div class="modal-body form-grid">
+          <input type="password" name="old_password" placeholder="Current password" required autocomplete="current-password">
+          <input type="password" name="new_password1" placeholder="New password" required minlength="8" maxlength="128" autocomplete="new-password">
+          <input type="password" name="new_password2" placeholder="Confirm new password" required minlength="8" maxlength="128" autocomplete="new-password">
+        </div>
+        <div class="modal-footer">
+          <button class="button button--ghost" type="button" data-modal-close>Cancel</button>
+          <button class="button button--primary" type="submit">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
 
-    $(document).ready(function () {
-        $(".js-change-password").click(function () {
-            var btn = $(this);
-            $.ajax({
-                url: btn.attr("data-url"),
-                type: 'get',
-                dataType: 'json',
-                beforeSend: function () {
-                $("#modalchangepassword").modal("show");
-                },
-                success: function (data) {
-                $("#modalchangepassword .modal-content").html(data.html_form);
-                
-                }
-            });
-        });
-
-        $(".js-change-username").click(function () {
-            var btn = $(this);
-            $.ajax({
-                url: btn.attr("data-url"),
-                type: 'get',
-                dataType: 'json',
-                beforeSend: function () {
-                $("#modalchangeusername").modal("show");
-                },
-                success: function (data) {
-                $("#modalchangeusername .modal-content").html(data.html_form);
-                
-                }
-            });
-        });
-    });
-
-    
-</script>
-
-<script>
-    $( document ).ready(function() {
-        var message = document.getElementById("message").value
-        if (message){
-        alert('{{ message|json_script:"message" }}');
-        location.href = "/";
-        }
-    });
-</script>
-{% endblock %}
+<div class="modal" id="username-modal" role="dialog" aria-modal="true" aria-labelledby="username-title">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h2 id="username-title">Change Username</h2></div>
+      <form method="POST" action="{% url 'modify_username' %}">
+        {% csrf_token %}
+        <div class="modal-body form-grid">
+          <input type="text" name="new_username1" placeholder="New username" required maxlength="150">
+        </div>
+        <div class="modal-footer">
+          <button class="button button--ghost" type="button" data-modal-close>Cancel</button>
+          <button class="button button--primary" type="submit">Update Username</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

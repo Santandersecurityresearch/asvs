@@ -1,32 +1,28 @@
-{% extends "base.html" %} {% load static %} {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-header">
-                <h2 id="navbars">
-                    <br>Get help understanding the ASVS standard...</h2>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="card" style="width:100%;margin-bottom: 15px;margin-left: 15px;">
-            <div class="card-header">
-                V{{ number }}: {{ category }}
-            </div>
-            <div class="card-body">
-                <p class="card-text">
-                    <strong>Control Objective:</strong>
-                    <br>
-                    <br> "{{ data.text|safe }}"</p>
-                <p>
-                    <strong>Useful Links: </strong>
-                </p>
-                {% for u in data.urls %}
-                <a href="{{ u.url }}" target="_blank" class="card-link" rel="noopener noreferrer">{{ u.title }} <i class="fas fa-link"></i></a>
-                <br> {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
+{% extends "base.html" %} {% block title %}ASVS Help{% endblock title %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Control Objective V{{ number }}</p>
+    <h1>{{ category }}</h1>
+    <p class="lead">Reference guidance and supporting material for this ASVS chapter.</p>
+  </div>
+</section>
 
+<section class="grid grid--2">
+  <article class="panel">
+    <h2>Objective</h2>
+    <div class="muted">{{ data.text|safe }}</div>
+  </article>
+  <article class="panel">
+    <h2>Useful Links</h2>
+    <div class="grid" style="margin-top: 12px;">
+      {% for u in data.urls %}
+      <a class="category-item" href="{{ u.url }}" target="_blank" rel="noopener noreferrer">
+        <strong>{{ u.title }}</strong>
+        <span class="muted">{{ u.url }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </article>
+</section>
 {% endblock content %}

@@ -4,77 +4,96 @@
 
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from rest_framework import views, permissions
 from rest_framework.response import Response
 from rest_framework import status
-from django_otp import devices_for_user
-from django_otp.plugins.otp_totp.models import TOTPDevice
-from django import forms
-from django.contrib.auth import get_user_model
 from accountauth.models import CustomUser
-from django.http import Http404, HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseForbidden
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import logout
 from projects.models import Projects
-from django.db.models import Q
-import hashlib
+from projects.storage import load_project_template, save_project_template
 from user_agents import parse
-import json
 
 
 class UserCreateForm(UserCreationForm):
 
     class Meta:
-        fields = ('username','password1','password2','is_two_factor_enabled','is_superuser')
-        widgets = {
-            'is_two_factor_enabled': forms.HiddenInput(),
-            'is_superuser': forms.HiddenInput(),
-        }
+        fields = ('username','password1','password2')
         model = CustomUser
 
+
+def device_name(request):
+    return str(parse(request.META.get('HTTP_USER_AGENT', 'unknown')))
+
+
+def current_totp_device(user, request, confirmed=None):
+    devices = user.totpdevice_set.all()
+    if confirmed is not None:
+        devices = devices.filter(confirmed=confirmed)
+    name = device_name(request)
+    for device in devices:
+        if name == device.name:
+            return device
+    return None
+
+
+def get_or_create_current_totp_device(user, request):
+    device = current_totp_device(user, request)
+    if device:
+        return device
+    return user.totpdevice_set.create(confirmed=False, name=device_name(request))
+
+
+def has_verified_2fa(user):
+    return user.is_authenticated and user.is_two_factor_enabled
+
+
+def request_has_verified_2fa(request):
+    return (
+        request.user.is_authenticated
+        and request.user.is_two_factor_enabled
+        and current_totp_device(request.user, request, confirmed=True) is not None
+    )
 
 
 def signup(request):     
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
 
-        if form.is_valid() and len(CustomUser.objects.filter(username=form.cleaned_data.get('username')))==0:
-                form.save()
+        if form.is_valid() and not CustomUser.objects.filter(username=form.cleaned_data.get('username')).exists():
+                user = form.save(commit=False)
+                user.is_superuser = False
+                user.is_staff = False
+                user.is_two_factor_enabled = False
+                user.save()
                 username = form.cleaned_data.get('username')
                 raw_password = form.cleaned_data.get('password1')
-                user = authenticate(username=username, password=raw_password, is_two_factor_enabled=False, is_superuser=False)
+                user = authenticate(request, username=username, password=raw_password)
                 login(request, user)
-                secret= user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
+                secret= get_or_create_current_totp_device(user, request)
                 return render(request, '2fa.html', {'secret':secret.config_url}) 
         else:
-            return render(request, 'auth/signup.html', {'message': 'User already exists'})
+            return render(request, 'auth/signup.html', {'form': form, 'message': 'User already exists or the form is invalid'})
     else:
         form = UserCreateForm()
         return render(request, 'auth/signup.html', {'form': form})
 
+@login_required
 def authenticate_2fa(request):
-    secret= request.user.totpdevice_set.create(confirmed=False,name=str(parse(request.META['HTTP_USER_AGENT'])))
+    secret= get_or_create_current_totp_device(request.user, request)
     return render(request, '2fa.html', {'secret':secret.config_url})
 
-
-def get_user_totp_device(self, user, confirmed=None):
-    devices = devices_for_user(user, confirmed=confirmed)
-    for device in devices:
-        if isinstance(device, TOTPDevice):
-            return device
 class TOTPCreateView(views.APIView):
     """
     Use this endpoint to set up a new TOTP device
     """
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, format=None):
-        
-        #devices=list(request.user.totpdevice_set.all())
-        device = user.totpdevice_set.create(confirmed=True,name=str(parse(request.META['HTTP_USER_AGENT'])))
-        device.confirmed=True   
-        user.is_two_factor_enabled=True   
-        user.save() 
+        user = request.user
+        device = get_or_create_current_totp_device(user, request)
         url = device.config_url
         return Response(url, status=status.HTTP_201_CREATED)
 
@@ -85,24 +104,17 @@ class TOTPVerifyView(views.APIView):
     permission_classes = (permissions.IsAuthenticated, )
     def post(self, request, format=None):
         user = request.user
-
-        devices=list(request.user.totpdevice_set.all())     
-        for d in devices:
-            if str(parse(request.META['HTTP_USER_AGENT'])) in str(d):
-                device=d
-        
+        device = current_totp_device(user, request)
 
         if not device:
              return Response(dict(
            errors=['This user has not setup two factor authentication']),
                 status=status.HTTP_400_BAD_REQUEST
             )
-        if device.verify_token(request.POST['verification_code']):
+        if device.verify_token(request.POST.get('verification_code', '')):
             if not device.confirmed:
                 device.confirmed = True
                 device.save()
-                if user.username=="admin":
-                    user.is_superuser=True
                 user.is_two_factor_enabled=True
                 user.save() 
             
@@ -110,18 +122,10 @@ class TOTPVerifyView(views.APIView):
         return render(request, '2fa.html', {'secret':device.config_url})
 
 
+@login_required
 def profile(request):
-    if request.user.is_authenticated and request.user.is_two_factor_enabled:
-        if request.user.is_superuser:
-            projects = Projects.objects.all().values()
-        else:
-            projects = list(Projects.objects.filter(Q(project_owner=request.user.username) | Q(
-                project_allowed_viewers__contains=request.user.username)).values())
-            for p in projects:
-                #This code was written to fix a problem with django not distinguishing uppercase and lowercase on .filter
-                if p['project_owner']!=request.user.username and request.user.username not in p['project_allowed_viewers'].split(","):
-                    projects.remove(p)
-               
+    if request_has_verified_2fa(request):
+        projects = Projects.objects.visible_to(request.user)
         devices=list(request.user.totpdevice_set.all())
         verified_devices=[]
         for d in devices:
@@ -130,19 +134,15 @@ def profile(request):
 
         return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices})
     else:
-        if request.user.is_authenticated  and not request.user.is_two_factor_enabled:
-            return redirect("authenticate_2fa") 
-        else:    
-            return HttpResponseForbidden('You need to be authenticated to see this page.')
+        return redirect("authenticate_2fa")
 
+@login_required
 def modify_password(request):
+    if not request_has_verified_2fa(request):
+        return redirect("authenticate_2fa")
 
     #Getting user info
-    if request.user.is_superuser:
-        projects = Projects.objects.all().values()
-    else:
-        projects = Projects.objects.filter(Q(project_owner__exact=request.user.username) | Q(
-            project_allowed_viewers__contains=request.user.username)).values()
+    projects = Projects.objects.visible_to(request.user)
         
     devices=list(request.user.totpdevice_set.all())
     verified_devices=[]
@@ -157,18 +157,20 @@ def modify_password(request):
             form.save()
             data['form_is_valid'] = True
             update_session_auth_hash(request, form.user)
+            message = "Your password was changed"
         else:
             data['form_is_valid'] = False
+            message = "Your password was not changed"
     else:
         form = PasswordChangeForm(user=request.user)
-    return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices,'message':"Your password was changed"})     
+        message = ""
+    return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices,'message':message})
 
 def custom_logout(request):
-    print('Loggin out {}'.format(request.user))
     logout(request)
-    print(request.user)
     return redirect('home')
 
+@login_required
 def unauthenticate_device(request,device):
 
     devices = request.user.totpdevice_set.all()
@@ -176,17 +178,16 @@ def unauthenticate_device(request,device):
         if (str(t)==device):
             t.delete()
 
-    if str(parse(request.META['HTTP_USER_AGENT'])) in device:
-        custom_logout(request)    
+    if device_name(request) in device:
+        return custom_logout(request)
     return redirect('home')
 
+@login_required
 def modify_username(request):
+    if not request_has_verified_2fa(request):
+        return redirect("authenticate_2fa")
     #Getting user prjects and devices
-    if request.user.is_superuser:
-        projects = Projects.objects.all().values()
-    else:
-        projects = list(Projects.objects.filter(Q(project_owner__exact=request.user.username) | Q(
-            project_allowed_viewers__contains=request.user.username)).values())
+    projects = Projects.objects.visible_to(request.user)
 
         
     devices=list(request.user.totpdevice_set.all())
@@ -197,34 +198,28 @@ def modify_username(request):
     
     #Modify and render
     if request.method == 'POST':
-        if len(CustomUser.objects.filter(username=request.POST.get('new_username1')))==0 :
-            new_username= request.POST.get('new_username1')
+        new_username= request.POST.get('new_username1', '').strip()
+        if not new_username:
+            return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices,'message':"Username cannot be empty"})
+        if not CustomUser.objects.filter(username=new_username).exists():
             for p in projects:
-                #This code was written to fix a problem with django not distinguishing uppercase and lowercase on .filter
-                if p['project_owner']!=request.user.username and request.user.username not in p['project_allowed_viewers'].split(","):
-                    projects.remove(p)
-            for p in projects:
-                if p['project_owner']==request.user.username or request.user.username  in p['project_allowed_viewers'].split(","):
-                    project_change=Projects.objects.get(id=p['id'])
-                    phash = (hashlib.sha3_256('{0}{1}'.format(project_change.project_name, p['id']).encode('utf-8')).hexdigest())
-                    project = load_template(phash)
+                if p.project_owner == request.user.username or request.user.username in p.allowed_viewer_names():
+                    project_change=Projects.objects.get(id=p.id)
+                    project = load_project_template(project_change)
                     #If its the owner of the project modify project owner with the new username (for the project and its template)
                     if project['project_owner']==request.user.username:
                         project['project_owner']=new_username
                         project_change.project_owner=new_username
                     #If he is an allowed user for the project, change the username (for the project and its template)
-                    if request.user.username in p['project_allowed_viewers'].split(","):
-                        changed_list=""
-                        for viewer in p['project_allowed_viewers'].split(","):
-                            if viewer == request.user.username:
-                                changed_list=changed_list+new_username+","
-                            else:
-                                changed_list=changed_list+viewer+","
-                        
-                        project['project_allowed_viewers']= changed_list[:-1]
-                        project_change.project_allowed_viewers= changed_list[:-1]  
+                    if request.user.username in p.allowed_viewer_names():
+                        changed_list = [
+                            new_username if viewer == request.user.username else viewer
+                            for viewer in p.allowed_viewer_names()
+                        ]
+                        project['project_allowed_viewers']= ",".join(changed_list)
+                        project_change.project_allowed_viewers= ",".join(changed_list)
                     #We update template and project    
-                    update_template(phash, project) 
+                    save_project_template(project_change, project)
                     project_change.save()   
                     
 
@@ -237,33 +232,23 @@ def modify_username(request):
             return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices,'message':"Username already exists, the username wasnt changed"})
         return render(request, 'auth/profile.html', {'projects':projects,'devices':verified_devices,'message':"Username changed to "+ request.POST.get('new_username1')})
 
+@login_required
 def removefromproject(request,projectid):
+    if not request_has_verified_2fa(request):
+        return redirect("authenticate_2fa")
     change = Projects.objects.get(id=projectid)
-    phash = (hashlib.sha3_256('{0}{1}'.format(change.project_name, projectid).encode('utf-8')).hexdigest())
-    project = load_template(phash)
+    if not change.can_view(request.user):
+        return HttpResponseForbidden('You are not allowed to modify this project.')
+    project = load_project_template(change)
     
-    allowed_users = change.project_allowed_viewers.split(",")
+    allowed_users = change.allowed_viewer_names()
     if change.project_owner!=request.user.username:
-        allowed_users.remove(request.user.username)
-        new_allowed_viewers=""
-        for u in allowed_users:
-            new_allowed_viewers+= u+","
+        if request.user.username in allowed_users:
+            allowed_users.remove(request.user.username)
+        new_allowed_viewers = ",".join(allowed_users)
 
-        change.project_allowed_viewers= new_allowed_viewers[:-1]
-        project['project_allowed_viewers']= new_allowed_viewers[:-1]
+        change.project_allowed_viewers= new_allowed_viewers
+        project['project_allowed_viewers']= new_allowed_viewers
         change.save()
+        save_project_template(change, project)
     return redirect('profile') 
- 
-
-def load_template(phash):
-    with open('storage/{0}.json'.format(phash), 'r') as template:
-        data = json.load(template)
-        template.close()
-        return data
-
-
-def update_template(phash, data):
-    with open('storage/{0}.json'.format(phash), 'w') as template:
-        json.dump(data, template, indent=2)
-    template.close()
-    return

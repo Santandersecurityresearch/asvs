@@ -1,20 +1,9 @@
-{% extends "base.html" %} {% load static %} {% block content %}
-
-<div class="container">
-   
-    <div class="row">
-        <div class="card" style="width: 60rem;">
-
-
-            <div class="card-body" style="margin:auto">
-                <p class="card-text">
-                    <strong>Error 500</strong>
-                    <br>
-                </p>
-                
-            </div>
-           
-        </div>
-    </div>
-</div>
+{% extends "base.html" %} {% block title %}Server Error{% endblock title %}
+{% block content %}
+<section class="panel" style="max-width: 560px;">
+  <p class="eyebrow">500</p>
+  <h1>Something went wrong</h1>
+  <p class="lead">The request could not be completed. Try again, or check the server logs for the failing view.</p>
+  <a class="button button--primary" href="{% url 'home' %}">Return Home</a>
+</section>
 {% endblock content %}

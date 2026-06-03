@@ -1,721 +1,1084 @@
 {
-  "bomFormat": "CycloneDX",
-  "specVersion": "1.5",
-  "serialNumber": "urn:uuid:344cb3ff-6647-43e9-bfe9-4b523bd9c761",
-  "version": 1,
+  "components": [
+    {
+      "bom-ref": "Django==5.2.14",
+      "description": "A high-level Python web framework that encourages rapid development and clean, pragmatic design.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://docs.djangoproject.com/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Tracker",
+          "type": "issue-tracker",
+          "url": "https://code.djangoproject.com/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Release notes",
+          "type": "other",
+          "url": "https://docs.djangoproject.com/en/stable/releases/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source",
+          "type": "other",
+          "url": "https://github.com/django/django"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Funding",
+          "type": "other",
+          "url": "https://www.djangoproject.com/fundraising/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://www.djangoproject.com/"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "name": "Django",
+      "purl": "pkg:pypi/django@5.2.14",
+      "type": "library",
+      "version": "5.2.14"
+    },
+    {
+      "bom-ref": "PyYAML==6.0.3",
+      "description": "YAML parser and emitter for Python",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata: Download-URL",
+          "type": "distribution",
+          "url": "https://pypi.org/project/PyYAML/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://pyyaml.org/wiki/PyYAMLDocumentation"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Bug Tracker",
+          "type": "issue-tracker",
+          "url": "https://github.com/yaml/pyyaml/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Mailing lists",
+          "type": "other",
+          "url": "http://lists.sourceforge.net/lists/listinfo/yaml-core"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source Code",
+          "type": "other",
+          "url": "https://github.com/yaml/pyyaml"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: CI",
+          "type": "other",
+          "url": "https://github.com/yaml/pyyaml/actions"
+        },
+        {
+          "comment": "from packaging metadata: Home-page",
+          "type": "website",
+          "url": "https://pyyaml.org/"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "PyYAML",
+      "purl": "pkg:pypi/pyyaml@6.0.3",
+      "type": "library",
+      "version": "6.0.3"
+    },
+    {
+      "bom-ref": "asgiref==3.11.1",
+      "description": "ASGI specs, helper code, and adapters",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://asgi.readthedocs.io/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Further Documentation",
+          "type": "other",
+          "url": "https://docs.djangoproject.com/en/stable/topics/async/#async-adapter-functions"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://github.com/django/asgiref/blob/master/CHANGELOG.txt"
+        },
+        {
+          "comment": "from packaging metadata: Home-page",
+          "type": "website",
+          "url": "https://github.com/django/asgiref/"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "BSD-3-Clause"
+          }
+        },
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "name": "License :: OSI Approved :: BSD License"
+          }
+        }
+      ],
+      "name": "asgiref",
+      "purl": "pkg:pypi/asgiref@3.11.1",
+      "type": "library",
+      "version": "3.11.1"
+    },
+    {
+      "bom-ref": "charset-normalizer==3.4.7",
+      "description": "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://charset-normalizer.readthedocs.io/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Issue tracker",
+          "type": "issue-tracker",
+          "url": "https://github.com/jawah/charset_normalizer/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Code",
+          "type": "other",
+          "url": "https://github.com/jawah/charset_normalizer"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://github.com/jawah/charset_normalizer/blob/master/CHANGELOG.md"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "charset-normalizer",
+      "purl": "pkg:pypi/charset-normalizer@3.4.7",
+      "type": "library",
+      "version": "3.4.7"
+    },
+    {
+      "bom-ref": "crispy-bootstrap3==2024.1",
+      "description": "Bootstrap3 template pack for django-crispy-forms",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Issues",
+          "type": "issue-tracker",
+          "url": "https://github.com/django-crispy-forms/crispy-bootstrap3/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: CI",
+          "type": "other",
+          "url": "https://github.com/django-crispy-forms/crispy-bootstrap3/actions"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://github.com/django-crispy-forms/crispy-bootstrap3/releases"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://github.com/django-crispy-forms/crispy-bootstrap3"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "crispy-bootstrap3",
+      "purl": "pkg:pypi/crispy-bootstrap3@2024.1",
+      "type": "library",
+      "version": "2024.1"
+    },
+    {
+      "bom-ref": "django-crispy-forms==2.6",
+      "description": "Best way to have Django DRY forms",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Issues",
+          "type": "issue-tracker",
+          "url": "https://github.com/django-crispy-forms/django-crispy-forms/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://github.com/django-crispy-forms/django-crispy-forms/releases"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://github.com/django-crispy-forms/django-crispy-forms"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "django-crispy-forms",
+      "purl": "pkg:pypi/django-crispy-forms@2.6",
+      "type": "library",
+      "version": "2.6"
+    },
+    {
+      "bom-ref": "django-otp==1.7.0",
+      "description": "A pluggable framework for adding two-factor authentication to Django using one-time passwords.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://django-otp-official.readthedocs.io/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://github.com/django-otp/django-otp"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "Unlicense"
+          }
+        }
+      ],
+      "name": "django-otp",
+      "purl": "pkg:pypi/django-otp@1.7.0",
+      "type": "library",
+      "version": "1.7.0"
+    },
+    {
+      "bom-ref": "djangorestframework==3.16.1",
+      "description": "Web APIs for Django, made easy.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Funding",
+          "type": "other",
+          "url": "https://fund.django-rest-framework.org/topics/funding/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source",
+          "type": "other",
+          "url": "https://github.com/encode/django-rest-framework"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://www.django-rest-framework.org/community/release-notes/"
+        },
+        {
+          "comment": "from packaging metadata: Home-page",
+          "type": "website",
+          "url": "https://www.django-rest-framework.org/"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "name": "License :: OSI Approved :: BSD License"
+          }
+        }
+      ],
+      "name": "djangorestframework",
+      "purl": "pkg:pypi/djangorestframework@3.16.1",
+      "type": "library",
+      "version": "3.16.1"
+    },
+    {
+      "bom-ref": "djangorestframework-jsonapi==8.1.0",
+      "description": "A Django REST framework API adapter for the JSON:API spec.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://django-rest-framework-json-api.readthedocs.org/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Tracker",
+          "type": "issue-tracker",
+          "url": "https://github.com/django-json-api/django-rest-framework-json-api/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source",
+          "type": "other",
+          "url": "https://github.com/django-json-api/django-rest-framework-json-api"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://github.com/django-json-api/django-rest-framework-json-api/blob/main/CHANGELOG.md"
+        },
+        {
+          "comment": "from packaging metadata: Home-page",
+          "type": "website",
+          "url": "https://github.com/django-json-api/django-rest-framework-json-api"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "name": "License :: OSI Approved :: BSD License"
+          }
+        }
+      ],
+      "name": "djangorestframework-jsonapi",
+      "purl": "pkg:pypi/djangorestframework-jsonapi@8.1.0",
+      "type": "library",
+      "version": "8.1.0"
+    },
+    {
+      "bom-ref": "gunicorn==26.0.0",
+      "description": "WSGI HTTP Server for UNIX",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://gunicorn.org"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Issue tracker",
+          "type": "issue-tracker",
+          "url": "https://github.com/benoitc/gunicorn/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source code",
+          "type": "other",
+          "url": "https://github.com/benoitc/gunicorn"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://gunicorn.org/news/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://gunicorn.org"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "gunicorn",
+      "purl": "pkg:pypi/gunicorn@26.0.0",
+      "type": "library",
+      "version": "26.0.0"
+    },
+    {
+      "bom-ref": "inflection==0.5.1",
+      "description": "A port of Ruby on Rails inflector to Python",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata: Home-page",
+          "type": "website",
+          "url": "https://github.com/jpvanhal/inflection"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "inflection",
+      "purl": "pkg:pypi/inflection@0.5.1",
+      "type": "library",
+      "version": "0.5.1"
+    },
+    {
+      "bom-ref": "packaging==26.2",
+      "description": "Core utilities for Python packages",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://packaging.pypa.io/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source",
+          "type": "other",
+          "url": "https://github.com/pypa/packaging"
+        }
+      ],
+      "licenses": [
+        {
+          "acknowledgement": "declared",
+          "expression": "Apache-2.0 OR BSD-2-Clause"
+        }
+      ],
+      "name": "packaging",
+      "purl": "pkg:pypi/packaging@26.2",
+      "type": "library",
+      "version": "26.2"
+    },
+    {
+      "bom-ref": "pillow==12.2.0",
+      "description": "Python Imaging Library (fork)",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://pillow.readthedocs.io"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Mastodon",
+          "type": "other",
+          "url": "https://fosstodon.org/@pillow"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source",
+          "type": "other",
+          "url": "https://github.com/python-pillow/Pillow"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Release notes",
+          "type": "other",
+          "url": "https://pillow.readthedocs.io/en/stable/releasenotes/index.html"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Funding",
+          "type": "other",
+          "url": "https://tidelift.com/subscription/pkg/pypi-pillow?utm_source=pypi-pillow&utm_medium=pypi"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://github.com/python-pillow/Pillow/releases"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://python-pillow.github.io"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT-CMU"
+          }
+        }
+      ],
+      "name": "pillow",
+      "purl": "pkg:pypi/pillow@12.2.0",
+      "type": "library",
+      "version": "12.2.0"
+    },
+    {
+      "bom-ref": "pip==26.0",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://pip.pypa.io"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source",
+          "type": "other",
+          "url": "https://github.com/pypa/pip"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://pip.pypa.io/"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "pip",
+      "purl": "pkg:pypi/pip@26.0",
+      "type": "library",
+      "version": "26.0"
+    },
+    {
+      "bom-ref": "psycopg2-binary==2.9.12",
+      "description": "psycopg2 - Python-PostgreSQL Database Adapter",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Download",
+          "type": "distribution",
+          "url": "https://pypi.org/project/psycopg2/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://www.psycopg.org/docs/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Issue Tracker",
+          "type": "issue-tracker",
+          "url": "https://github.com/psycopg/psycopg2/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Code",
+          "type": "other",
+          "url": "https://github.com/psycopg/psycopg2"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changes",
+          "type": "release-notes",
+          "url": "https://www.psycopg.org/docs/news.html"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://psycopg.org/"
+        },
+        {
+          "comment": "from packaging metadata: Home-page",
+          "type": "website",
+          "url": "https://psycopg.org/"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "name": "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)"
+          }
+        }
+      ],
+      "name": "psycopg2-binary",
+      "purl": "pkg:pypi/psycopg2-binary@2.9.12",
+      "type": "library",
+      "version": "2.9.12"
+    },
+    {
+      "bom-ref": "reportlab==4.5.1",
+      "description": "The Reportlab Toolkit",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata: Home-page",
+          "type": "website",
+          "url": "https://www.reportlab.com/"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "name": "License :: OSI Approved :: BSD License"
+          }
+        }
+      ],
+      "name": "reportlab",
+      "purl": "pkg:pypi/reportlab@4.5.1",
+      "type": "library",
+      "version": "4.5.1"
+    },
+    {
+      "bom-ref": "requirements-parser==0.13.0",
+      "description": "This is a small Python module for parsing Pip requirement files.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://requirements-parser.readthedocs.io/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Bug Tracker",
+          "type": "issue-tracker",
+          "url": "https://github.com/madpah/requirements-parser/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Repository",
+          "type": "vcs",
+          "url": "https://github.com/madpah/requirements-parser"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Homepage",
+          "type": "website",
+          "url": "https://github.com/madpah/requirements-parser/#readme"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "name": "License :: OSI Approved :: Apache Software License"
+          }
+        }
+      ],
+      "name": "requirements-parser",
+      "purl": "pkg:pypi/requirements-parser@0.13.0",
+      "type": "library",
+      "version": "0.13.0"
+    },
+    {
+      "bom-ref": "sqlparse==0.5.5",
+      "description": "A non-validating SQL parser.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://sqlparse.readthedocs.io/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Tracker",
+          "type": "issue-tracker",
+          "url": "https://github.com/andialbrecht/sqlparse/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Source",
+          "type": "other",
+          "url": "https://github.com/andialbrecht/sqlparse"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Release Notes",
+          "type": "other",
+          "url": "https://sqlparse.readthedocs.io/en/latest/changes.html"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Home",
+          "type": "website",
+          "url": "https://github.com/andialbrecht/sqlparse"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "name": "License :: OSI Approved :: BSD License"
+          }
+        }
+      ],
+      "name": "sqlparse",
+      "purl": "pkg:pypi/sqlparse@0.5.5",
+      "type": "library",
+      "version": "0.5.5"
+    },
+    {
+      "bom-ref": "ua-parser==1.0.2",
+      "description": "Python port of Browserscope's user agent parser",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: documentation",
+          "type": "documentation",
+          "url": "https://uap-python.readthedocs.io"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: issues",
+          "type": "issue-tracker",
+          "url": "https://github.com/ua-parser/uap-python/issues"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: repository",
+          "type": "vcs",
+          "url": "https://github.com/ua-parser/uap-python"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "ua-parser",
+      "purl": "pkg:pypi/ua-parser@1.0.2",
+      "type": "library",
+      "version": "1.0.2"
+    },
+    {
+      "bom-ref": "ua-parser-builtins==202606",
+      "description": "Precompiled rules for User Agent Parser",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: repository",
+          "type": "vcs",
+          "url": "https://github.com/ua-parser/uap-python"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "name": "License :: OSI Approved :: Apache Software License"
+          }
+        }
+      ],
+      "name": "ua-parser-builtins",
+      "purl": "pkg:pypi/ua-parser-builtins@202606",
+      "type": "library",
+      "version": "202606"
+    },
+    {
+      "bom-ref": "user-agents==2.2.0",
+      "description": "A library to identify devices (phones, tablets) and their capabilities by parsing browser user agent strings.",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata: Home-page",
+          "type": "website",
+          "url": "https://github.com/selwin/python-user-agents"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "user-agents",
+      "purl": "pkg:pypi/user-agents@2.2.0",
+      "type": "library",
+      "version": "2.2.0"
+    },
+    {
+      "bom-ref": "whitenoise==6.12.0",
+      "description": "Radically simplified static file serving for WSGI applications",
+      "externalReferences": [
+        {
+          "comment": "from packaging metadata Project-URL: Documentation",
+          "type": "documentation",
+          "url": "https://whitenoise.readthedocs.io/"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Changelog",
+          "type": "release-notes",
+          "url": "https://whitenoise.readthedocs.io/en/stable/changelog.html"
+        },
+        {
+          "comment": "from packaging metadata Project-URL: Repository",
+          "type": "vcs",
+          "url": "https://github.com/evansd/whitenoise"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "acknowledgement": "declared",
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "whitenoise",
+      "purl": "pkg:pypi/whitenoise@6.12.0",
+      "type": "library",
+      "version": "6.12.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/asvs@SCANROUTE",
+      "dependsOn": [
+        "Django==5.2.14",
+        "PyYAML==6.0.3",
+        "asgiref==3.11.1",
+        "charset-normalizer==3.4.7",
+        "crispy-bootstrap3==2024.1",
+        "django-crispy-forms==2.6",
+        "django-otp==1.7.0",
+        "djangorestframework==3.16.1",
+        "djangorestframework-jsonapi==8.1.0",
+        "gunicorn==26.0.0",
+        "inflection==0.5.1",
+        "packaging==26.2",
+        "pillow==12.2.0",
+        "pip==26.0",
+        "psycopg2-binary==2.9.12",
+        "reportlab==4.5.1",
+        "requirements-parser==0.13.0",
+        "sqlparse==0.5.5",
+        "ua-parser==1.0.2",
+        "ua-parser-builtins==202606",
+        "user-agents==2.2.0",
+        "whitenoise==6.12.0"
+      ]
+    },
+    {
+      "dependsOn": [
+        "asgiref==3.11.1",
+        "sqlparse==0.5.5"
+      ],
+      "ref": "Django==5.2.14"
+    },
+    {
+      "ref": "PyYAML==6.0.3"
+    },
+    {
+      "ref": "asgiref==3.11.1"
+    },
+    {
+      "ref": "charset-normalizer==3.4.7"
+    },
+    {
+      "dependsOn": [
+        "Django==5.2.14",
+        "django-crispy-forms==2.6"
+      ],
+      "ref": "crispy-bootstrap3==2024.1"
+    },
+    {
+      "dependsOn": [
+        "Django==5.2.14"
+      ],
+      "ref": "django-crispy-forms==2.6"
+    },
+    {
+      "dependsOn": [
+        "Django==5.2.14"
+      ],
+      "ref": "django-otp==1.7.0"
+    },
+    {
+      "dependsOn": [
+        "Django==5.2.14",
+        "djangorestframework==3.16.1",
+        "inflection==0.5.1"
+      ],
+      "ref": "djangorestframework-jsonapi==8.1.0"
+    },
+    {
+      "dependsOn": [
+        "Django==5.2.14"
+      ],
+      "ref": "djangorestframework==3.16.1"
+    },
+    {
+      "dependsOn": [
+        "packaging==26.2"
+      ],
+      "ref": "gunicorn==26.0.0"
+    },
+    {
+      "ref": "inflection==0.5.1"
+    },
+    {
+      "ref": "packaging==26.2"
+    },
+    {
+      "dependsOn": [
+        "packaging==26.2"
+      ],
+      "ref": "pillow==12.2.0"
+    },
+    {
+      "ref": "pip==26.0"
+    },
+    {
+      "ref": "psycopg2-binary==2.9.12"
+    },
+    {
+      "dependsOn": [
+        "charset-normalizer==3.4.7",
+        "pillow==12.2.0"
+      ],
+      "ref": "reportlab==4.5.1"
+    },
+    {
+      "dependsOn": [
+        "packaging==26.2"
+      ],
+      "ref": "requirements-parser==0.13.0"
+    },
+    {
+      "ref": "sqlparse==0.5.5"
+    },
+    {
+      "ref": "ua-parser-builtins==202606"
+    },
+    {
+      "dependsOn": [
+        "PyYAML==6.0.3",
+        "ua-parser-builtins==202606"
+      ],
+      "ref": "ua-parser==1.0.2"
+    },
+    {
+      "dependsOn": [
+        "ua-parser==1.0.2"
+      ],
+      "ref": "user-agents==2.2.0"
+    },
+    {
+      "ref": "whitenoise==6.12.0"
+    }
+  ],
   "metadata": {
-    "timestamp": "2023-08-29T16:09:23.016Z",
+    "properties": [
+      {
+        "name": "cdx:reproducible",
+        "value": "true"
+      }
+    ],
     "tools": {
       "components": [
         {
-          "group": "@cyclonedx",
-          "name": "cdxgen",
-          "version": "9.6.1",
-          "purl": "pkg:npm/%40cyclonedx/cdxgen@9.6.1",
+          "description": "CycloneDX Software Bill of Materials (SBOM) generator for Python projects and environments",
+          "externalReferences": [
+            {
+              "type": "build-system",
+              "url": "https://github.com/CycloneDX/cyclonedx-python/actions"
+            },
+            {
+              "type": "distribution",
+              "url": "https://pypi.org/project/cyclonedx-bom/"
+            },
+            {
+              "type": "documentation",
+              "url": "https://cyclonedx-bom-tool.readthedocs.io/"
+            },
+            {
+              "type": "issue-tracker",
+              "url": "https://github.com/CycloneDX/cyclonedx-python/issues"
+            },
+            {
+              "type": "license",
+              "url": "https://github.com/CycloneDX/cyclonedx-python/blob/main/LICENSE"
+            },
+            {
+              "type": "release-notes",
+              "url": "https://github.com/CycloneDX/cyclonedx-python/blob/main/CHANGELOG.md"
+            },
+            {
+              "type": "vcs",
+              "url": "https://github.com/CycloneDX/cyclonedx-python/"
+            },
+            {
+              "type": "website",
+              "url": "https://github.com/CycloneDX/cyclonedx-python/#readme"
+            }
+          ],
+          "group": "CycloneDX",
+          "licenses": [
+            {
+              "license": {
+                "acknowledgement": "declared",
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "name": "cyclonedx-py",
           "type": "application",
-          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@9.6.1"
+          "version": "7.2.1"
+        },
+        {
+          "description": "Python library for CycloneDX",
+          "externalReferences": [
+            {
+              "type": "build-system",
+              "url": "https://github.com/CycloneDX/cyclonedx-python-lib/actions"
+            },
+            {
+              "type": "distribution",
+              "url": "https://pypi.org/project/cyclonedx-python-lib/"
+            },
+            {
+              "type": "documentation",
+              "url": "https://cyclonedx-python-library.readthedocs.io/"
+            },
+            {
+              "type": "issue-tracker",
+              "url": "https://github.com/CycloneDX/cyclonedx-python-lib/issues"
+            },
+            {
+              "type": "license",
+              "url": "https://github.com/CycloneDX/cyclonedx-python-lib/blob/main/LICENSE"
+            },
+            {
+              "type": "release-notes",
+              "url": "https://github.com/CycloneDX/cyclonedx-python-lib/blob/main/CHANGELOG.md"
+            },
+            {
+              "type": "vcs",
+              "url": "https://github.com/CycloneDX/cyclonedx-python-lib"
+            },
+            {
+              "type": "website",
+              "url": "https://github.com/CycloneDX/cyclonedx-python-lib/#readme"
+            }
+          ],
+          "group": "CycloneDX",
+          "licenses": [
+            {
+              "license": {
+                "acknowledgement": "declared",
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "name": "cyclonedx-python-lib",
+          "type": "library",
+          "version": "11.4.0"
         }
       ]
     },
-    "authors": [
-      {
-        "name": "Prabhu Subramanian",
-        "email": "prabhu@appthreat.com"
-      }
-    ],
     "component": {
-      "group": "",
-      "name": "asvs",
-      "version": "latest",
       "type": "application",
-      "bom-ref": "pkg:pypi/asvs@latest",
-      "purl": "pkg:pypi/asvs@latest",
-      "components": []
+      "name": "asvs",
+      "version": "SCANROUTE",
+      "bom-ref": "pkg:pypi/asvs@SCANROUTE",
+      "purl": "pkg:pypi/asvs@SCANROUTE",
+      "description": "OWASP Application Security Verification Standard web application"
     }
   },
-  "components": [
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "pyyaml",
-      "version": "6.0.1",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/pyyaml@6.0.1",
-      "type": "library",
-      "bom-ref": "pkg:pypi/pyyaml@6.0.1",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "instrumentation",
-              "confidence": 1,
-              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "crispy-bootstrap3",
-      "version": "2022.1",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/crispy-bootstrap3@2022.1",
-      "type": "library",
-      "bom-ref": "pkg:pypi/crispy-bootstrap3@2022.1",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "instrumentation",
-              "confidence": 1,
-              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "django-crispy-forms",
-      "version": "2.0",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/django-crispy-forms@2.0",
-      "type": "library",
-      "bom-ref": "pkg:pypi/django-crispy-forms@2.0",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "Django",
-      "version": "4.2.4",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/django@4.2.4",
-      "type": "library",
-      "bom-ref": "pkg:pypi/django@4.2.4",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "asgiref",
-      "version": "3.7.2",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/asgiref@3.7.2",
-      "type": "library",
-      "bom-ref": "pkg:pypi/asgiref@3.7.2",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "typing-extensions",
-      "version": "4.7.1",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/typing-extensions@4.7.1",
-      "type": "library",
-      "bom-ref": "pkg:pypi/typing-extensions@4.7.1",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "sqlparse",
-      "version": "0.4.4",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/sqlparse@0.4.4",
-      "type": "library",
-      "bom-ref": "pkg:pypi/sqlparse@0.4.4",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "django-otp",
-      "version": "1.2.2",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/django-otp@1.2.2",
-      "type": "library",
-      "bom-ref": "pkg:pypi/django-otp@1.2.2",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "instrumentation",
-              "confidence": 1,
-              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "djangorestframework-jsonapi",
-      "version": "6.1.0",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/djangorestframework-jsonapi@6.1.0",
-      "type": "library",
-      "bom-ref": "pkg:pypi/djangorestframework-jsonapi@6.1.0",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "instrumentation",
-              "confidence": 1,
-              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "djangorestframework",
-      "version": "3.14.0",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/djangorestframework@3.14.0",
-      "type": "library",
-      "bom-ref": "pkg:pypi/djangorestframework@3.14.0",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "inflection",
-      "version": "0.5.1",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/inflection@0.5.1",
-      "type": "library",
-      "bom-ref": "pkg:pypi/inflection@0.5.1",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "psycopg2-binary",
-      "version": "2.9.7",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/psycopg2-binary@2.9.7",
-      "type": "library",
-      "bom-ref": "pkg:pypi/psycopg2-binary@2.9.7",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "instrumentation",
-              "confidence": 1,
-              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "reportlab",
-      "version": "4.0.4",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/reportlab@4.0.4",
-      "type": "library",
-      "bom-ref": "pkg:pypi/reportlab@4.0.4",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "instrumentation",
-              "confidence": 1,
-              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "Pillow",
-      "version": "10.0.0",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/pillow@10.0.0",
-      "type": "library",
-      "bom-ref": "pkg:pypi/pillow@10.0.0",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "requirements-parser",
-      "version": "0.5.0",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/requirements-parser@0.5.0",
-      "type": "library",
-      "bom-ref": "pkg:pypi/requirements-parser@0.5.0",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "instrumentation",
-              "confidence": 1,
-              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "types-setuptools",
-      "version": "68.1.0.0",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/types-setuptools@68.1.0.0",
-      "type": "library",
-      "bom-ref": "pkg:pypi/types-setuptools@68.1.0.0",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "user-agents",
-      "version": "2.2.0",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/user-agents@2.2.0",
-      "type": "library",
-      "bom-ref": "pkg:pypi/user-agents@2.2.0",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "instrumentation",
-              "confidence": 1,
-              "value": "/var/folders/r1/h718tgd140l7q9494fvbxt4r0000gn/T/cdxgen-venv-JmmILb"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "ua-parser",
-      "version": "0.18.0",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:pypi/ua-parser@0.18.0",
-      "type": "library",
-      "bom-ref": "pkg:pypi/ua-parser@0.18.0",
-      "evidence": {
-        "identity": {
-          "field": "purl",
-          "confidence": 1,
-          "methods": [
-            {
-              "technique": "manifest-analysis",
-              "confidence": 1,
-              "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-            }
-          ]
-        }
-      },
-      "properties": [
-        {
-          "name": "SrcFile",
-          "value": "/Users/daniel/O365/CSR/Code/asvs/requirements.txt"
-        }
-      ]
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "actions",
-      "name": "checkout",
-      "version": "v2",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:github/actions/checkout@v2",
-      "type": "application",
-      "bom-ref": "pkg:github/actions/checkout@v2"
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "returntocorp",
-      "name": "semgrep-action",
-      "version": "v1",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:github/returntocorp/semgrep-action@v1",
-      "type": "library",
-      "bom-ref": "pkg:github/returntocorp/semgrep-action@v1"
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "github/codeql-action/init",
-      "version": "v2",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:github/github/codeql-action/init@v2",
-      "type": "library",
-      "bom-ref": "pkg:github/github/codeql-action/init@v2"
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "github/codeql-action/autobuild",
-      "version": "v2",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:github/github/codeql-action/autobuild@v2",
-      "type": "library",
-      "bom-ref": "pkg:github/github/codeql-action/autobuild@v2"
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "",
-      "name": "github/codeql-action/analyze",
-      "version": "v2",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:github/github/codeql-action/analyze@v2",
-      "type": "library",
-      "bom-ref": "pkg:github/github/codeql-action/analyze@v2"
-    },
-    {
-      "author": "",
-      "publisher": "",
-      "group": "andrewmcodes",
-      "name": "bundler-audit-action",
-      "version": "main",
-      "description": "",
-      "licenses": [],
-      "purl": "pkg:github/andrewmcodes/bundler-audit-action@main",
-      "type": "library",
-      "bom-ref": "pkg:github/andrewmcodes/bundler-audit-action@main"
-    }
-  ],
-  "services": [],
-  "dependencies": [
-    {
-      "ref": "pkg:pypi/asvs@latest",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/pyyaml@6.0.1",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/django-crispy-forms@2.0",
-      "dependsOn": [
-        "pkg:pypi/django@4.2.4"
-      ]
-    },
-    {
-      "ref": "pkg:pypi/django@4.2.4",
-      "dependsOn": [
-        "pkg:pypi/asgiref@3.7.2",
-        "pkg:pypi/sqlparse@0.4.4"
-      ]
-    },
-    {
-      "ref": "pkg:pypi/asgiref@3.7.2",
-      "dependsOn": [
-        "pkg:pypi/typing-extensions@4.7.1"
-      ]
-    },
-    {
-      "ref": "pkg:pypi/typing-extensions@4.7.1",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/sqlparse@0.4.4",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/crispy-bootstrap3@2022.1",
-      "dependsOn": [
-        "pkg:pypi/django-crispy-forms@2.0",
-        "pkg:pypi/django@4.2.4"
-      ]
-    },
-    {
-      "ref": "pkg:pypi/django-otp@1.2.2",
-      "dependsOn": [
-        "pkg:pypi/django@4.2.4"
-      ]
-    },
-    {
-      "ref": "pkg:pypi/djangorestframework@3.14.0",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/inflection@0.5.1",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/djangorestframework-jsonapi@6.1.0",
-      "dependsOn": [
-        "pkg:pypi/django@4.2.4",
-        "pkg:pypi/djangorestframework@3.14.0",
-        "pkg:pypi/inflection@0.5.1"
-      ]
-    },
-    {
-      "ref": "pkg:pypi/psycopg2-binary@2.9.7",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/pillow@10.0.0",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/reportlab@4.0.4",
-      "dependsOn": [
-        "pkg:pypi/pillow@10.0.0"
-      ]
-    },
-    {
-      "ref": "pkg:pypi/types-setuptools@68.1.0.0",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/requirements-parser@0.5.0",
-      "dependsOn": [
-        "pkg:pypi/types-setuptools@68.1.0.0"
-      ]
-    },
-    {
-      "ref": "pkg:pypi/ua-parser@0.18.0",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:pypi/user-agents@2.2.0",
-      "dependsOn": [
-        "pkg:pypi/ua-parser@0.18.0"
-      ]
-    }
-  ]
+  "version": 1,
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6"
 }

@@ -1,10 +1,20 @@
-from django.shortcuts import render, redirect
+from django.conf import settings
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from .models import Projects
+from django.db.models import Q
+from django.utils import timezone
+from .models import AuditEvent, ProjectMember, ProjectRequirement, Projects, RequirementComment, RequirementEvidence
+from .storage import (
+    create_project_template,
+    delete_project_template,
+    load_project_template,
+    save_project_template,
+    template_path,
+)
 import json
-import hashlib
-from django.core.files import File
+import csv
 import os
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -14,18 +24,50 @@ from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase.pdfmetrics import registerFontFamily
-from django.contrib.auth.decorators import user_passes_test
-from django.db.models import Q
+from functools import wraps
 import time
 import datetime as dt
 import textwrap
+from user_agents import parse
 
 
-def is_2fa_authenticated(user):
-    try:
-        return user.is_authenticated and user.is_two_factor_enabled is True and len(user.totpdevice_set.all())>0
-    except user.DoesNotExist:
+def request_has_verified_2fa(request):
+    if not request.user.is_authenticated or request.user.is_two_factor_enabled is not True:
         return False
+    device_name = str(parse(request.META.get('HTTP_USER_AGENT', 'unknown')))
+    return request.user.totpdevice_set.filter(
+        confirmed=True,
+        name=device_name,
+    ).exists()
+
+
+def two_factor_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if not request_has_verified_2fa(request):
+            return redirect("authenticate_2fa")
+        return view_func(request, *args, **kwargs)
+    return login_required(wrapper)
+
+
+def get_viewable_project(request, projectid):
+    project = get_object_or_404(Projects, id=projectid)
+    if not project.can_view(request.user):
+        raise PermissionDenied
+    return project
+
+
+def get_manageable_project(request, projectid):
+    project = get_object_or_404(Projects, id=projectid)
+    if not project.can_manage(request.user):
+        raise PermissionDenied
+    return project
+
+
+def get_editable_requirement(request, projectid, req_id):
+    project = get_manageable_project(request, projectid)
+    requirement = get_object_or_404(ProjectRequirement, project=project, req_id=req_id)
+    return project, requirement
 
 
 def add_chapter_name(requirement, categories):
@@ -34,12 +76,12 @@ def add_chapter_name(requirement, categories):
 
 def load_json_file(level):
     categories = {}
-    with open('common/category.json') as j:
+    with open(os.path.join(settings.BASE_DIR, 'common/category.json')) as j:
         categories_json = json.load(j)
         for c in categories_json['categories']:
             categories[c['id']] = c['title']
     results = []
-    with open('common/asvs.json') as f:
+    with open(os.path.join(settings.BASE_DIR, 'common/asvs.json')) as f:
         data = json.load(f)
         for r in data['requirements']:
             bob = 'level{0}'.format(level)
@@ -50,41 +92,24 @@ def load_json_file(level):
 
 
 def create_template(requirements, project):
-    # build the template with project information and requirements
-    data = {}
-    data['project_owner'] = project['project_owner']
-    data['project_name'] = project['project_name']
-    data['project_id'] = project['id']
-    data['project_description'] = project['project_description']
-    data['project_created'] = project['project_created'].isoformat()
-    data['project_level'] = project['project_level']
-    data['requirements'] = requirements
-    data['project_allowed_viewers'] = project['project_owner']
-    phash = (hashlib.sha3_256('{0}{1}'.format(
-        project['project_name'], project['id']).encode('utf-8')).hexdigest())
-    with open('storage/{0}.json'.format(phash), 'w') as output:
-        project_file = File(output)
-        json.dump(data, project_file, indent=2)
-    project_file.close()
-    return
+    project_object = Projects.objects.get(id=project['id'])
+    create_project_template(project_object, requirements)
 
 
 def load_template(phash):
-    with open('storage/{0}.json'.format(phash), 'r') as template:
-        data = json.load(template)
-        template.close()
-        return data
+    with open(os.path.join(settings.BASE_DIR, 'storage/{0}.json'.format(phash)), 'r') as template:
+        return json.load(template)
 
 
 def update_template(phash, data):
-    with open('storage/{0}.json'.format(phash), 'w') as template:
+    with open(os.path.join(settings.BASE_DIR, 'storage/{0}.json'.format(phash)), 'w') as template:
         json.dump(data, template, indent=2)
-    template.close()
-    return
 
 
 def calculate_completion(requirements):
     total = len(requirements)
+    if total == 0:
+        return {'total': 0, 'enabled': 0, 'percentage': '0.0'}
     enabled = 0
     for r in requirements:
         if r.get('enabled') and r['enabled'] > 0:
@@ -95,57 +120,124 @@ def calculate_completion(requirements):
     return {'total': total, 'enabled': enabled, 'percentage': '{0:.1f}'.format(percentage)}
 
 
-@user_passes_test(is_2fa_authenticated)
+def project_metrics(project):
+    requirements = project.requirements.all()
+    total = requirements.count()
+    complete = requirements.filter(status=ProjectRequirement.STATUS_COMPLETE).count()
+    incomplete = requirements.filter(status=ProjectRequirement.STATUS_INCOMPLETE).count()
+    review = requirements.filter(status=ProjectRequirement.STATUS_NEEDS_REVIEW).count()
+    na = requirements.filter(status=ProjectRequirement.STATUS_NOT_APPLICABLE).count()
+    percentage = complete / total * 100 if total else 0
+    return {
+        "total": total,
+        "complete": complete,
+        "incomplete": incomplete,
+        "review": review,
+        "na": na,
+        "percentage": "{0:.1f}".format(percentage),
+    }
+
+
+def requirement_queryset_for_project(project, request):
+    requirements = project.requirements.prefetch_related("evidence", "comments")
+    status_filter = request.GET.get("status", "").strip()
+    query = request.GET.get("q", "").strip()
+    if status_filter:
+        requirements = requirements.filter(status=status_filter)
+    if query:
+        requirements = requirements.filter(
+            Q(req_id__icontains=query)
+            | Q(req_description__icontains=query)
+            | Q(chapter_name__icontains=query)
+            | Q(section_name__icontains=query)
+            | Q(cwe__icontains=query)
+            | Q(nist__icontains=query)
+            | Q(note__icontains=query)
+        )
+    return requirements
+
+
+def grouped_requirements(requirements):
+    groups = []
+    by_chapter = {}
+    for requirement in requirements:
+        chapter = requirement.chapter_name or "Uncategorized"
+        if chapter not in by_chapter:
+            by_chapter[chapter] = {
+                "title": chapter,
+                "requirements": [],
+                "total": 0,
+                "complete": 0,
+            }
+            groups.append(by_chapter[chapter])
+        group = by_chapter[chapter]
+        group["requirements"].append(requirement)
+        group["total"] += 1
+        if requirement.status == ProjectRequirement.STATUS_COMPLETE:
+            group["complete"] += 1
+    for group in groups:
+        group["percentage"] = "{0:.0f}".format(group["complete"] / group["total"] * 100) if group["total"] else "0"
+    return groups
+
+
+def update_project_members(project):
+    ProjectMember.objects.update_or_create(
+        project=project,
+        username=project.project_owner,
+        defaults={"role": ProjectMember.ROLE_OWNER},
+    )
+    for viewer in project.allowed_viewer_names():
+        if viewer == project.project_owner:
+            continue
+        ProjectMember.objects.update_or_create(
+            project=project,
+            username=viewer,
+            defaults={"role": ProjectMember.ROLE_VIEWER},
+        )
+    project.members.exclude(username__in=project.allowed_viewer_names()).exclude(username=project.project_owner).delete()
+
+
+@two_factor_required
 def project_all(request):
 
-    if is_2fa_authenticated(request.user):
-        if request.user.is_superuser:
-            projects = list(Projects.objects.all().values())
-        else:
-            projects = list(Projects.objects.filter(Q(project_owner__exact=request.user.username) | Q(
-                project_allowed_viewers__contains=request.user.username)).values())
-            if len(projects)>0:    
-                for p in projects:
-                    #This code was written to fix a problem with django not distinguishing uppercase and lowercase on .filter
-                    if p['project_owner']!=request.user.username and request.user.username not in p['project_allowed_viewers']:
-                        projects.remove(p) 
-        return render(request, 'projects/manage.html', {'projects': projects, 'user': request.user})
+    projects = Projects.objects.visible_to(request.user)
+    return render(request, 'projects/manage.html', {'projects': projects, 'user': request.user})
 
 
-@user_passes_test(is_2fa_authenticated)
+@two_factor_required
 def project_add(request):
     if request.method == 'POST':
         # Create the database record
-        project_name = request.POST.get('project_name')
+        project_name = request.POST.get('project_name', '').strip()
         project_owner = request.user.username
-        project_description = request.POST.get('project_description')
-        project_level = request.POST.get('project_level')
+        project_description = request.POST.get('project_description', '').strip()
+        project_level = request.POST.get('project_level', '1')
+        if project_level not in ('1', '2', '3') or not project_name:
+            return redirect('projectsmanage')
         p = Projects(project_name=project_name, project_owner=project_owner,
-                     project_description=project_description, project_level=project_level, project_allowed_viewers=project_owner)
+                     project_description=project_description, project_level=project_level)
+        p.set_allowed_viewers(project_owner)
         p.save()
+        update_project_members(p)
         # Build the template
         controls = load_json_file(project_level)
-        project = Projects.objects.filter(
-            project_owner=request.user.username, project_name=project_name, project_level=project_level).values()[0]
-        create_template(controls, project)
+        create_project_template(p, controls)
+        AuditEvent.objects.create(project=p, actor=request.user.username, action="project.created", detail=project_name)
         return redirect('projectsmanage')
+    return redirect('projectsmanage')
 
 
-@user_passes_test(is_2fa_authenticated)
+@two_factor_required
 def project_delete(request, projectid):
-    p = Projects.objects.get(id=projectid)
-    Projects.objects.filter(
-    project_owner=request.user.username, pk=projectid).delete()
-    phash = (hashlib.sha3_256('{0}{1}'.format(
-        p.project_name, projectid).encode('utf-8')).hexdigest())
-    os.remove('storage/{0}.json'.format(phash))
+    p = get_manageable_project(request, projectid)
+    delete_project_template(p)
     p.delete()
     return redirect('projectsmanage')
 
 
 def get_chapter_styles():
     category_styles = {}
-    with open('common/category_styles.json') as f:
+    with open(os.path.join(settings.BASE_DIR, 'common/category_styles.json')) as f:
         categories_json = json.load(f)
         for c in categories_json.get('categories'):
             category_styles[c.get('title')] = c.get('style')
@@ -153,61 +245,120 @@ def get_chapter_styles():
     return category_styles
 
 
-@user_passes_test(is_2fa_authenticated)
+@two_factor_required
 def project_view(request, projectid):
-    p = Projects.objects.get(id=projectid)
-
-    phash = (hashlib.sha3_256('{0}{1}'.format(
-        p.project_name, projectid).encode('utf-8')).hexdigest())   
-    project = load_template(phash)
-    allowed_users = project['project_allowed_viewers'].split(",")
+    p = get_viewable_project(request, projectid)
+    project = load_project_template(p)
     project['project_created']=  add_one_hour(time.strftime("%m/%d/%Y %H:%M:%S",time.strptime(project['project_created'][:19], "%Y-%m-%dT%H:%M:%S")))
-    percentage = calculate_completion(project['requirements'])
     styles = get_chapter_styles()
+    requirements = requirement_queryset_for_project(p, request)
 
-    if project['project_owner'] == request.user.username or request.user.username in allowed_users:
-        return render(request, "projects/view.html", {'data': project['requirements'], 'project': project, 'percentage': percentage, 'styles': styles})
-    else:
-        return redirect('projectsmanage')    
+    return render(request, "projects/view.html", {
+        'data': project['requirements'],
+        'project': project,
+        'percentage': calculate_completion(project['requirements']),
+        'metrics': project_metrics(p),
+        'groups': grouped_requirements(requirements),
+        'styles': styles,
+        'can_manage': p.can_manage(request.user),
+        'status_choices': ProjectRequirement.STATUS_CHOICES,
+        'active_status': request.GET.get("status", ""),
+        'query': request.GET.get("q", ""),
+        'audit_events': p.audit_events.select_related("requirement")[:8],
+    })
 
 
-@user_passes_test(is_2fa_authenticated)
+@two_factor_required
 def project_update(request):
-    p = Projects.objects.get(id=request.POST.get(
-            'projectid'))
     if request.method == 'POST':
-        
-        phash = (hashlib.sha3_256('{0}{1}'.format(p.project_name, request.POST.get(
-            'projectid')).encode('utf-8')).hexdigest())
-        project = load_template(phash)
-        for k, v in request.POST.items():
-            if 'csrfmiddlewaretoken' in k or 'projectid' in k:
-                pass
-            else:
-                for r in project['requirements']:
-                    if request.POST.get(r['req_id']+'enabled') == "1":
-                        r['enabled'] = 1
-                    else:
-                        r['enabled'] = 0
-                    if request.POST.get(r['req_id']+'disabled') == "1":
-                        r['disabled'] = 1
-                    else:
-                        r['disabled'] = 0
-                    if request.POST.get(r['req_id']+'na') == "1":
-                        r['enabled'] = 0
-                        r['disabled'] = 0
-                    r['note']= request.POST.get(r['req_id']+'note')   
-        p.save()
-        update_template(phash, project)
+        p = get_manageable_project(request, request.POST.get('projectid'))
+        project = load_project_template(p)
+        for r in project['requirements']:
+            req_id = r['req_id']
+            r['enabled'] = 1 if request.POST.get(req_id + 'status') == ProjectRequirement.STATUS_COMPLETE else 0
+            r['disabled'] = 1 if request.POST.get(req_id + 'status') == ProjectRequirement.STATUS_INCOMPLETE else 0
+            r['status'] = request.POST.get(req_id + 'status', ProjectRequirement.STATUS_NOT_APPLICABLE)
+            if r['status'] == ProjectRequirement.STATUS_NOT_APPLICABLE:
+                r['enabled'] = 0
+                r['disabled'] = 0
+            r['note'] = request.POST.get(req_id + 'note', '')[:5000]
+        save_project_template(p, project)
+        AuditEvent.objects.create(project=p, actor=request.user.username, action="project.bulk_updated", detail="")
         return redirect('projectsview', projectid=request.POST.get('projectid'))
+    return redirect('projectsmanage')
 
 
-@user_passes_test(is_2fa_authenticated)
+@two_factor_required
+def project_requirement_update(request, projectid, req_id):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=405)
+    project, requirement = get_editable_requirement(request, projectid, req_id)
+    previous_status = requirement.status
+    previous_note = requirement.note
+    status_value = request.POST.get("status", requirement.status)
+    if status_value not in dict(ProjectRequirement.STATUS_CHOICES):
+        return JsonResponse({"error": "Invalid status"}, status=400)
+    requirement.status = status_value
+    requirement.note = request.POST.get("note", requirement.note)[:5000]
+    if status_value in (ProjectRequirement.STATUS_COMPLETE, ProjectRequirement.STATUS_NEEDS_REVIEW):
+        requirement.mark_reviewed(request.user.username)
+    requirement.save()
+    save_project_template(project, load_project_template(project))
+    if previous_status != requirement.status or previous_note != requirement.note:
+        AuditEvent.objects.create(
+            project=project,
+            requirement=requirement,
+            actor=request.user.username,
+            action="requirement.updated",
+            detail="{0}: {1} -> {2}".format(requirement.req_id, previous_status, requirement.status),
+        )
+    return JsonResponse({
+        "ok": True,
+        "req_id": requirement.req_id,
+        "status": requirement.status,
+        "metrics": project_metrics(project),
+        "updated_at": timezone.localtime(requirement.updated_at).strftime("%Y-%m-%d %H:%M"),
+    })
+
+
+@two_factor_required
+def project_requirement_evidence_add(request, projectid, req_id):
+    if request.method != "POST":
+        return redirect('projectsview', projectid=projectid)
+    project, requirement = get_editable_requirement(request, projectid, req_id)
+    title = request.POST.get("title", "").strip()
+    if title:
+        RequirementEvidence.objects.create(
+            requirement=requirement,
+            title=title[:200],
+            url=request.POST.get("url", "").strip(),
+            notes=request.POST.get("notes", "").strip(),
+            created_by=request.user.username,
+        )
+        AuditEvent.objects.create(project=project, requirement=requirement, actor=request.user.username, action="evidence.added", detail=title[:200])
+    return redirect('projectsview', projectid=projectid)
+
+
+@two_factor_required
+def project_requirement_comment_add(request, projectid, req_id):
+    if request.method != "POST":
+        return redirect('projectsview', projectid=projectid)
+    project, requirement = get_editable_requirement(request, projectid, req_id)
+    body = request.POST.get("body", "").strip()
+    if body:
+        RequirementComment.objects.create(
+            requirement=requirement,
+            body=body[:5000],
+            created_by=request.user.username,
+        )
+        AuditEvent.objects.create(project=project, requirement=requirement, actor=request.user.username, action="comment.added", detail=requirement.req_id)
+    return redirect('projectsview', projectid=projectid)
+
+
+@two_factor_required
 def project_download(request, projectid):
-    p = Projects.objects.get(id=projectid)
-    phash = (hashlib.sha3_256('{0}{1}'.format(
-        p.project_name, projectid).encode('utf-8')).hexdigest())
-    filename = 'storage/{0}.json'.format(phash)
+    p = get_viewable_project(request, projectid)
+    filename = template_path(p)
     with open(filename, 'rb') as fh:
         response = HttpResponse(
             fh.read(), content_type="application/json")
@@ -216,16 +367,36 @@ def project_download(request, projectid):
         return response
 
 
-@user_passes_test(is_2fa_authenticated)
+@two_factor_required
+def project_download_csv(request, projectid):
+    p = get_viewable_project(request, projectid)
+    response = HttpResponse(content_type="text/csv")
+    response['Content-Disposition'] = 'attachment; filename="asvs-project-{0}.csv"'.format(p.id)
+    writer = csv.writer(response)
+    writer.writerow(["Requirement", "Chapter", "Section", "Status", "CWE", "NIST", "Note", "Evidence", "Comments"])
+    for requirement in p.requirements.prefetch_related("evidence", "comments"):
+        writer.writerow([
+            requirement.req_id,
+            requirement.chapter_name,
+            requirement.section_name,
+            requirement.get_status_display(),
+            requirement.cwe,
+            requirement.nist,
+            requirement.note,
+            requirement.evidence.count(),
+            requirement.comments.count(),
+        ])
+    return response
+
+
+@two_factor_required
 def generate_pdf(request, projectid):
-    p = Projects.objects.get(id=projectid)
-    phash = (hashlib.sha3_256('{0}{1}'.format(
-        p.project_name, projectid).encode('utf-8')).hexdigest())
-    project = load_template(phash)
+    p = get_viewable_project(request, projectid)
+    project = load_project_template(p)
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="ProjectReport.pdf"'
-    pdfmetrics.registerFont(TTFont('SantanderTextW05-Regular', "./static/fonts/SantanderText-Regular.ttf"))
-    pdfmetrics.registerFont(TTFont('SantanderTextW05-Bold', "./static/fonts/SantanderText-Bold.ttf"))
+    pdfmetrics.registerFont(TTFont('SantanderTextW05-Regular', os.path.join(settings.BASE_DIR, "static/fonts/SantanderText-Regular.ttf")))
+    pdfmetrics.registerFont(TTFont('SantanderTextW05-Bold', os.path.join(settings.BASE_DIR, "static/fonts/SantanderText-Bold.ttf")))
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
     data = [[],[],[],[],[],['PROJECT REPORT']] #First eements to give a space for the logo image
@@ -260,21 +431,21 @@ def generate_pdf(request, projectid):
         if r.get('enabled') and r['enabled'] > 0:
             data.append([" "])
             data.append(["Complete"])
-            if (len(r['note'])>0):
-                data.append(['"'+str(r['note'])+'"'])
+            if (len(r.get('note', ''))>0):
+                data.append(['"'+str(r.get('note', ''))+'"'])
             data.append([" "])
 
         elif r.get('disabled') and r['disabled'] > 0:
             data.append([" "])
             data.append(["Incomplete"])
-            if (len(r['note'])>0):
-                data.append(['"'+str(r['note'])+'"'])
+            if (len(r.get('note', ''))>0):
+                data.append(['"'+str(r.get('note', ''))+'"'])
             data.append([" "])
         else:
             data.append([" "])  
             data.append(["N/A"])
-            if (len(r['note'])>0):
-                data.append(['"'+str(r['note'])+'"'])
+            if (len(r.get('note', ''))>0):
+                data.append(['"'+str(r.get('note', ''))+'"'])
             data.append([" "])   
 
     if len(data) >= 40:
@@ -290,14 +461,14 @@ def generate_pdf(request, projectid):
                 canvasBackground(p,"#E3FFFA")
                 if pagenumber==0:
                     detailsBackground(p,"#D3D3D3")
-                    p.drawImage('./static/img/logoicon3.jpg',227.5,730,width = 100, height = 100)
-                
-                p.drawImage('./static/img/logoicon3.jpg',530,40,width = 40, height =40)     
-                table_style =  TableStyle([('FONTNAME', (0,0), (0,-1), 'SantanderTextW05-Regular')])              
+                    p.drawImage(os.path.join(settings.BASE_DIR, 'static/img/logoicon3.jpg'),227.5,730,width = 100, height = 100)
+
+                p.drawImage(os.path.join(settings.BASE_DIR, 'static/img/logoicon3.jpg'),530,40,width = 40, height =40)
+                table_style =  TableStyle([('FONTNAME', (0,0), (0,-1), 'SantanderTextW05-Regular')])
                 for row, values, in enumerate(smalldata):
                     for column, value in enumerate(values):
                         if (value=="PROJECT REPORT" or value=="Requirements:" or value=="•Project Owner:" or value=="•Project Name:" or value=="•Project ID:" or value=="•Project Description:" or value=="•Project Created:" or value=="•Project Level:"or value=="COMPLETION"):
-                            table_style.add('FONTNAME', (column, row), (column, row), 'SantanderTextW05-Bold')  
+                            table_style.add('FONTNAME', (column, row), (column, row), 'SantanderTextW05-Bold')
                         if (value=="COMPLETION" or value=="PROJECT REPORT"):
                             table_style.add('ALIGN', (column, row), (column, row), "CENTRE")   
                             table_style.add('ALIGN', (column, row+1), (column, row+1), "CENTRE") 
@@ -352,7 +523,7 @@ def generate_pdf(request, projectid):
         y = 767-17*len(data)
         canvasBackground(p,"#E3FFFA")
         detailsBackground(p,"#D3D3D3")
-        p.drawImage('./static/img/logoicon3.jpg',530,40,width = 40, height =40)
+        p.drawImage(os.path.join(settings.BASE_DIR, 'static/img/logoicon3.jpg'),530,40,width = 40, height =40)
         grid = [('FONTNAME', (0,0), (0,-1), 'SantanderTextW05-Regular')]
         f = Table(data,style=TableStyle(grid))
         f.wrapOn(p, width, height)
@@ -373,16 +544,19 @@ def chunkstring(text, length):
     return(list_of_strings)
 
 
+@two_factor_required
 def modify_allowed_users(request, projectid):
-    p = Projects.objects.get(id=projectid)
+    p = get_manageable_project(request, projectid)
     if request.method == 'POST':
-        phash = (hashlib.sha3_256('{0}{1}'.format(
-            p.project_name, projectid).encode('utf-8')).hexdigest())
-
-        change = Projects.objects.get(id=projectid)
-        change.project_allowed_viewers = request.POST.get('viewers')
-        change.save()
+        p.set_allowed_viewers(request.POST.get('viewers', ''))
+        p.save()
+        update_project_members(p)
+        project = load_project_template(p)
+        project['project_allowed_viewers'] = p.project_allowed_viewers
+        save_project_template(p, project)
+        AuditEvent.objects.create(project=p, actor=request.user.username, action="members.updated", detail=p.project_allowed_viewers)
         return redirect('projectsmanage')
+    return redirect('projectsview', projectid=projectid)
 
 #Adjust UTC timestamp to "Europe/London" Timezone
 def add_one_hour(time_string):

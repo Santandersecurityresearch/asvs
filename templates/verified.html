@@ -1,30 +1,14 @@
-{% extends "base.html" %} {% load static %} {% block content %}
-
-<div class="container">
-   <br>
-   <br>
-    <div class="row">
-        <div class="card" style="width: 60rem;">
-
-
-            <div class="card-body" style="margin:auto">
-                <p class="card-text">
-                    <strong>Successfully Verified</strong>
-                    <br>
-                </p>
-                
-            </div>
-           
-        </div>
-    </div>
-</div>
+{% extends "base.html" %} {% block title %}Device Verified{% endblock title %}
+{% block content %}
+<section class="panel" style="max-width: 560px;">
+  <p class="eyebrow">Verified</p>
+  <h1>Device trusted</h1>
+  <p class="lead">You can now access ASVS project workspaces from this browser.</p>
+  <a class="button button--primary" href="{% url 'projectsmanage' %}">Open Projects</a>
+</section>
 <script>
-
-window.setTimeout(function(){
-
-    window.location.href = "/projects/manage";
-
-}, 2000);
-
+  window.setTimeout(function () {
+    window.location.href = "{% url 'projectsmanage' %}";
+  }, 1200);
 </script>
 {% endblock content %}
