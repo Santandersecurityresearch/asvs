@@ -1,4 +1,4 @@
-Django==5.2.14
+Django==5.2.16
 gunicorn==26.0.0
 whitenoise==6.12.0
 django-crispy-forms==2.6
