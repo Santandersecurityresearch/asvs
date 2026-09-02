@@ -5,7 +5,7 @@ django-crispy-forms==2.6
 crispy-bootstrap3==2024.1
 reportlab==4.5.1
 django-otp==1.7.0
-djangorestframework==3.16.1
+djangorestframework==3.17.2
 djangorestframework-jsonapi==8.1.0
 PyYAML==6.0.3
 ua-parser>=1.0,<2
